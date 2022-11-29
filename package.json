@@ -15,7 +15,8 @@
   },
   "workspaces": [
     "core",
-    "packages/*"
+    "packages/*",
+    "packages/plugin/*"
   ],
   "devDependencies": {
     "ajv": "~8.11.2",
