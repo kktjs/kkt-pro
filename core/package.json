@@ -1,0 +1,35 @@
+{
+  "name": "kktp",
+  "version": "0.0.0",
+  "description": "kktp cli",
+  "author": "SunLxy <1011771396@qq.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "bin": {
+    "kktp": "bin/kktp"
+  },
+  "scripts": {
+    "watch": "tsbb watch --no-esm --disable-babel",
+    "build": "tsbb build --no-esm --disable-babel"
+  },
+  "files": [
+    "lib",
+    "bin",
+    "src"
+  ],
+  "keywords": [
+    "kkt",
+    "ncc",
+    "nodejs",
+    "cra",
+    "build-tools",
+    "create-react-app",
+    "zero-configuration",
+    "framework"
+  ],
+  "dependencies": {
+    "kkt": "~7.2.3",
+    "minimist": "~1.2.7"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@kkt/plugin-pro-entry",
+  "version": "0.0.0",
+  "description": "kktp plugins",
+  "author": "SunLxy <1011771396@qq.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "lib/index.d.ts",
+  "types": "esm/index.js",
+  "scripts": {
+    "watch": "tsbb watch",
+    "build": "tsbb build"
+  },
+  "files": [
+    "lib",
+    "esm",
+    "src"
+  ],
+  "keywords": [
+    "kkt",
+    "ncc",
+    "nodejs",
+    "cra",
+    "build-tools",
+    "create-react-app",
+    "zero-configuration",
+    "framework"
+  ]
+}

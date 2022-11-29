@@ -1,0 +1,31 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "prepare": "husky install",
+    "watch": "lerna exec --scope kktp -- npm run watch",
+    "build": "lerna exec --scope @kktp/* --scope kktp -- npm run build",
+    "version": "lerna version --no-changelog --no-git-tag-version --no-push",
+    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
+    "remove": "lerna exec \"rm -rf node_modules build package-lock.json\"",
+    "clean": "lerna clean --yes && npm run remove"
+  },
+  "lint-staged": {
+    "*.{js,jsx,tsx,ts,less,md,json}": "prettier --write"
+  },
+  "workspaces": [
+    "core",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "ajv": "~8.11.2",
+    "husky": "~8.0.2",
+    "lerna": "~6.0.3",
+    "lint-staged": "~13.0.4",
+    "prettier": "~2.8.0",
+    "tsbb": "~3.7.8"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16
+
+    - run: npm install
+    - run: npm run build
+
+    # - name: 📦 kktp publish to NPM
+    #   uses: kktjs/npm-publish@1.0.2
+    #   with:
+    #     token: ${{ secrets.NPM_TOKEN }}
+    #     workspaces: |
+    #       packages/*
+    #       core
