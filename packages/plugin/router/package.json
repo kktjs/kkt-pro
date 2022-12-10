@@ -25,5 +25,8 @@
     "create-react-app",
     "zero-configuration",
     "framework"
-  ]
+  ],
+  "dependencies": {
+    "@kkt/plugin-pro-utils": "0.0.0"
+  }
 }

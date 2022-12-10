@@ -25,5 +25,12 @@
     "create-react-app",
     "zero-configuration",
     "framework"
-  ]
+  ],
+  "dependencies": {
+    "@babel/generator": "7.20.5",
+    "@babel/parser": "7.20.5",
+    "@babel/traverse": "7.20.5",
+    "@babel/types": "7.20.5",
+    "chokidar": "3.5.3"
+  }
 }
