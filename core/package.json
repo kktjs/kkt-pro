@@ -29,6 +29,7 @@
     "framework"
   ],
   "dependencies": {
+    "@proload/core": "~0.3.3",
     "kkt": "~7.2.3",
     "minimist": "~1.2.7"
   }
