@@ -1,6 +1,6 @@
 import minimist from 'minimist';
 import { BuildArgs } from 'kkt';
-
+import { getLoadConfig } from './utils/getLoadConfig';
 function help() {
   console.log('\n  Usage: \x1b[34;1mkktp\x1b[0m [build|watch] [input-file] [--help|h]');
   console.log('\n  Displays help information.');
@@ -16,6 +16,8 @@ interface KKTPArgs extends BuildArgs {}
 
 (async () => {
   try {
+    const result = await getLoadConfig();
+    console.log('result', result);
     const args = process.argv.slice(2);
     const argvs: KKTPArgs = minimist(args);
     if (argvs.h || argvs.help) {
