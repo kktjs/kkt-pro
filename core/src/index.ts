@@ -6,6 +6,7 @@ import { StartArgs } from 'kkt';
 import { fileExists } from './utils';
 import { overridePaths } from 'kkt/lib/overrides/paths';
 import overrideKKTPConfig from '@kkt/plugin-pro-config';
+import lessModules from '@kkt/less-modules';
 
 function help() {
   console.log('\n  Usage: \x1b[34;1mkktp\x1b[0m [build|watch] [input-file] [--help|h]');
@@ -18,7 +19,7 @@ function help() {
   console.log('   $ \x1b[35mkktp\x1b[0m watch');
 }
 const ROOT_SRC = path.resolve(process.cwd(), 'src');
-const ENTRY_JS_PATH = path.resolve(ROOT_SRC, 'index.{js,jsx,tsx}');
+const ENTRY_JS_PATH = path.resolve(ROOT_SRC, 'index.{js,jsx,tsx,ts}');
 const ENTRY_CACHE_DIR_PATH = path.resolve(ROOT_SRC, '.kktp');
 const ENTRY_ROUTER_DIR_PATH = path.resolve(ROOT_SRC, 'pages');
 const ENTRY_CACHE_JS_PATH = path.resolve(ENTRY_CACHE_DIR_PATH, 'index.jsx');
@@ -53,6 +54,8 @@ interface KKTPArgs extends StartArgs {}
     argvs.overridesWebpack = (conf, env, options) => {
       /** 移除入口警告 */
       overridePaths(undefined, { ...oPaths });
+      /** 支持 less 文件编译 */
+      conf = lessModules(conf, env, options);
       // 入口文件不存在添加
       if (!entryFileExist && fs.existsSync(ENTRY_ROUTER_DIR_PATH)) {
         conf.entry = inputFile;

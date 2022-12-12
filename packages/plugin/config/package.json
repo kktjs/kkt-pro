@@ -25,5 +25,8 @@
     "create-react-app",
     "zero-configuration",
     "framework"
-  ]
+  ],
+  "dependencies": {
+    "kkt": "^7.3.2"
+  }
 }
