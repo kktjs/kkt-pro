@@ -5,8 +5,8 @@
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
   "main": "lib/index.js",
-  "module": "lib/index.d.ts",
-  "types": "esm/index.js",
+  "types": "lib/index.d.ts",
+  "module": "esm/index.js",
   "scripts": {
     "watch": "tsbb watch",
     "build": "tsbb build"

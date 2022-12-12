@@ -1,6 +1,12 @@
 import minimist from 'minimist';
-import { BuildArgs } from 'kkt';
 import { getLoadConfig } from './utils/getLoadConfig';
+import path from 'path';
+import fs from 'fs-extra';
+import { StartArgs } from 'kkt';
+import { fileExists } from './utils';
+import { overridePaths } from 'kkt/lib/overrides/paths';
+import overrideKKTPConfig from '@kkt/plugin-pro-config';
+
 function help() {
   console.log('\n  Usage: \x1b[34;1mkktp\x1b[0m [build|watch] [input-file] [--help|h]');
   console.log('\n  Displays help information.');
@@ -11,13 +17,16 @@ function help() {
   console.log('   $ \x1b[35mkktp\x1b[0m build');
   console.log('   $ \x1b[35mkktp\x1b[0m watch');
 }
+const ROOT_SRC = path.resolve(process.cwd(), 'src');
+const ENTRY_JS_PATH = path.resolve(ROOT_SRC, 'index.{js,jsx,tsx}');
+const ENTRY_CACHE_DIR_PATH = path.resolve(ROOT_SRC, '.kktp');
+const ENTRY_ROUTER_DIR_PATH = path.resolve(ROOT_SRC, 'pages');
+const ENTRY_CACHE_JS_PATH = path.resolve(ENTRY_CACHE_DIR_PATH, 'index.jsx');
 
-interface KKTPArgs extends BuildArgs {}
+interface KKTPArgs extends StartArgs {}
 
 (async () => {
   try {
-    const result = await getLoadConfig();
-    console.log('result', result);
     const args = process.argv.slice(2);
     const argvs: KKTPArgs = minimist(args);
     if (argvs.h || argvs.help) {
@@ -27,6 +36,49 @@ interface KKTPArgs extends BuildArgs {}
       const { version } = require('../package.json');
       console.log(`\n \x1b[34;1mKKTP\x1b[0m \x1b[32;1mv${version || ''}\x1b[0m\n`);
       return;
+    }
+
+    fs.removeSync(ENTRY_CACHE_DIR_PATH);
+    const entryFileExist = fileExists(ENTRY_JS_PATH);
+    let inputFile = entryFileExist && typeof entryFileExist === 'string' ? entryFileExist : ENTRY_CACHE_JS_PATH;
+    const oPaths = { appIndexJs: inputFile };
+    overridePaths(undefined, { ...oPaths });
+    /**
+     * 获取配置
+     * */
+    const overrideConfig = await getLoadConfig();
+
+    const scriptName = argvs._[0];
+    const isWatch = /^(watch|start)$/gi.test(scriptName);
+    argvs.overridesWebpack = (conf, env, options) => {
+      /** 移除入口警告 */
+      overridePaths(undefined, { ...oPaths });
+      // 入口文件不存在添加
+      if (!entryFileExist && fs.existsSync(ENTRY_ROUTER_DIR_PATH)) {
+        conf.entry = inputFile;
+        fs.ensureFileSync(conf.entry);
+      }
+      conf = overrideKKTPConfig(overrideConfig, conf, env, options);
+      return conf;
+    };
+    if (scriptName === 'build') {
+      await (
+        await import('kkt/lib/scripts/build')
+      ).default({
+        ...argvs,
+        overridePaths: { ...oPaths },
+      });
+    } else if (isWatch) {
+      await (
+        await import('kkt/lib/scripts/start')
+      ).default({
+        ...argvs,
+        /**
+         * 使用 --no-clear-console 调试开发工具，展示日志
+         */
+        // 'clear-console': false,
+        overridePaths: { ...oPaths },
+      });
     }
   } catch (error) {
     console.log('\x1b[31m KKT:KKTP:ERROR:\x1b[0m', error);
