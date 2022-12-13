@@ -30,3 +30,12 @@ kktp ===> `kkt pro`
 └── mock # mock 数据
     └── index.js
 ```
+
+## 配置加载使用 proload 替换
+
+Github: https://github.com/natemoo-re/proload
+
+#### 问题
+
+1.  `require`引入，缺失`use`方法
+2. 配置文件需要使用`module.exports/require`写法,不能使用`import/export`写法
