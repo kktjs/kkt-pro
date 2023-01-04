@@ -27,6 +27,6 @@
     "framework"
   ],
   "dependencies": {
-    "@kkt/plugin-pro-utils": "0.0.0"
+    "@kkt/plugin-pro-utils": "0.0.1"
   }
 }
