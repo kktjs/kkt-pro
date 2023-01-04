@@ -7,6 +7,9 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "module": "esm/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "watch": "tsbb watch",
     "build": "tsbb build"
