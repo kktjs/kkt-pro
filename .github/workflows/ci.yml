@@ -19,11 +19,11 @@ jobs:
     - run: npm install
     - run: npm run build
 
-    # - name: 📦 kktp publish to NPM
-    #   uses: kktjs/npm-publish@1.0.2
-    #   with:
-    #     token: ${{ secrets.NPM_TOKEN }}
-    #     workspaces: |
-    #       packages/doc
-    #       packages/plugin/config
-    #       core
+    - name: 📦 kktp publish to NPM
+      uses: kktjs/npm-publish@1.0.2
+      with:
+        token: ${{ secrets.NPM_TOKEN }}
+        workspaces: |
+          packages/doc
+          packages/plugin/config
+          core
