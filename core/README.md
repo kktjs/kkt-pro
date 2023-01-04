@@ -34,9 +34,9 @@ $ npm install kktp # yarn add kktp
 
 ```bash
 
-kktp docs --entry @uiw/doc/doc # 使用文档包进行预览
+kktp doc --entry @uiw/doc/doc # 使用文档包进行预览
 
-kktp docs --entry ./build --local # 使用本地地址进行预览
+kktp doc --entry ./build --local # 使用本地地址进行预览
 
 ```
 
