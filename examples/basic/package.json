@@ -4,7 +4,7 @@
   "description": "案例",
   "private": true,
   "scripts": {
-    "start": "kktp start",
+    "start": "kktp docs --entry @examples/basic-js/build",
     "build": "kktp build",
     "test": "kktp test --env=jsdom",
     "coverage": "kktp test --env=jsdom --coverage"
@@ -21,6 +21,7 @@
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
+    "@examples/basic-js": "1.0.0",
     "@kkt/less-modules": "^7.2.3",
     "@types/jest": "~27.4.1",
     "@types/react": "~18.0.0",

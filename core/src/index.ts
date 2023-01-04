@@ -7,6 +7,7 @@ import { fileExists } from './utils';
 import { overridePaths } from 'kkt/lib/overrides/paths';
 import overrideKKTPConfig from '@kkt/plugin-pro-config';
 import lessModules from '@kkt/less-modules';
+import { staticDocServer } from './scripts/doc';
 
 function help() {
   console.log('\n  Usage: \x1b[34;1mkktp\x1b[0m [build|watch] [input-file] [--help|h]');
@@ -14,6 +15,7 @@ function help() {
   console.log('\n  Options:\n');
   console.log('   --version, -v        ', 'Show version number');
   console.log('   --help, -h           ', 'Displays help information.');
+  console.log('   --entry, -e           ', 'Document entry address.');
   console.log('\n  Example:\n');
   console.log('   $ \x1b[35mkktp\x1b[0m build');
   console.log('   $ \x1b[35mkktp\x1b[0m watch');
@@ -39,17 +41,26 @@ interface KKTPArgs extends StartArgs {}
       return;
     }
 
+    const scriptName = argvs._[0];
+    const entry = argvs.e || argvs.entry;
+
+    /**执行渲染文档*/
+    if (scriptName === 'docs') {
+      await staticDocServer(entry);
+      return;
+    }
+
     fs.removeSync(ENTRY_CACHE_DIR_PATH);
     const entryFileExist = fileExists(ENTRY_JS_PATH);
     let inputFile = entryFileExist && typeof entryFileExist === 'string' ? entryFileExist : ENTRY_CACHE_JS_PATH;
     const oPaths = { appIndexJs: inputFile };
     overridePaths(undefined, { ...oPaths });
+
     /**
      * 获取配置
      * */
     const overrideConfig = await getLoadConfig();
 
-    const scriptName = argvs._[0];
     const isWatch = /^(watch|start)$/gi.test(scriptName);
     argvs.overridesWebpack = (conf, env, options) => {
       /** 移除入口警告 */
