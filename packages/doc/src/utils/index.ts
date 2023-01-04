@@ -1,7 +1,7 @@
 import resolvePackagePath from 'resolve-package-path';
 import * as path from 'path';
 
-export function getDocsData(str: string = '') {
+export function getDocsData(str: string = '', isLocal: boolean) {
   let dirPath = str;
   let route = '/';
   if (dirPath?.includes(':')) {
@@ -12,11 +12,23 @@ export function getDocsData(str: string = '') {
   if (!route.startsWith('/')) {
     route = '/' + route;
   }
-  const [_, name] = dirPath.match(/^([a-zA-Z]+|@[a-zA-Z]+\/[a-zA-Z]+)\/?/i);
-  const pkgPath = resolvePackagePath(name, process.cwd());
+  let name = '';
+  let pkgPath = '';
+  if (isLocal) {
+    [, name] = dirPath.match(/^([a-zA-Z]+|@[a-zA-Z]+\/[a-zA-Z]+|(\.|\.\.)\/[a-zA-Z]+)\/?/i);
+  } else {
+    [, name] = dirPath.match(/^([a-zA-Z]+|@[a-zA-Z]+\/[a-zA-Z]+)\/?/i);
+    pkgPath = resolvePackagePath(name, process.cwd());
+  }
   const root = path.dirname(pkgPath).replace(new RegExp(`${name.replace('/', path.sep)}$`, 'ig'), '');
   const [repath] = str.replace(name, '').split(':');
-  const docRoot = path.resolve(path.dirname(pkgPath) + repath);
+  let docRoot = '';
+  if (isLocal) {
+    docRoot = path.join(process.cwd(), dirPath, repath);
+  } else {
+    docRoot = path.resolve(path.dirname(pkgPath) + repath);
+  }
+
   return {
     name,
     route,

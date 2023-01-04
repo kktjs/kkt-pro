@@ -1,10 +1,10 @@
 import express from 'express';
 import { choosePort, prepareUrls } from 'react-dev-utils/WebpackDevServerUtils';
-import { getDocsData } from '../utils/getDocsData';
+import { getDocsData } from '../utils';
 import openBrowser from 'react-dev-utils/openBrowser';
 import chalk from 'chalk';
 
-export const staticDocServer = async (docs: string) => {
+export const staticDocServer = async (docs: string, isLocal: boolean) => {
   try {
     if (!docs) {
       throw new Error('entry does not exist!');
@@ -17,7 +17,8 @@ export const staticDocServer = async (docs: string) => {
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 
     const app = express();
-    const { route, docRoot } = getDocsData(docs);
+    const { route, docRoot } = getDocsData(docs, isLocal);
+
     app.use(route, express.static(docRoot));
     /**监听端口*/
     app.listen(port);

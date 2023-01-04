@@ -29,6 +29,7 @@
     "framework"
   ],
   "dependencies": {
+    "@kkt/doc": "0.0.0",
     "@kkt/less-modules": "~7.3.2",
     "@kkt/plugin-pro-config": "0.0.0",
     "carefree-proload": "^0.0.1",

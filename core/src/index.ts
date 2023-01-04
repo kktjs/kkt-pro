@@ -7,18 +7,20 @@ import { fileExists } from './utils';
 import { overridePaths } from 'kkt/lib/overrides/paths';
 import overrideKKTPConfig from '@kkt/plugin-pro-config';
 import lessModules from '@kkt/less-modules';
-import { staticDocServer } from './scripts/doc';
+import { staticDocServer } from '@kkt/doc';
 
 function help() {
-  console.log('\n  Usage: \x1b[34;1mkktp\x1b[0m [build|watch] [input-file] [--help|h]');
+  console.log('\n  Usage: \x1b[34;1mkktp\x1b[0m [build|watch|doc] [input-file] [--help|h]');
   console.log('\n  Displays help information.');
   console.log('\n  Options:\n');
   console.log('   --version, -v        ', 'Show version number');
   console.log('   --help, -h           ', 'Displays help information.');
-  console.log('   --entry, -e           ', 'Document entry address.');
+  console.log('   --entry, -e          ', 'Document entry address.');
+  console.log('   --local              ', 'Local address preview or not.');
   console.log('\n  Example:\n');
   console.log('   $ \x1b[35mkktp\x1b[0m build');
   console.log('   $ \x1b[35mkktp\x1b[0m watch');
+  console.log('   $ \x1b[35mkktp\x1b[0m doc');
 }
 const ROOT_SRC = path.resolve(process.cwd(), 'src');
 const ENTRY_JS_PATH = path.resolve(ROOT_SRC, 'index.{js,jsx,tsx,ts}');
@@ -45,8 +47,9 @@ interface KKTPArgs extends StartArgs {}
     const entry = argvs.e || argvs.entry;
 
     /**执行渲染文档*/
-    if (scriptName === 'docs') {
-      await staticDocServer(entry);
+    if (scriptName === 'doc') {
+      const isLocal = argvs.local;
+      await staticDocServer(entry, isLocal);
       return;
     }
 

@@ -1,6 +1,48 @@
 kktp
 ===
 
+## 安装
+
+```bash
+$ npm install kktp # yarn add kktp
+```
+
+## Command Help
+
+```bash
+
+  Usage: kktp [build|watch|doc] [input-file] [--help|h]
+
+  Displays help information.
+
+  Options:
+
+   --version, -v         Show version number
+   --help, -h            Displays help information.
+   --entry, -e           Document entry address.
+   --local               Local address preview or not.
+
+  Example:
+
+   $ kktp build
+   $ kktp watch
+   $ kktp doc
+
+```
+
+## 文档命令使用
+
+```bash
+
+kktp docs --entry @uiw/doc/doc # 使用文档包进行预览
+
+kktp docs --entry ./build --local # 使用本地地址进行预览
+
+```
+
+## 说明
+
+
 kktp ===> `kkt pro`
 
 把现存的`uiw-admin`进行简化

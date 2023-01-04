@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+const { runDoc } = require('../lib/index');
+
+runDoc()

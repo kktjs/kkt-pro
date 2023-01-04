@@ -4,7 +4,10 @@
   "description": "案例",
   "private": true,
   "scripts": {
-    "start": "kktp docs --entry @examples/basic-js/build",
+    "start": "kktp start",
+    "docs": "kktd @examples/basic-js/build",
+    "docs1": "kktd ./build --local",
+    "docs2": "kktp doc --entry @examples/basic-js/build",
     "build": "kktp build",
     "test": "kktp test --env=jsdom",
     "coverage": "kktp test --env=jsdom --coverage"
@@ -21,6 +24,7 @@
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
+    "@kkt/doc": "0.0.0",
     "@examples/basic-js": "1.0.0",
     "@kkt/less-modules": "^7.2.3",
     "@types/jest": "~27.4.1",
