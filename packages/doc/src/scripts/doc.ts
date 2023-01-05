@@ -1,4 +1,5 @@
 import express from 'express';
+import clearConsole from 'react-dev-utils/clearConsole';
 import { choosePort, prepareUrls } from 'react-dev-utils/WebpackDevServerUtils';
 import { getDocsData } from '../utils';
 import openBrowser from 'react-dev-utils/openBrowser';
@@ -26,6 +27,8 @@ export const staticDocServer = async (docs: string, isLocal: boolean) => {
     const urls = prepareUrls(protocol, HOST, port);
     /**前缀*/
     const publicUrlOrPath = `${route}`.replace(/\/$/, '');
+    /**清空之前的命令行内容**/
+    clearConsole();
 
     console.log(chalk.green('Doc start-up successfully!'));
 
