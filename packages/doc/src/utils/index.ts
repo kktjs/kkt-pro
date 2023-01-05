@@ -14,6 +14,7 @@ export function getDocsData(str: string = '', isLocal: boolean) {
   }
   let name = '';
   let pkgPath = '';
+  /**本地地址*/
   if (isLocal) {
     [, name] = dirPath.match(/^([a-zA-Z\-]+|@[a-zA-Z\-]+\/[a-zA-Z\-]+|(\.|\.\.)\/[a-zA-Z]+)\/?/i);
   } else {

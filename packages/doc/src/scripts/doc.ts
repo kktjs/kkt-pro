@@ -5,6 +5,8 @@ import { getDocsData } from '../utils';
 import openBrowser from 'react-dev-utils/openBrowser';
 import chalk from 'chalk';
 
+const app = express();
+
 export const staticDocServer = async (docs: string, isLocal: boolean) => {
   try {
     if (!docs) {
@@ -16,38 +18,33 @@ export const staticDocServer = async (docs: string, isLocal: boolean) => {
     /**端口处理*/
     const port = await choosePort(HOST, DEFAULT_PORT);
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
-
-    const app = express();
-    const { route, docRoot } = getDocsData(docs, isLocal);
-
+    const { route, docRoot, dirPath } = getDocsData(docs, isLocal);
     app.use(route, express.static(docRoot));
     /**监听端口*/
-    app.listen(port);
-    /**格式化地址*/
-    const urls = prepareUrls(protocol, HOST, port);
-    /**前缀*/
-    const publicUrlOrPath = `${route}`.replace(/\/$/, '');
-    /**清空之前的命令行内容**/
-    clearConsole();
-
-    console.log(chalk.green('Doc start-up successfully!'));
-
-    /**打开浏览器地址**/
-    const newLocalUrlForBrowser = urls.localUrlForBrowser + publicUrlOrPath;
-
-    console.log();
-
-    if (urls.lanUrlForTerminal) {
-      console.log(`  ${chalk.bold('Local:')}            ${urls.localUrlForTerminal}${publicUrlOrPath}`);
-      console.log(`  ${chalk.bold('On Your Network:')}  ${urls.lanUrlForTerminal}${publicUrlOrPath}`);
-    } else {
-      console.log(`  ${urls.localUrlForTerminal}`);
-    }
-
-    console.log();
-
-    /**打开地址**/
-    openBrowser(newLocalUrlForBrowser);
+    app.listen(port, () => {
+      const urls = prepareUrls(
+        protocol,
+        HOST,
+        port,
+        // @ts-ignore
+        route,
+      );
+      /**清空之前的命令行内容**/
+      clearConsole();
+      console.log(chalk.green('Doc start-up successfully!'));
+      console.log();
+      console.log(`You can now view \x1b[37;1m${dirPath}\x1b[0m in the browser.`);
+      console.log();
+      if (urls.lanUrlForTerminal) {
+        console.log(`  ${chalk.bold('Local:')}            ${urls.localUrlForTerminal}`);
+        console.log(`  ${chalk.bold('On Your Network:')}  ${urls.lanUrlForTerminal}`);
+      } else {
+        console.log(`  ${urls.localUrlForTerminal}`);
+      }
+      console.log();
+      /**打开地址**/
+      openBrowser(urls.localUrlForBrowser);
+    });
   } catch (err) {
     if (err && err.message) {
       console.log(err.message);
