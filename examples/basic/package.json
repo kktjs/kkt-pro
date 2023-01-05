@@ -7,7 +7,7 @@
     "start": "kktp start",
     "docs": "kktd @examples/basic-js/build",
     "docs1": "kktd ./build --local",
-    "docs2": "kktp doc --entry @examples/basic-js/build",
+    "docs2": "kktd @examples/basic-js/build",
     "build": "kktp build",
     "test": "kktp test --env=jsdom",
     "coverage": "kktp test --env=jsdom --coverage"

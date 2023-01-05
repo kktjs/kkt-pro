@@ -15,9 +15,9 @@ export function getDocsData(str: string = '', isLocal: boolean) {
   let name = '';
   let pkgPath = '';
   if (isLocal) {
-    [, name] = dirPath.match(/^([a-zA-Z]+|@[a-zA-Z]+\/[a-zA-Z]+|(\.|\.\.)\/[a-zA-Z]+)\/?/i);
+    [, name] = dirPath.match(/^([a-zA-Z\-]+|@[a-zA-Z\-]+\/[a-zA-Z\-]+|(\.|\.\.)\/[a-zA-Z]+)\/?/i);
   } else {
-    [, name] = dirPath.match(/^([a-zA-Z]+|@[a-zA-Z]+\/[a-zA-Z]+)\/?/i);
+    [, name] = dirPath.match(/^([a-zA-Z\-]+|@[a-zA-Z\-]+\/[a-zA-Z\-]+)\/?/i);
     pkgPath = resolvePackagePath(name, process.cwd());
   }
   const root = path.dirname(pkgPath).replace(new RegExp(`${name.replace('/', path.sep)}$`, 'ig'), '');
