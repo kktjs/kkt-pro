@@ -39,6 +39,17 @@ kktp doc --entry @uiw/doc/doc # 使用文档包进行预览
 kktp doc --entry ./build --local # 使用本地地址进行预览
 
 ```
+package.json 中配置命令
+
+```json
+
+  // ....
+  "script":{
+    "doc":"kktd @uiw/doc/doc", 
+    "doc2":"kktd ./examples/doc --local", 
+  }
+
+```
 
 ## 说明
 
