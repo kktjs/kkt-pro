@@ -1,6 +1,6 @@
 {
   "name": "@kkt/plugin-pro-router",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "kktp plugins",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -30,6 +30,6 @@
     "framework"
   ],
   "dependencies": {
-    "@kkt/plugin-pro-utils": "0.0.1"
+    "@kkt/plugin-pro-utils": "^0.0.2"
   }
 }
