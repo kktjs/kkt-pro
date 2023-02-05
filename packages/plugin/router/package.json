@@ -30,6 +30,9 @@
     "framework"
   ],
   "dependencies": {
-    "@kkt/plugin-pro-utils": "^0.0.4"
+    "@kkt/plugin-pro-utils": "^0.0.4",
+    "chokidar": "~3.5.3",
+    "fs-extra": "~11.1.0",
+    "@types/fs-extra": "~11.0.1"
   }
 }

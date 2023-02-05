@@ -104,6 +104,7 @@ export const analysisRoutersIcon = (content: string) => {
 export const analysisRoutersLoader = (content: string) => {
   const ast = getAst(content);
   const importLazy: Record<string, string> = {};
+  let importLazyString = '';
   traverse(ast, {
     ObjectProperty(path) {
       // 判断父级的父级是否是数组 如果是数组则进行转换
@@ -121,6 +122,7 @@ export const analysisRoutersLoader = (content: string) => {
               const ComponentName = 'Components' + toPascalCase(valus.replace(/^@/, '').split('/').join(''));
               node.value = getJSX(`${ComponentName}`);
               importLazy[ComponentName] = valus;
+              importLazyString += `\nimport ${ComponentName} from "${valus}";\n`;
               if (t.isObjectExpression(path.parent)) {
                 path.parent.properties.push(
                   t.objectProperty(t.identifier('loader'), t.identifier(`${ComponentName}.loader`)),
@@ -138,5 +140,6 @@ export const analysisRoutersLoader = (content: string) => {
     /**code代码*/
     code: jsonCode,
     importLazy,
+    importLazyString,
   };
 };
