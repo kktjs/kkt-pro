@@ -38,7 +38,7 @@ class RouterPlugin {
   analysisRoutersIcon?: RouterPluginProps['analysisRoutersIcon'];
 
   constructor(props: RouterPluginProps) {
-    const tmp = props.temp || '.kktp';
+    const tmp = props.tempDir || '.kktp';
     this.cwdConfig = path.resolve(process.cwd(), 'config');
     this.temp = path.resolve(process.cwd(), 'src', tmp);
     this.tempFile = path.resolve(process.cwd(), 'src', tmp, 'routes.js');
