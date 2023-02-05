@@ -4,4 +4,6 @@ export interface RouterPluginProps {
   /**在src目录下生成的临时文件夹名称*/
   tempDir?: string;
   routeType?: 'browser' | 'hash';
+  /**页面加载loading组件地址*/
+  fallbackElement?: string;
 }

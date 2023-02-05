@@ -27,6 +27,7 @@ class RouterPlugin {
   cwd: string = '';
   tempFile: string = '';
   tempConfigFile: string = '';
+  fallbackElement?: string = '';
   /**数据验证结果*/
   checkResult: { isArr: boolean; isImportReact: boolean; code: string } = {
     isArr: false,
@@ -44,6 +45,7 @@ class RouterPlugin {
   constructor(props: RouterPluginProps = {}) {
     const tmp = props.tempDir || '.kktp';
     this.routeType = props.routeType || 'hash';
+    this.fallbackElement = props.fallbackElement;
     this.cwdConfig = path.resolve(process.cwd(), 'config');
     this.temp = path.resolve(process.cwd(), 'src', tmp);
     this.tempFile = path.resolve(process.cwd(), 'src', tmp, 'routes.jsx');
@@ -71,7 +73,7 @@ class RouterPlugin {
     FS.writeFileSync(this.tempConfigFile, newContent, { encoding: 'utf-8', flag: 'w+' });
 
     /**生成路由渲染文件*/
-    const routeTemp = createRouteTemp(this.routeType);
+    const routeTemp = createRouteTemp(this.routeType, this.fallbackElement);
     FS.writeFileSync(this.tempFile, routeTemp, { encoding: 'utf-8', flag: 'w+' });
   }
 

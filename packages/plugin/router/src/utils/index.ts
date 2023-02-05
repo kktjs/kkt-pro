@@ -41,7 +41,7 @@ ${content}
 `;
 };
 
-export const createRouteTemp = (type?: 'browser' | 'hash') => {
+export const createRouteTemp = (type: 'browser' | 'hash', fallbackElement?: string) => {
   let importRouter = ``;
   importRouter = `
 import React from "react";
@@ -50,17 +50,23 @@ import {
   createHashRouter,
   RouterProvider,
 } from 'react-router-dom';
-import routesConfig from "./routesConfig"
+import routesConfig from "./routesConfig";\n
 `;
-  if (type === 'browser') {
-    importRouter += `\nconst router = createBrowserRouter(routesConfig);`;
-  } else {
-    importRouter += `\nconst router = createHashRouter(routesConfig);`;
+  if (fallbackElement) {
+    importRouter += `import FallbackElement from "${fallbackElement}";\n`;
   }
-  const render = `export default ()=> <RouterProvider router={router} fallbackElement={<div>loading...</div>} />`;
+
+  if (type === 'browser') {
+    importRouter += `const router = createBrowserRouter(routesConfig);\n`;
+  } else {
+    importRouter += `const router = createHashRouter(routesConfig);\n`;
+  }
+  const render = `export default ()=> <RouterProvider router={router} fallbackElement={${
+    fallbackElement ? '<FallbackElement />' : '<div>loading...</div>'
+  }} />`;
   return `
 ${importRouter}
-export const navigate = router.navigate;
+export const navigate = router.navigate;\n
 ${render}
 `;
 };

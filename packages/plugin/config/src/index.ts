@@ -47,6 +47,7 @@ const overrideKKTPConfig = (
   conf = getKKTPPlugins(kktPlugins, conf, env, options);
   /**处理 webpack plugin**/
   const newPlugins = getWebpackPlugins(plugins);
+
   // 修复 publicUrlOrPath 指向新的前缀
   // 此举完美的解决了命令启动跳转新路由，路由刷新空白的问题
   overridePaths(undefined, { publicUrlOrPath: prefixStr });
