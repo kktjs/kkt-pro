@@ -1,0 +1,6 @@
+[
+  {
+    "path": "/",
+    "element": "@/app/App.tsx"
+  }
+]

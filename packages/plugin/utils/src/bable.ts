@@ -65,20 +65,6 @@ export const analysisRoutersIcon = (content: string) => {
             iconsList.push({ name: valus, newName: newValue });
           }
         }
-        // 对 navigate 进行转换
-        if (
-          (t.isStringLiteral(node.key) && node.key.value === 'navigate') ||
-          (t.isIdentifier(node.key) && node.key.name === 'navigate')
-        ) {
-          if (t.isStringLiteral(node.value)) {
-            const valus = node.value.value;
-            const fn = template(valus);
-            const newValue = fn();
-            if (t.isExpressionStatement(newValue)) {
-              node.value = newValue.expression;
-            }
-          }
-        }
       }
     },
   });
@@ -113,7 +99,9 @@ export const analysisRoutersLoader = (content: string) => {
         // 对组件进行处理
         if (
           (t.isStringLiteral(node.key) && node.key.value === 'component') ||
-          (t.isIdentifier(node.key) && node.key.name === 'component')
+          (t.isIdentifier(node.key) && node.key.name === 'component') ||
+          (t.isStringLiteral(node.key) && node.key.value === 'element') ||
+          (t.isIdentifier(node.key) && node.key.name === 'element')
         ) {
           if (t.isStringLiteral(node.value)) {
             const valus = node.value.value;
@@ -128,6 +116,20 @@ export const analysisRoutersLoader = (content: string) => {
                   t.objectProperty(t.identifier('loader'), t.identifier(`${ComponentName}.loader`)),
                 );
               }
+            }
+          }
+        }
+        // 对 navigate 进行转换
+        if (
+          (t.isStringLiteral(node.key) && node.key.value === 'navigate') ||
+          (t.isIdentifier(node.key) && node.key.name === 'navigate')
+        ) {
+          if (t.isStringLiteral(node.value)) {
+            const valus = node.value.value;
+            const fn = template(valus);
+            const newValue = fn();
+            if (t.isExpressionStatement(newValue)) {
+              node.value = newValue.expression;
             }
           }
         }

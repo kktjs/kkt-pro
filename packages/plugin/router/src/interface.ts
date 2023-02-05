@@ -3,4 +3,5 @@ export interface RouterPluginProps {
   analysisRoutersIcon?: (icons: { name: string; newName: string }[]) => string;
   /**在src目录下生成的临时文件夹名称*/
   tempDir?: string;
+  routeType?: 'browser' | 'hash';
 }

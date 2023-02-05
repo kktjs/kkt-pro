@@ -12,8 +12,9 @@ import path from 'path';
 import chokidar from 'chokidar';
 import FS from 'fs-extra';
 import { checkRoutersFile, analysisRoutersIcon, analysisRoutersLoader } from '@kkt/plugin-pro-utils';
-import { getRouteContent, createTemp } from './utils';
+import { getRouteContent, createRouteConfigTemp, createRouteTemp } from './utils';
 import { RouterPluginProps } from './interface';
+export * from './interface';
 
 class RouterPlugin {
   /**上一次的路由数据*/
@@ -25,6 +26,7 @@ class RouterPlugin {
   /**执行根目录**/
   cwd: string = '';
   tempFile: string = '';
+  tempConfigFile: string = '';
   /**数据验证结果*/
   checkResult: { isArr: boolean; isImportReact: boolean; code: string } = {
     isArr: false,
@@ -37,14 +39,18 @@ class RouterPlugin {
   /**处理图标菜单中图标引入问题*/
   analysisRoutersIcon?: RouterPluginProps['analysisRoutersIcon'];
 
-  constructor(props: RouterPluginProps) {
+  routeType?: 'browser' | 'hash' = 'hash';
+
+  constructor(props: RouterPluginProps = {}) {
     const tmp = props.tempDir || '.kktp';
+    this.routeType = props.routeType || 'hash';
     this.cwdConfig = path.resolve(process.cwd(), 'config');
     this.temp = path.resolve(process.cwd(), 'src', tmp);
-    this.tempFile = path.resolve(process.cwd(), 'src', tmp, 'routes.js');
+    this.tempFile = path.resolve(process.cwd(), 'src', tmp, 'routes.jsx');
+    this.tempConfigFile = path.resolve(process.cwd(), 'src', tmp, 'routesConfig.jsx');
     this.cwd = path.resolve(process.cwd());
     this.analysisRoutersIcon = props.analysisRoutersIcon;
-    if (FS.existsSync(this.temp)) {
+    if (!FS.existsSync(this.temp)) {
       FS.ensureDirSync(this.temp);
     }
   }
@@ -60,8 +66,13 @@ class RouterPlugin {
       iconString = this.analysisRoutersIcon(iconResult.icons);
       content = iconResult.code;
     }
-    const newContent = createTemp({ isImportReact, importLazyString, iconString, content });
-    FS.writeFileSync(this.tempFile, newContent, { encoding: 'utf-8', flag: 'w+' });
+    /**生成配置*/
+    const newContent = createRouteConfigTemp({ isImportReact, importLazyString, iconString, content });
+    FS.writeFileSync(this.tempConfigFile, newContent, { encoding: 'utf-8', flag: 'w+' });
+
+    /**生成路由渲染文件*/
+    const routeTemp = createRouteTemp(this.routeType);
+    FS.writeFileSync(this.tempFile, routeTemp, { encoding: 'utf-8', flag: 'w+' });
   }
 
   /**判断读取的内容是否与上次一样**/

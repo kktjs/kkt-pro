@@ -31,12 +31,36 @@ interface CreateTempProps {
   iconString?: string;
 }
 /**生成文件模板*/
-export const createTemp = (props: CreateTempProps) => {
+export const createRouteConfigTemp = (props: CreateTempProps) => {
   const { content, importLazyString = '', isImportReact, iconString = '' } = props;
   return `
-${isImportReact ? '' : `import React from "react;\n"`}
-${importLazyString}\n
-${iconString}\n
+${isImportReact ? '' : `import React from "react";`}
+${importLazyString}
+${iconString}
 ${content}
+`;
+};
+
+export const createRouteTemp = (type?: 'browser' | 'hash') => {
+  let importRouter = ``;
+  importRouter = `
+import React from "react";
+import {
+  createBrowserRouter,
+  createHashRouter,
+  RouterProvider,
+} from 'react-router-dom';
+import routesConfig from "./routesConfig"
+`;
+  if (type === 'browser') {
+    importRouter += `\nconst router = createBrowserRouter(routesConfig);`;
+  } else {
+    importRouter += `\nconst router = createHashRouter(routesConfig);`;
+  }
+  const render = `export default ()=> <RouterProvider router={router} fallbackElement={<div>loading...</div>} />`;
+  return `
+${importRouter}
+export const navigate = router.navigate;
+${render}
 `;
 };

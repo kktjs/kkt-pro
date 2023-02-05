@@ -71,7 +71,8 @@ interface KKTPArgs extends StartArgs {}
       /** 支持 less 文件编译 */
       conf = lessModules(conf, env, options);
       // 入口文件不存在添加
-      if (!entryFileExist && fs.existsSync(ENTRY_ROUTER_DIR_PATH)) {
+      // if (!entryFileExist && fs.existsSync(ENTRY_ROUTER_DIR_PATH)) { // 暂时不进行判断 ENTRY_ROUTER_DIR_PATH 是否存在
+      if (!entryFileExist) {
         conf.entry = inputFile;
         fs.ensureFileSync(conf.entry);
       }

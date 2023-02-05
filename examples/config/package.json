@@ -18,9 +18,13 @@
   "dependencies": {
     "react": "~18.2.0",
     "react-dom": "~18.2.0",
+    "react-router-dom": "~6.8.0",
+    "react-router": "~6.8.0",
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
+    "@kkt/plugin-pro-entry": "0.0.4",
+    "@kkt/plugin-pro-router": "0.0.4",
     "@kkt/less-modules": "^7.2.3",
     "@types/jest": "~27.4.1",
     "@types/react": "~18.0.0",
