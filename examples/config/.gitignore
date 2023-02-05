@@ -7,7 +7,7 @@ package-lock.json
 .DS_Store
 .cache
 .vscode
-
+.kktp
 *.bak
 *.tem
 *.temp

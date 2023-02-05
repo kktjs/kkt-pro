@@ -13,7 +13,7 @@ lerna-debug.log
 .DS_Store
 .cache
 .vscode
-
+.kktp
 *.bak
 *.tem
 *.temp
