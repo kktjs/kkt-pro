@@ -38,9 +38,10 @@ class RouterPlugin {
   analysisRoutersIcon?: RouterPluginProps['analysisRoutersIcon'];
 
   constructor(props: RouterPluginProps) {
+    const tmp = props.temp || '.kktp';
     this.cwdConfig = path.resolve(process.cwd(), 'config');
-    this.temp = path.resolve(process.cwd(), 'src/.kktp');
-    this.tempFile = path.resolve(process.cwd(), 'src/.kktp/routes.js');
+    this.temp = path.resolve(process.cwd(), 'src', tmp);
+    this.tempFile = path.resolve(process.cwd(), 'src', tmp, 'routes.js');
     this.cwd = path.resolve(process.cwd());
     this.analysisRoutersIcon = props.analysisRoutersIcon;
     if (FS.existsSync(this.temp)) {
