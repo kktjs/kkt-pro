@@ -8,6 +8,7 @@
     "watch:d": "lerna exec --scope @kkt/doc -- npm run watch",
     "watch:route": "lerna exec --scope @kkt/plugin-pro-router -- npm run watch",
     "watch:config": "lerna exec --scope @kkt/plugin-pro-config -- npm run watch",
+    "watch:models": "lerna exec --scope  @kkt/plugin-pro-models -- npm run watch",
     "------------": "----------------案例------------------------------",
     "basic": "lerna exec --scope @examples/basic -- npm run start",
     "basic:doc": "lerna exec --scope @examples/basic -- npm run docs2",

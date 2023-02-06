@@ -25,7 +25,7 @@ export const getAst = (content: string) => {
   return parse(content, option);
 };
 
-type NodeFun = t.Expression | t.FunctionDeclaration | t.TSDeclareFunction | t.ClassDeclaration;
+export type NodeFun = t.Expression | t.FunctionDeclaration | t.TSDeclareFunction | t.ClassDeclaration;
 
 export function getVarInit(node: NodeFun, path: NodePath<t.ExportDefaultDeclaration>) {
   // 判断  默认导出变量的方式

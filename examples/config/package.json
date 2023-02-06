@@ -23,6 +23,7 @@
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
+    "@kkt/plugin-pro-models": "0.0.4",
     "@kkt/plugin-pro-entry": "0.0.4",
     "@kkt/plugin-pro-router": "0.0.4",
     "@kkt/less-modules": "^7.2.3",

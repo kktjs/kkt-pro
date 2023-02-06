@@ -2,7 +2,8 @@ import traverse, { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
 import template from '@babel/template';
 import generate from '@babel/generator';
-import { getAst, getTSNode, getVarInit, getJSX, getToUpperCase, toPascalCase } from './utils';
+import { getAst, getTSNode, getVarInit, getJSX, getToUpperCase, toPascalCase, NodeFun } from './utils';
+
 /**
  * 1. 判断路由文件
  */
@@ -143,5 +144,38 @@ export const analysisRoutersLoader = (content: string) => {
     code: jsonCode,
     importLazy,
     importLazyString,
+  };
+};
+
+export const checkModels = (content: string) => {
+  let isModels = false;
+  let modelNames;
+  const ast = getAst(content);
+
+  traverse(ast, {
+    ExportDefaultDeclaration(path: NodePath<t.ExportDefaultDeclaration>) {
+      let node = path.node.declaration;
+      node = getTSNode(node);
+      node = getVarInit(node, path);
+      node = getTSNode(node);
+      // 如果 node 是一个对象
+      // 并且 子集存在 state reducers, subscriptions, effects, name 则是一个 model 返回true
+      if (
+        t.isObjectExpression(node) &&
+        node.properties.some((property) => {
+          return ['state', 'reducers', 'subscriptions', 'effects', 'name'].includes((property as any).key.name);
+        })
+      ) {
+        isModels = true;
+        const modeObj = node.properties.find((property) => (property as any).key.name === 'name');
+        if (t.isObjectProperty(modeObj) && t.isStringLiteral(modeObj.value)) {
+          modelNames = modeObj.value.value;
+        }
+      }
+    },
+  });
+  return {
+    isModels,
+    modelNames,
   };
 };

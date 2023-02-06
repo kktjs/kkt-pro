@@ -1,5 +1,5 @@
 {
-  "name": "@kkt/plugin-pro-redux",
+  "name": "@kkt/plugin-pro-models",
   "version": "0.0.4",
   "description": "kktp plugins",
   "author": "SunLxy <1011771396@qq.com>",
@@ -28,5 +28,11 @@
     "create-react-app",
     "zero-configuration",
     "framework"
-  ]
+  ],
+  "dependencies": {
+    "@kkt/plugin-pro-utils": "^0.0.4",
+    "chokidar": "~3.5.3",
+    "fs-extra": "~11.1.0",
+    "@types/fs-extra": "~11.0.1"
+  }
 }
