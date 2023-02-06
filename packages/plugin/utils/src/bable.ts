@@ -43,7 +43,7 @@ export const checkRoutersFile = (content: string) => {
 };
 
 /**
- * 1. 解析路由中的图标 和 `navigate` 跳转进行解析
+ * 1. 解析路由中的图标
  */
 export const analysisRoutersIcon = (content: string) => {
   const ast = getAst(content);
