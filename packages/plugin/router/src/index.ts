@@ -47,9 +47,9 @@ class RouterPlugin {
     this.routeType = props.routeType || 'hash';
     this.fallbackElement = props.fallbackElement;
     this.cwdConfig = path.resolve(process.cwd(), 'config');
-    this.temp = path.resolve(process.cwd(), 'src', tmp);
-    this.tempFile = path.resolve(process.cwd(), 'src', tmp, 'routes.jsx');
-    this.tempConfigFile = path.resolve(process.cwd(), 'src', tmp, 'routesConfig.jsx');
+    this.temp = path.resolve(process.cwd(), 'src', tmp, 'routes');
+    this.tempFile = path.resolve(process.cwd(), 'src', tmp, 'routes', 'index.jsx');
+    this.tempConfigFile = path.resolve(process.cwd(), 'src', tmp, 'routes', 'config.jsx');
     this.cwd = path.resolve(process.cwd());
     this.analysisRoutersIcon = props.analysisRoutersIcon;
     if (!FS.existsSync(this.temp)) {

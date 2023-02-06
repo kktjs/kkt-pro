@@ -50,7 +50,7 @@ import {
   createHashRouter,
   RouterProvider,
 } from 'react-router-dom';
-import routesConfig from "./routesConfig";\n
+import routesConfig from "./config";\n
 `;
   if (fallbackElement) {
     importRouter += `import FallbackElement from "${fallbackElement}";\n`;
