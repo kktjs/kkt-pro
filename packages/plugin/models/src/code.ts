@@ -30,9 +30,18 @@ ${modelsString}
 `;
 };
 
-/**入口模板*/
-export const createIndex = (isTS?: boolean) => {
-  let importString = `
+const jsContent = `
+import { init } from '@rematch/core';
+import loading  from '@rematch/loading';
+import models from "./config"
+export const store = init({
+  models,
+  plugins: [loading()],
+})
+export const { dispatch, addModel } = store;
+`;
+
+const tsContent = `
 import {  
   init,
   Models,
@@ -41,29 +50,22 @@ import {
   RematchDispatch,
 } from '@rematch/core';
 import loading,{ExtraModelsFromLoading} from '@rematch/loading';
-`;
-  let storeString = `
-export const store = init({
-  models,
-  plugins: [loading()],
-})
-`;
-  let preTypeString = '';
-  let typeString = '';
-  if (isTS) {
-    importString += `import models,{ ModelsType } from "./config"`;
-    preTypeString = `export interface RootModel extends Models<RootModel>,ModelsType {};\nexport type FullModel = ExtraModelsFromLoading<RootModel>`;
-    storeString = `export const store = init<RootModel, FullModel>({ models, plugins: [loading()]})`;
-    typeString = `export type Store = typeof store;\nexport type AddModel = typeof addModel;\nexport type Dispatch = RematchDispatch<RootModel>;\nexport type RootState = RematchRootState<RootModel, FullModel>;\nexport type ModelDefault<T = any> = Model<RootModel, T>;`;
-  } else {
-    importString += `import models from "./config"`;
-  }
-
-  return `
-${importString}
-${preTypeString}
-${storeString}
+import models,{ ModelsType } from "./config"
+export interface RootModel extends Models<RootModel>,ModelsType {};
+export type FullModel = ExtraModelsFromLoading<RootModel>
+export const store = init<RootModel, FullModel>({ models, plugins: [loading()]})
 export const { dispatch, addModel } = store;
-${typeString}
+export type Store = typeof store;
+export type AddModel = typeof addModel;
+export type Dispatch = RematchDispatch<RootModel>;
+export type RootState = RematchRootState<RootModel, FullModel>;
+export type ModelDefault<T = any> = Model<RootModel, T>;
 `;
+
+/**入口模板*/
+export const createIndex = (isTS?: boolean) => {
+  if (isTS) {
+    return tsContent;
+  }
+  return jsContent;
 };

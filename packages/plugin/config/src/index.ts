@@ -4,7 +4,7 @@ import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 import { overridePaths } from 'kkt/lib/overrides/paths';
 import path from 'path';
 import { OverrideKKTPConfigProps } from './interface';
-import { transformationDefineString, getKKTPPlugins, getWebpackPlugins, getInitPlugin } from './utils';
+import { transformationDefineString, getKKTPlugins, getWebpackPlugins, getInitPlugin } from './utils';
 /**
  * @Description: 默认配置
  *
@@ -44,15 +44,15 @@ const overrideKKTPConfig = (
     alias: {
       ...conf.resolve?.alias,
       '@': options.paths.appSrc,
-      '@@': path.resolve(options.paths.appSrc, '.kktp'),
+      '@@': path.resolve(options.paths.appSrc, tempDirName),
       ...(alias || {}),
     },
   };
   const publicPath = conf.output.publicPath as string;
   let prefixStr = ((publicPath.startsWith('/') ? publicPath : '/') + '/').replace(/\/+$/, '/');
   prefixStr = prefixStr.endsWith('/') ? prefixStr : prefixStr + '/';
-  /**处理kktp plugin**/
-  conf = getKKTPPlugins(kktPlugins, conf, env, options);
+  /**处理kkt plugin**/
+  conf = getKKTPlugins(kktPlugins, conf, env, options);
   /**处理 webpack plugin**/
   const newPlugins = getWebpackPlugins(getInitPlugin(overrideConfigProps));
 

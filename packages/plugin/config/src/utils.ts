@@ -40,7 +40,7 @@ export const getWebpackPlugins = (plugins: PluginsType) => {
   return plugin;
 };
 
-export const getKKTPPlugins = (
+export const getKKTPlugins = (
   plugins: KKTPlugins,
   conf: WebpackConfiguration,
   env: 'development' | 'production',

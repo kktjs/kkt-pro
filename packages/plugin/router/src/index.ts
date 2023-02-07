@@ -12,13 +12,15 @@ import path from 'path';
 import chokidar from 'chokidar';
 import FS from 'fs-extra';
 import { checkRoutersFile, analysisRoutersIcon, analysisRoutersLoader } from '@kkt/plugin-pro-utils';
-import { getRouteContent, createRouteConfigTemp, createRouteTemp } from './utils';
+import { getRouteContent } from './utils';
+import { createRouteConfigTemp, createRouteTemp } from './code';
 import { RouterPluginProps } from './interface';
 export * from './interface';
 
 class RouterPlugin {
   /**上一次的路由数据*/
-  preString = '';
+  preConfigString = '';
+  preIndexString = '';
   /**需要监听的文件目录*/
   cwdConfig = '';
   /**生成缓存文件目录*/
@@ -74,7 +76,9 @@ class RouterPlugin {
 
     /**生成路由渲染文件*/
     const routeTemp = createRouteTemp(this.routeType, this.fallbackElement);
-    FS.writeFileSync(this.tempFile, routeTemp, { encoding: 'utf-8', flag: 'w+' });
+    if (this.preIndexString !== routeTemp) {
+      FS.writeFileSync(this.tempFile, routeTemp, { encoding: 'utf-8', flag: 'w+' });
+    }
   }
 
   /**判断读取的内容是否与上次一样**/
@@ -82,15 +86,15 @@ class RouterPlugin {
     /**读取文件内容*/
     this.contentResult = getRouteContent();
     /**判断上一次和当前读取的内容是否一样*/
-    if (this.preString !== this.contentResult.content) {
+    if (this.preConfigString !== this.contentResult.content) {
       // 不相等再进行数据 babel 转换
       this.checkResult = checkRoutersFile(this.contentResult.content);
       if (this.checkResult.isArr) {
-        this.preString = this.contentResult.content;
+        this.preConfigString = this.contentResult.content;
         this.createRoute();
       } else {
-        this.preString = 'export default []';
-        FS.writeFileSync(this.tempFile, 'export default []', { encoding: 'utf-8', flag: 'w+' });
+        this.preConfigString = 'export default []';
+        FS.writeFileSync(this.tempConfigFile, 'export default []', { encoding: 'utf-8', flag: 'w+' });
       }
     }
   }
