@@ -1,6 +1,6 @@
 import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 
-import { DefaultDefineType, PluginsType, KKTPlugins } from './interface';
+import { DefaultDefineType, PluginsType, KKTPlugins, OverrideKKTPConfigProps } from './interface';
 /** 全局默认公共参数  */
 export const defaultDefine: DefaultDefineType = {};
 
@@ -62,4 +62,33 @@ export const getKKTPPlugins = (
     });
   }
   return conf;
+};
+
+/**内置插件判断*/
+export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
+  const {
+    plugins = [],
+    /**自动生成文件目录**/
+    tempDirName = '.kktp',
+    /**自动生成入口文件*/
+    initEntery = false,
+    /**路由配置*/
+    initRoute = false,
+    /**自动生成models集合配置文件*/
+    initModel = false,
+  } = props;
+  const pluginsArr = [...plugins];
+  if (initEntery) {
+    pluginsArr.push(['@kkt/plugin-pro-entry', { redux: initModel, tempDirName }]);
+  }
+  if (initRoute) {
+    pluginsArr.push([
+      '@kkt/plugin-pro-router',
+      typeof initRoute === 'boolean' ? { tempDirName } : { ...initRoute, tempDirName },
+    ]);
+  }
+  if (initModel) {
+    pluginsArr.push(['@kkt/plugin-pro-models', { tempDirName }]);
+  }
+  return pluginsArr;
 };

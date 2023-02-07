@@ -43,7 +43,7 @@ class RouterPlugin {
   routeType?: 'browser' | 'hash' = 'hash';
 
   constructor(props: RouterPluginProps = {}) {
-    const tmp = props.tempDir || '.kktp';
+    const tmp = props.tempDirName || '.kktp';
     this.routeType = props.routeType || 'hash';
     this.fallbackElement = props.fallbackElement;
     this.cwdConfig = path.resolve(process.cwd(), 'config');

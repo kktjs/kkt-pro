@@ -8,34 +8,53 @@ import chokidar from 'chokidar';
 import path from 'path';
 import FS from 'fs-extra';
 
-import { getAllFiles, getModelsFiles, getSingleModel } from './utils';
-import { createModelsConfigFile } from './code';
+import { getAllFiles, getModelsFiles, getSingleModel, getExt } from './utils';
+import { createModelsConfigFile, createIndex } from './code';
 
 export interface ModelspluginProps {
-  root?: string;
-  tempDir?: string;
+  tempDirName?: string;
 }
 
 class Modelsplugin {
-  root?: string = path.join(process.cwd(), 'src');
-  temp?: string = path.join(process.cwd(), 'src', '.kktp');
-  tempFile? = path.join(process.cwd(), 'src', '.kktp', 'models', 'config.js');
+  root: string = path.join(process.cwd(), 'src');
+  temp: string = path.join(process.cwd(), 'src', '.kktp');
+  tempDir = path.join(process.cwd(), 'src', '.kktp', 'models');
+  /**所有model数据存储*/
   modelsData: { filePath: string; modelNames: string; variableName: string }[] = [];
+  /**所有model路径存储*/
   modelsPath: string[] = [];
+  /**判断是否是存在tsconfig文件配置*/
+  isTS: boolean = FS.existsSync(path.join(process.cwd(), 'tsconfig.json'));
+  /**记录上一次内容*/
+  preConfigString = '';
+  preIndexString = '';
   constructor(props: ModelspluginProps = {}) {
-    if (props.root) {
-      this.root = props.root;
+    if (props.tempDirName) {
+      this.temp = path.resolve(this.root, props.tempDirName);
     }
-    if (props.tempDir) {
-      this.temp = props.tempDir;
-    }
-    this.tempFile = path.join(this.temp, 'models', 'config.js');
+    this.tempDir = path.join(this.temp, 'models');
   }
   /**创建文件*/
   createFile() {
-    const content = createModelsConfigFile(this.modelsData);
-    FS.ensureFileSync(this.tempFile);
-    FS.writeFile(this.tempFile, content, { encoding: 'utf-8', flag: 'w+' });
+    const configContent = createModelsConfigFile(this.modelsData, this.isTS);
+    const indexContent = createIndex(this.isTS);
+    FS.ensureDirSync(this.tempDir);
+    /**判断文件生成是否一样，一样不进行重新生成*/
+    if (this.preConfigString !== configContent) {
+      this.preConfigString = configContent;
+      FS.writeFile(path.join(this.tempDir, `config.${getExt(this.isTS)}`), configContent, {
+        encoding: 'utf-8',
+        flag: 'w+',
+      });
+    }
+    /**判断文件生成是否一样，一样不进行重新生成*/
+    if (this.preIndexString !== indexContent) {
+      this.preIndexString = indexContent;
+      FS.writeFile(path.join(this.tempDir, `index.${getExt(this.isTS)}`), indexContent, {
+        encoding: 'utf-8',
+        flag: 'w+',
+      });
+    }
   }
   /**更新*/
   updateFiles(path: string) {

@@ -4,7 +4,7 @@
 import FS from 'fs-extra';
 import path from 'path';
 import { checkModels } from '@kkt/plugin-pro-utils';
-
+/**获取符合路径的model路径地址*/
 export const getAllFiles = (root: string, temp: string) => {
   const pathList: string[] = [];
   const loop = (parent: string) => {
@@ -35,6 +35,7 @@ export const getAllFiles = (root: string, temp: string) => {
   return pathList;
 };
 
+/**判断某个文件是否是 model ,并返回数据信息**/
 export const getSingleModel = (filePath: string, root: string) => {
   const content = FS.readFileSync(filePath, 'utf-8').toString();
   const { isModels, modelNames } = checkModels(content);
@@ -61,6 +62,7 @@ export const getSingleModel = (filePath: string, root: string) => {
   };
 };
 
+/**多个路径地址进行解析判断是否是model并返回信息**/
 export const getModelsFiles = (list: string[], root: string) => {
   // 解析数据
   const newModelsData: { filePath: string; modelNames: string; variableName: string }[] = [];
@@ -79,4 +81,11 @@ export const getModelsFiles = (list: string[], root: string) => {
     newModelsData,
     newModelsPath,
   };
+};
+
+export const getExt = (isTS: boolean) => {
+  if (isTS) {
+    return 'ts';
+  }
+  return 'js';
 };

@@ -3,15 +3,15 @@ import fs from 'fs-extra';
 import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 import { overridePaths } from 'kkt/lib/overrides/paths';
 import path from 'path';
-import { overrideKKTPConfigProps } from './interface';
-import { transformationDefineString, getKKTPPlugins, getWebpackPlugins } from './utils';
+import { OverrideKKTPConfigProps } from './interface';
+import { transformationDefineString, getKKTPPlugins, getWebpackPlugins, getInitPlugin } from './utils';
 /**
  * @Description: 默认配置
  *
  * 1. 用于简化覆写`kkt`配置
  */
 const overrideKKTPConfig = (
-  overrideConfigProps: overrideKKTPConfigProps,
+  overrideConfigProps: OverrideKKTPConfigProps,
   conf: WebpackConfiguration,
   env: 'development' | 'production',
   options?: LoaderConfOptions,
@@ -20,11 +20,19 @@ const overrideKKTPConfig = (
     publicPath: prefix = '/',
     define = {},
     proxySetup,
-    plugins,
+    plugins = [],
     alias = {},
     kktPlugins,
     overrideWebpack,
     output = {},
+    /**自动生成文件目录**/
+    tempDirName = '.kktp',
+    /**自动生成入口文件*/
+    initEntery = false,
+    /**路由配置*/
+    initRoute = false,
+    /**自动生成models集合配置文件*/
+    initModel = false,
     ...rest
   } = overrideConfigProps;
   conf.output = { ...conf.output, ...output, publicPath: prefix };
@@ -46,7 +54,7 @@ const overrideKKTPConfig = (
   /**处理kktp plugin**/
   conf = getKKTPPlugins(kktPlugins, conf, env, options);
   /**处理 webpack plugin**/
-  const newPlugins = getWebpackPlugins(plugins);
+  const newPlugins = getWebpackPlugins(getInitPlugin(overrideConfigProps));
 
   // 修复 publicUrlOrPath 指向新的前缀
   // 此举完美的解决了命令启动跳转新路由，路由刷新空白的问题

@@ -1,12 +1,24 @@
-type InitCode = {};
+type InitCode = {
+  redux?: boolean;
+};
 
-export const getInitCode = ({}: InitCode = {}) => `import React from 'react';
+export const getInitCode = ({ redux }: InitCode = { redux: false }) => {
+  let importString = '';
+  let renderString = '<Route />';
+  if (redux) {
+    importString = `import { Provider } from 'react-redux';\nimport { store } from "./models"\n`;
+    renderString = `<Provider store={store} ><Route /></Provider>`;
+  }
+
+  return `import React from 'react';
 import ReactClient from 'react-dom/client';
+${importString}
 import './index.css';
 import Route from './routes';
 
-ReactClient.createRoot(document.getElementById('root')).render(<Route />);
+ReactClient.createRoot(document.getElementById('root')).render(${renderString});
 `;
+};
 
 export const getInitCSSCode = () => `body {
   margin: 0;

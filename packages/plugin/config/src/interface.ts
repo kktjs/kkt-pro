@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
+import { RouterPluginProps } from '@kkt/plugin-pro-router';
 
 export type DefaultDefineType = {};
 
@@ -26,7 +27,7 @@ export type KKTPlugins = (
   | [string, Record<string, any>]
 )[];
 
-export interface overrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
+export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   /**
    * 别名
    * 默认系统内置两个别名
@@ -46,4 +47,12 @@ export interface overrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
   overrideWebpack?: OverrideWebpackType;
   /** 输出 */
   output?: Omit<WebpackConfiguration['output'], 'publicPath'>;
+  /**自动生成文件目录名称**/
+  tempDirName?: string;
+  /**自动生成入口文件*/
+  initEntery?: boolean;
+  /**路由配置*/
+  initRoute?: RouterPluginProps | boolean;
+  /**自动生成models集合配置文件*/
+  initModel?: boolean;
 }
