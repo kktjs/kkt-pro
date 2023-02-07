@@ -6,7 +6,7 @@ export const getInitCode = ({ redux }: InitCode = { redux: false }) => {
   let importString = '';
   let renderString = '<Route />';
   if (redux) {
-    importString = `import { Provider } from 'react-redux';\nimport { store } from "./models"\n`;
+    importString = `import { Provider } from 'react-redux';\nimport { store } from "./rematch"\n`;
     renderString = `<Provider store={store} ><Route /></Provider>`;
   }
 

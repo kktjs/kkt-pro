@@ -31,7 +31,7 @@
   ],
   "dependencies": {
     "kkt": "^7.3.2",
-    "@kkt/plugin-pro-models": "0.0.4",
+    "@kkt/plugin-pro-rematch": "0.0.4",
     "@kkt/plugin-pro-entry": "0.0.4",
     "@kkt/plugin-pro-router": "0.0.4"
   }

@@ -88,7 +88,7 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
     ]);
   }
   if (initModel) {
-    pluginsArr.push(['@kkt/plugin-pro-models', { tempDirName }]);
+    pluginsArr.push(['@kkt/plugin-pro-rematch', { tempDirName }]);
   }
   return pluginsArr;
 };

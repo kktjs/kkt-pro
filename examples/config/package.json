@@ -6,6 +6,7 @@
   "scripts": {
     "start": "kktp start",
     "build": "kktp build",
+    "doc": "kktp doc --entry=./build --local",
     "test": "kktp test --env=jsdom",
     "coverage": "kktp test --env=jsdom --coverage"
   },

@@ -15,10 +15,10 @@ export interface ModelspluginProps {
   tempDirName?: string;
 }
 
-class Modelsplugin {
+class RematchPlugin {
   root: string = path.join(process.cwd(), 'src');
   temp: string = path.join(process.cwd(), 'src', '.kktp');
-  tempDir = path.join(process.cwd(), 'src', '.kktp', 'models');
+  tempDir = path.join(process.cwd(), 'src', '.kktp', 'rematch');
   /**所有model数据存储*/
   modelsData: { filePath: string; modelNames: string; variableName: string }[] = [];
   /**所有model路径存储*/
@@ -32,7 +32,7 @@ class Modelsplugin {
     if (props.tempDirName) {
       this.temp = path.resolve(this.root, props.tempDirName);
     }
-    this.tempDir = path.join(this.temp, 'models');
+    this.tempDir = path.join(this.temp, 'rematch');
   }
   /**创建文件*/
   createFile() {
@@ -94,7 +94,7 @@ class Modelsplugin {
   }
 
   apply(compiler: webpack.Compiler) {
-    compiler.hooks.afterPlugins.tap('Modelsplugin', () => {
+    compiler.hooks.afterPlugins.tap('RematchPlugin', () => {
       const allFiles = getAllFiles(this.root, this.temp);
       const { newModelsData, newModelsPath } = getModelsFiles(allFiles, this.root);
       this.modelsData = newModelsData;
@@ -119,4 +119,4 @@ class Modelsplugin {
     });
   }
 }
-export default Modelsplugin;
+export default RematchPlugin;
