@@ -1,5 +1,7 @@
 import path from 'path';
+import recursive from 'recursive-readdir';
 import FS from 'fs-extra';
+import { toPascalCase } from '@kkt/plugin-pro-utils';
 
 export const getRouteContent = () => {
   // json > ts > js
@@ -22,4 +24,20 @@ export const getRouteContent = () => {
     type,
     content,
   };
+};
+
+const ignoreFunc = (file: string, stats: FS.Stats) => {
+  if (/index.(tsx|js|jsx)$/.test(file) || stats.isDirectory()) {
+    return false;
+  }
+  return true;
+};
+
+export const getFilesPath = (currentPath: string): Promise<string[]> => {
+  return new Promise((resolve, reject) => {
+    recursive(currentPath, [ignoreFunc], (err, files) => {
+      if (err) return reject(err);
+      resolve(files);
+    });
+  });
 };

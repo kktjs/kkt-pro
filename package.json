@@ -14,6 +14,7 @@
     "basic:doc": "lerna exec --scope @examples/basic -- npm run docs2",
     "basic-js": "lerna exec --scope  @examples/basic-js -- npm run start",
     "conf": "lerna exec --scope @examples/config -- npm run start",
+    "auto": "lerna exec --scope @examples/auto-route -- npm run start",
     "-------------": "----------------------------------------------",
     "version": "lerna version --no-changelog --no-git-tag-version --no-push",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",

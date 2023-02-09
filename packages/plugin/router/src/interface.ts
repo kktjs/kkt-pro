@@ -9,4 +9,8 @@ export interface RouterPluginProps {
   fallbackElement?: string;
   /**路由权限处理组件**/
   authElement?: string;
+  /**自动生成路由配置*/
+  autoRoute?: boolean;
+  /**自动生成路由layout布局组件地址*/
+  outletLayout?: string;
 }

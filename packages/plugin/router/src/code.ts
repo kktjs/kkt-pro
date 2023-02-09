@@ -55,3 +55,21 @@ ${createRouterFunTemp(type)}
 export default ()=>(${render})
 `;
 };
+
+export const getRouterDataCode = (data: Map<string, string>, outletLayout?: string) => {
+  let childCode = '';
+  let importCode = '';
+  data.forEach((name, routePath, map) => {
+    const pathStr = routePath.replace('@/pages/', '').replace(/\/index$/, '');
+    importCode += `import ${name} from "${routePath}";\n`;
+    if (pathStr === 'index') {
+      childCode += `\t{ index: true, element: <${name}/>, loader: ${name}.loader },\n`;
+    } else {
+      childCode += `\t{ path: prefix + "${pathStr}", element: <${name}/>, loader: ${name}.loader },\n`;
+    }
+  });
+  if (outletLayout) {
+    return `import React from "react";\nimport { Outlet } from "react-router-dom"\nimport OutletLayout from "${outletLayout}";\n${importCode}const prefix = PREFIX;\nexport default [\n{\n\tpath:prefix,\n\telement:<OutletLayout ><Outlet/></OutletLayout>,\n\tchildren:[\n\t${childCode}\t]\n}\n]`;
+  }
+  return `import React from "react";\n${importCode}const prefix = PREFIX;\nexport default [\n${childCode}\n]`;
+};
