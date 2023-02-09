@@ -63,5 +63,5 @@ jobs:
         token: ${{ secrets.NPM_TOKEN }}
         workspaces: |
           packages/doc
-          packages/plugin/config
+          packages/plugin/*
           core
