@@ -26,6 +26,7 @@ export const createrRouter = (options) => {
 export { router,navigate }
 `;
 
+/**获取路由入口文件内容*/
 export const createRouteTemp = (type: 'browser' | 'hash', fallbackElement?: string, authElement?: string) => {
   let importRouter = ``;
   importRouter = `
@@ -55,7 +56,7 @@ ${createRouterFunTemp(type)}
 export default ()=>(${render})
 `;
 };
-
+/**自动生成-获取路由配置数据*/
 export const getRouterDataCode = (data: Map<string, string>, outletLayout?: string) => {
   let childCode = '';
   let importCode = '';

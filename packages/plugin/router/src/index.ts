@@ -77,6 +77,15 @@ class RouterPlugin {
       FS.ensureDirSync(this.temp);
     }
   }
+  /**创建路由入口文件*/
+  createIndex() {
+    const routeTemp = createRouteTemp(this.routeType, this.fallbackElement, this.authElement);
+    if (this.pre_index_content !== routeTemp) {
+      this.pre_index_content = routeTemp;
+      FS.writeFileSync(this.temp_index_file, routeTemp, { encoding: 'utf-8', flag: 'w+' });
+    }
+  }
+
   // ------------------------------------ 通过配置生成路由 ----------------------------------------------
   /**生成文件*/
   config_CreateRoute() {
@@ -92,15 +101,8 @@ class RouterPlugin {
     }
     /**生成配置*/
     const newContent = createRouteConfigTemp({ isImportReact, importLazyString, iconString, content });
-    if (newContent) {
-    }
     FS.writeFileSync(this.temp_config_file, newContent, { encoding: 'utf-8', flag: 'w+' });
-
-    /**生成路由渲染文件*/
-    const routeTemp = createRouteTemp(this.routeType, this.fallbackElement, this.authElement);
-    if (this.pre_index_content !== routeTemp) {
-      FS.writeFileSync(this.temp_index_file, routeTemp, { encoding: 'utf-8', flag: 'w+' });
-    }
+    this.createIndex();
   }
   /**判断读取的内容是否与上次一样**/
   config_JudgeContent() {
@@ -159,11 +161,7 @@ class RouterPlugin {
       /**生成配置*/
       FS.writeFileSync(this.temp_config_file, configContent, { encoding: 'utf-8', flag: 'w+' });
     }
-    /**生成路由渲染文件*/
-    const routeTemp = createRouteTemp(this.routeType, this.fallbackElement, this.authElement);
-    if (this.pre_index_content !== routeTemp) {
-      FS.writeFileSync(this.temp_index_file, routeTemp, { encoding: 'utf-8', flag: 'w+' });
-    }
+    this.createIndex();
   }
   /**初始获取路径数据*/
   async auto_GetFiles() {
