@@ -1,6 +1,6 @@
 {
   "name": "@kkt/plugin-pro-rematch",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "kktp plugins",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -30,9 +30,9 @@
     "framework"
   ],
   "dependencies": {
-    "@kkt/plugin-pro-utils": "^0.0.4",
+    "@kkt/plugin-pro-utils": "^0.0.5",
+    "@types/fs-extra": "~11.0.1",
     "chokidar": "~3.5.3",
-    "fs-extra": "~11.1.0",
-    "@types/fs-extra": "~11.0.1"
+    "fs-extra": "~11.1.0"
   }
 }
