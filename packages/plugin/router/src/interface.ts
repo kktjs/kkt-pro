@@ -7,4 +7,6 @@ export interface RouterPluginProps {
   routeType?: 'browser' | 'hash';
   /**页面加载loading组件地址*/
   fallbackElement?: string;
+  /**路由权限处理组件**/
+  authElement?: string;
 }

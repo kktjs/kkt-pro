@@ -30,6 +30,8 @@ class RouterPlugin {
   tempFile: string = '';
   tempConfigFile: string = '';
   fallbackElement?: string = '';
+  authElement?: string = '';
+
   /**数据验证结果*/
   checkResult: { isArr: boolean; isImportReact: boolean; code: string } = {
     isArr: false,
@@ -48,6 +50,7 @@ class RouterPlugin {
     const tmp = props.tempDirName || '.kktp';
     this.routeType = props.routeType || 'hash';
     this.fallbackElement = props.fallbackElement;
+    this.authElement = props.authElement;
     this.cwdConfig = path.resolve(process.cwd(), 'config');
     this.temp = path.resolve(process.cwd(), 'src', tmp, 'routes');
     this.tempFile = path.resolve(process.cwd(), 'src', tmp, 'routes', 'index.jsx');
@@ -75,7 +78,7 @@ class RouterPlugin {
     FS.writeFileSync(this.tempConfigFile, newContent, { encoding: 'utf-8', flag: 'w+' });
 
     /**生成路由渲染文件*/
-    const routeTemp = createRouteTemp(this.routeType, this.fallbackElement);
+    const routeTemp = createRouteTemp(this.routeType, this.fallbackElement, this.authElement);
     if (this.preIndexString !== routeTemp) {
       FS.writeFileSync(this.tempFile, routeTemp, { encoding: 'utf-8', flag: 'w+' });
     }

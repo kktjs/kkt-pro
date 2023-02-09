@@ -15,7 +15,18 @@ ${content}
 `;
 };
 
-export const createRouteTemp = (type: 'browser' | 'hash', fallbackElement?: string) => {
+const createRouterFunTemp = (type: 'browser' | 'hash') => `
+let router;
+let navigate;
+export const createrRouter = (options) => {
+  router = ${type === 'browser' ? 'createBrowserRouter' : 'createHashRouter'}(options);
+  navigate = router.navigate;
+  return router
+};
+export { router,navigate }
+`;
+
+export const createRouteTemp = (type: 'browser' | 'hash', fallbackElement?: string, authElement?: string) => {
   let importRouter = ``;
   importRouter = `
 import React from "react";
@@ -24,23 +35,23 @@ import {
   createHashRouter,
   RouterProvider,
 } from 'react-router-dom';
-import routesConfig from "./config";\n
+import routesConfig from "./config";
 `;
   if (fallbackElement) {
     importRouter += `import FallbackElement from "${fallbackElement}";\n`;
   }
 
-  if (type === 'browser') {
-    importRouter += `export const router = createBrowserRouter(routesConfig);\n`;
-  } else {
-    importRouter += `export const router = createHashRouter(routesConfig);\n`;
-  }
-  const render = `export default ()=> <RouterProvider router={router} fallbackElement={${
+  let render = `<RouterProvider router={createrRouter(routesConfig)} fallbackElement={${
     fallbackElement ? '<FallbackElement />' : '<div>loading...</div>'
   }} />`;
+  if (authElement) {
+    importRouter += `import AuthElement from "${authElement}";\n`;
+    render = `<AuthElement routes={routesConfig} createRouter={createrRouter}>${render}</AuthElement>`;
+  }
+
   return `
 ${importRouter}
-export const navigate = router.navigate;\n
-${render}
+${createRouterFunTemp(type)}
+export default ()=>(${render})
 `;
 };
