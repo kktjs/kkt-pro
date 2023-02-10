@@ -1,6 +1,6 @@
 {
   "name": "@examples/auto-route",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -31,7 +31,7 @@
     "@types/jest": "~27.4.1",
     "@types/react": "~18.0.0",
     "@types/react-dom": "~18.0.0",
-    "kktp": "^0.0.6"
+    "kktp": "^0.0.7"
   },
   "eslintConfig": {
     "extends": [

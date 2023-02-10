@@ -1,6 +1,6 @@
 {
   "name": "kktp",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "kktp cli",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -32,9 +32,9 @@
     "framework"
   ],
   "dependencies": {
-    "@kkt/doc": "^0.0.6",
+    "@kkt/doc": "^0.0.7",
     "@kkt/less-modules": "~7.3.2",
-    "@kkt/plugin-pro-config": "^0.0.6",
+    "@kkt/plugin-pro-config": "^0.0.7",
     "@proload/plugin-json": "~0.3.1",
     "@proload/plugin-rc": "~0.2.1",
     "@proload/plugin-typescript": "~0.2.1",
