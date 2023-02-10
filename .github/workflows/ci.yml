@@ -53,6 +53,9 @@ jobs:
           npm i kktp@${{steps.create_tag.outputs.version}}
           npm i @kkt/doc@${{steps.create_tag.outputs.version}}
           npm i @kkt/plugin-pro-config@${{steps.create_tag.outputs.version}}
+          npm i @kkt/plugin-pro-entry@${{steps.create_tag.outputs.version}}
+          npm i @kkt/plugin-pro-rematch@${{steps.create_tag.outputs.version}}
+          npm i @kkt/plugin-pro-router@${{steps.create_tag.outputs.version}}
           ```
           ${{ steps.changelog.outputs.compareurl }}
           ${{ steps.changelog.outputs.changelog }}
