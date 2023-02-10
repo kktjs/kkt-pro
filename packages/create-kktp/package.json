@@ -1,0 +1,37 @@
+{
+  "name": "create-kktp",
+  "version": "0.0.7",
+  "description": "Creates a kktp application using the command line.",
+  "author": "SunLxy <1011771396@qq.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "create-kktp": "bin/create-kktp"
+  },
+  "scripts": {
+    "watch": "tsbb watch --no-esm --disable-babel",
+    "build": "tsbb build --no-esm --disable-babel"
+  },
+  "files": [
+    "lib",
+    "bin",
+    "src"
+  ],
+  "keywords": [
+    "kkt",
+    "ncc",
+    "nodejs",
+    "cra",
+    "build-tools",
+    "create-react-app",
+    "zero-configuration",
+    "framework"
+  ],
+  "dependencies": {
+    "create-kkt": "3.0.0"
+  }
+}

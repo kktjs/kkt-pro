@@ -4,7 +4,7 @@
   "scripts": {
     "prepare": "husky install",
     "watch": "lerna exec --scope kktp -- npm run watch",
-    "build": "lerna exec --scope @kkt/* --scope kktp -- npm run build",
+    "build": "lerna exec --scope @kkt/* --scope kktp --scope create-kktp -- npm run build",
     "watch:d": "lerna exec --scope @kkt/doc -- npm run watch",
     "watch:route": "lerna exec --scope @kkt/plugin-pro-router -- npm run watch",
     "watch:config": "lerna exec --scope @kkt/plugin-pro-config -- npm run watch",

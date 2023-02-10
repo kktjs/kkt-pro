@@ -138,6 +138,7 @@ jobs:
         token: ${{ secrets.NPM_TOKEN }}
         workspaces: |
           packages/doc
+          packages/create-kktp
           packages/plugin/*
           core
 
