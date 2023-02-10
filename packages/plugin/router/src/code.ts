@@ -27,7 +27,7 @@ export { router,navigate }
 `;
 
 /**获取路由入口文件内容*/
-export const createRouteTemp = (type: 'browser' | 'hash', fallbackElement?: string, authElement?: string) => {
+export const createIndexRouteTemp = (type: 'browser' | 'hash', fallbackElement?: string, authElement?: string) => {
   let importRouter = ``;
   importRouter = `
 import React from "react";

@@ -1,4 +1,4 @@
-const Index = () => {
-  return <div>测试页面2</div>;
+const Home = () => {
+  return <div>测试页面Home</div>;
 };
-export default Index;
+export default Home;

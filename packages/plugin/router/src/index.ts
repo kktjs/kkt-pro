@@ -13,12 +13,12 @@ import chokidar from 'chokidar';
 import FS from 'fs-extra';
 import { checkRoutersFile, analysisRoutersIcon, analysisRoutersLoader } from '@kkt/plugin-pro-utils';
 import { getRouteContent, getFilesPath } from './utils';
-import { createRouteConfigTemp, createRouteTemp, getRouterDataCode } from './code';
+import { createRouteConfigTemp, createIndexRouteTemp, getRouterDataCode } from './code';
 import { RouterPluginProps } from './interface';
 import { toPascalCase } from '@kkt/plugin-pro-utils';
 export * from './interface';
 
-class RouterPlugin {
+class ConfigRouterPlugin {
   /**上一次的路由数据*/
   pre_config_content = '';
   /**上一次的入口文件数据*/
@@ -47,7 +47,6 @@ class RouterPlugin {
   analysisRoutersIcon?: RouterPluginProps['analysisRoutersIcon'];
   /**路由类型*/
   routeType?: 'browser' | 'hash' = 'hash';
-
   // -----------------------自动生成路由-------------------------------
   /**自动生成路由配置*/
   autoRoute: boolean = false;
@@ -60,26 +59,9 @@ class RouterPlugin {
   /**路由数据*/
   routerData: Map<string, string> = new Map();
   // ------------------------------------------------------
-
-  constructor(props: RouterPluginProps = {}) {
-    const tmp = props.tempDirName || '.kktp';
-    this.routeType = props.routeType || 'hash';
-    this.fallbackElement = props.fallbackElement;
-    this.outletLayout = props.outletLayout;
-    this.authElement = props.authElement;
-    this.autoRoute = props.autoRoute;
-
-    this.temp = path.resolve(this.rootDir, tmp, 'routes');
-    this.temp_index_file = path.resolve(this.rootDir, tmp, 'routes', 'index.jsx');
-    this.temp_config_file = path.resolve(this.rootDir, tmp, 'routes', 'config.jsx');
-    this.analysisRoutersIcon = props.analysisRoutersIcon;
-    if (!FS.existsSync(this.temp)) {
-      FS.ensureDirSync(this.temp);
-    }
-  }
   /**创建路由入口文件*/
   createIndex() {
-    const routeTemp = createRouteTemp(this.routeType, this.fallbackElement, this.authElement);
+    const routeTemp = createIndexRouteTemp(this.routeType, this.fallbackElement, this.authElement);
     if (this.pre_index_content !== routeTemp) {
       this.pre_index_content = routeTemp;
       FS.writeFileSync(this.temp_index_file, routeTemp, { encoding: 'utf-8', flag: 'w+' });
@@ -137,7 +119,25 @@ class RouterPlugin {
         });
     }
   }
+}
+class RouterPlugin extends ConfigRouterPlugin {
+  constructor(props: RouterPluginProps = {}) {
+    super();
+    const tmp = props.tempDirName || '.kktp';
+    this.routeType = props.routeType || 'hash';
+    this.fallbackElement = props.fallbackElement;
+    this.outletLayout = props.outletLayout;
+    this.authElement = props.authElement;
+    this.autoRoute = props.autoRoute;
 
+    this.temp = path.resolve(this.rootDir, tmp, 'routes');
+    this.temp_index_file = path.resolve(this.rootDir, tmp, 'routes', 'index.jsx');
+    this.temp_config_file = path.resolve(this.rootDir, tmp, 'routes', 'config.jsx');
+    this.analysisRoutersIcon = props.analysisRoutersIcon;
+    if (!FS.existsSync(this.temp)) {
+      FS.ensureDirSync(this.temp);
+    }
+  }
   // ------------------------------------ 自动生成路由 ----------------------------------------------
   /**获取路由跳转名称**/
   getRouterPath = (filePath: string) =>

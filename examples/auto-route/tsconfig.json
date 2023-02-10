@@ -1,26 +1,27 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "jsx": "react-jsx",
-    "declaration": true,
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "importHelpers": true,
-    "noImplicitAny": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "baseUrl": "./src",
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "sourceMap": false,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "module": "esnext",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "isolatedModules": true,
-    "types": ["jest", "node"],
-    "noEmit": true
+    "declaration": true,
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@@/*": ["./src/.kktp/*"]
+    }
   },
   "include": ["src", "config/.kktprc.ts"]
 }
