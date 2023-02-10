@@ -1,6 +1,6 @@
 {
   "name": "@kkt/plugin-pro-config",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "kktp plugins",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -30,9 +30,9 @@
     "framework"
   ],
   "dependencies": {
-    "@kkt/plugin-pro-entry": "^0.0.5",
-    "@kkt/plugin-pro-rematch": "^0.0.5",
-    "@kkt/plugin-pro-router": "^0.0.5",
+    "@kkt/plugin-pro-entry": "^0.0.6",
+    "@kkt/plugin-pro-rematch": "^0.0.6",
+    "@kkt/plugin-pro-router": "^0.0.6",
     "kkt": "^7.3.2"
   }
 }

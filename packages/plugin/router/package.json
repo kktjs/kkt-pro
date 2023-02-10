@@ -1,6 +1,6 @@
 {
   "name": "@kkt/plugin-pro-router",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "kktp plugins",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -30,11 +30,11 @@
     "framework"
   ],
   "dependencies": {
-    "@types/recursive-readdir": "~2.2.1",
-    "recursive-readdir": "~2.2.3",
-    "@kkt/plugin-pro-utils": "^0.0.5",
+    "@kkt/plugin-pro-utils": "^0.0.6",
     "@types/fs-extra": "~11.0.1",
+    "@types/recursive-readdir": "~2.2.1",
     "chokidar": "~3.5.3",
-    "fs-extra": "~11.1.0"
+    "fs-extra": "~11.1.0",
+    "recursive-readdir": "~2.2.3"
   }
 }
