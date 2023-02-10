@@ -27,7 +27,7 @@ export const getRouteContent = () => {
 };
 
 const ignoreFunc = (file: string, stats: FS.Stats) => {
-  if (/index.(tsx|js|jsx)$/.test(file) || stats.isDirectory()) {
+  if ((/index.(tsx|js|jsx)$/.test(file) && stats.isFile) || stats.isDirectory()) {
     return false;
   }
   return true;
