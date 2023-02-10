@@ -69,7 +69,7 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
   const {
     plugins = [],
     /**自动生成文件目录**/
-    tempDirName = '.kktp',
+    cacheDirName = '.kktp',
     /**自动生成入口文件*/
     initEntery = false,
     /**路由配置*/
@@ -79,16 +79,16 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
   } = props;
   const pluginsArr = [...plugins];
   if (initEntery) {
-    pluginsArr.push(['@kkt/plugin-pro-entry', { redux: initModel, tempDirName }]);
+    pluginsArr.push(['@kkt/plugin-pro-entry', { redux: initModel, cacheDirName }]);
   }
   if (initRoute) {
     pluginsArr.push([
       '@kkt/plugin-pro-router',
-      typeof initRoute === 'boolean' ? { tempDirName } : { ...initRoute, tempDirName },
+      typeof initRoute === 'boolean' ? { cacheDirName } : { ...initRoute, cacheDirName },
     ]);
   }
   if (initModel) {
-    pluginsArr.push(['@kkt/plugin-pro-rematch', { tempDirName }]);
+    pluginsArr.push(['@kkt/plugin-pro-rematch', { cacheDirName }]);
   }
   return pluginsArr;
 };

@@ -9,7 +9,7 @@ export interface RouterPluginProps {
   /**处理图标菜单中图标引入问题*/
   analysisRoutersIcon?: (icons: { name: string; newName: string }[]) => string;
   /**在src目录下生成的临时文件夹名称*/
-  tempDirName?: string;
+  cacheDirName?: string;
   /**路由类型*/
   routeType?: 'browser' | 'hash';
   /**页面加载loading组件地址*/
@@ -26,7 +26,7 @@ export interface RouterPluginProps {
 
 ## 通过配置进行生成路由
 
-1. 约定根目录下`config/routes(json|js|ts)`为路由菜单配置
+1. 约定根目录下`config/routes.(json|js|ts)`为路由菜单配置
 
 ## 自动生成路由
 

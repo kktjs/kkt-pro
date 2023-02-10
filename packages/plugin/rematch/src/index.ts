@@ -12,7 +12,7 @@ import { getAllFiles, getModelsFiles, getSingleModel, getExt } from './utils';
 import { createModelsConfigFile, createIndex } from './code';
 
 export interface ModelspluginProps {
-  tempDirName?: string;
+  cacheDirName?: string;
 }
 
 class RematchPlugin {
@@ -29,10 +29,10 @@ class RematchPlugin {
   preConfigString = '';
   preIndexString = '';
   constructor(props: ModelspluginProps = {}) {
-    if (props.tempDirName) {
-      this.temp = path.resolve(this.root, props.tempDirName);
+    if (props.cacheDirName) {
+      this.temp = path.resolve(this.root, props.cacheDirName);
+      this.tempDir = path.join(this.temp, 'rematch');
     }
-    this.tempDir = path.join(this.temp, 'rematch');
   }
   /**创建文件*/
   createFile() {

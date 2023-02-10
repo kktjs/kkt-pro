@@ -23,10 +23,6 @@ function help() {
   console.log('   $ \x1b[35mkktp\x1b[0m doc');
 }
 const ROOT_SRC = path.resolve(process.cwd(), 'src');
-const ENTRY_JS_PATH = path.resolve(ROOT_SRC, 'index.{js,jsx,tsx,ts}');
-const ENTRY_CACHE_DIR_PATH = path.resolve(ROOT_SRC, '.kktp');
-const ENTRY_ROUTER_DIR_PATH = path.resolve(ROOT_SRC, 'pages');
-const ENTRY_CACHE_JS_PATH = path.resolve(ENTRY_CACHE_DIR_PATH, 'index.jsx');
 
 interface KKTPArgs extends StartArgs {}
 
@@ -53,27 +49,32 @@ interface KKTPArgs extends StartArgs {}
       return;
     }
 
-    fs.removeSync(ENTRY_CACHE_DIR_PATH);
-    const entryFileExist = fileExists(ENTRY_JS_PATH);
-    let inputFile = entryFileExist && typeof entryFileExist === 'string' ? entryFileExist : ENTRY_CACHE_JS_PATH;
-    const oPaths = { appIndexJs: inputFile };
-    overridePaths(undefined, { ...oPaths });
-
     /**
      * 获取配置
      * */
     const overrideConfig = await getLoadConfig();
+    /**缓存文件夹名称*/
+    const cacheDirName = overrideConfig.cacheDirName || '.kktp';
+    /**判断自动生成入口配置*/
+    const initEntery = overrideConfig.initEntery;
 
+    const ENTRY_CACHE_DIR_PATH = path.resolve(ROOT_SRC, cacheDirName);
+
+    fs.removeSync(ENTRY_CACHE_DIR_PATH);
+    const oPaths: { appIndexJs?: string } = {};
+    if (initEntery) {
+      oPaths.appIndexJs = path.resolve(ENTRY_CACHE_DIR_PATH, 'index.jsx');
+      overridePaths(undefined, { ...oPaths });
+    }
     const isWatch = /^(watch|start)$/gi.test(scriptName);
     argvs.overridesWebpack = (conf, env, options) => {
       /** 移除入口警告 */
       overridePaths(undefined, { ...oPaths });
       /** 支持 less 文件编译 */
       conf = lessModules(conf, env, options);
-      // 入口文件不存在添加
-      // if (!entryFileExist && fs.existsSync(ENTRY_ROUTER_DIR_PATH)) { // 暂时不进行判断 ENTRY_ROUTER_DIR_PATH 是否存在
-      if (!entryFileExist) {
-        conf.entry = inputFile;
+      // 是否自动生成入口文件
+      if (initEntery) {
+        conf.entry = oPaths.appIndexJs;
         fs.ensureFileSync(conf.entry);
       }
       conf = overrideKKTPConfig(overrideConfig, conf, env, options);

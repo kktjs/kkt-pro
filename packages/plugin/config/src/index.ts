@@ -26,7 +26,7 @@ const overrideKKTPConfig = (
     overrideWebpack,
     output = {},
     /**自动生成文件目录**/
-    tempDirName = '.kktp',
+    cacheDirName = '.kktp',
     /**自动生成入口文件*/
     initEntery = false,
     /**路由配置*/
@@ -44,7 +44,7 @@ const overrideKKTPConfig = (
     alias: {
       ...conf.resolve?.alias,
       '@': options.paths.appSrc,
-      '@@': path.resolve(options.paths.appSrc, tempDirName),
+      '@@': path.resolve(options.paths.appSrc, cacheDirName),
       ...(alias || {}),
     },
   };

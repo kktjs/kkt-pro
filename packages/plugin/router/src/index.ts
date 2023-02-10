@@ -123,7 +123,7 @@ class ConfigRouterPlugin {
 class RouterPlugin extends ConfigRouterPlugin {
   constructor(props: RouterPluginProps = {}) {
     super();
-    const tmp = props.tempDirName || '.kktp';
+    const tmp = props.cacheDirName || '.kktp';
     this.routeType = props.routeType || 'hash';
     this.fallbackElement = props.fallbackElement;
     this.outletLayout = props.outletLayout;

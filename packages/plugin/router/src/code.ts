@@ -47,7 +47,7 @@ import routesConfig from "./config";
   }} />`;
   if (authElement) {
     importRouter += `import AuthElement from "${authElement}";\n`;
-    render = `<AuthElement routes={routesConfig} createRouter={createrRouter}>${render}</AuthElement>`;
+    render = `<AuthElement routes={routesConfig} createrRouter={createrRouter}>${render}</AuthElement>`;
   }
 
   return `

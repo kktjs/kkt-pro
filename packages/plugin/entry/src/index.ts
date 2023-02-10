@@ -7,7 +7,7 @@ type InnerCallback<E, T> = (error?: E | null | false, result?: T) => void;
 
 type InitEntryOptions = {
   /**在src目录下生成的临时文件夹名称*/
-  tempDirName?: string;
+  cacheDirName?: string;
   redux?: boolean;
 };
 
@@ -25,9 +25,9 @@ class InitEntry implements WebpackPluginInstance {
   globalCSSPath = path.resolve(this.rootDir, 'global.css');
   initGlobalCSSContent = '';
   redux: boolean = false;
-  constructor({ tempDirName, redux = false }: InitEntryOptions = {}) {
-    if (tempDirName) {
-      this.tempDir = path.resolve(this.rootDir, tempDirName);
+  constructor({ cacheDirName, redux = false }: InitEntryOptions = {}) {
+    if (cacheDirName) {
+      this.tempDir = path.resolve(this.rootDir, cacheDirName);
       this.entryCSSPath = path.resolve(this.tempDir, 'index.css');
       this.entryJSPath = path.resolve(this.tempDir, 'index.jsx');
     }

@@ -48,7 +48,7 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
   /** 输出 */
   output?: Omit<WebpackConfiguration['output'], 'publicPath'>;
   /**自动生成文件目录名称**/
-  tempDirName?: string;
+  cacheDirName?: string;
   /**自动生成入口文件*/
   initEntery?: boolean;
   /**路由配置*/
