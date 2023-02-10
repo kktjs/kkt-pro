@@ -12,13 +12,10 @@ export function getDocsData(str: string = '', isLocal: boolean) {
   if (!route.startsWith('/')) {
     route = '/' + route;
   }
-  let name = '';
   let pkgPath = '';
+  const [, name] = dirPath.match(/^([a-zA-Z\-]+|@[a-zA-Z\-]+\/[a-zA-Z\-]+|(\.|\.\.)\/[a-zA-Z\-]+)\/?/i);
   /**本地地址*/
-  if (isLocal) {
-    [, name] = dirPath.match(/^([a-zA-Z\-]+|@[a-zA-Z\-]+\/[a-zA-Z\-]+|(\.|\.\.)\/[a-zA-Z]+)\/?/i);
-  } else {
-    [, name] = dirPath.match(/^([a-zA-Z\-]+|@[a-zA-Z\-]+\/[a-zA-Z\-]+)\/?/i);
+  if (!isLocal) {
     pkgPath = resolvePackagePath(name, process.cwd());
   }
   const root = path.dirname(pkgPath).replace(new RegExp(`${name.replace('/', path.sep)}$`, 'ig'), '');
