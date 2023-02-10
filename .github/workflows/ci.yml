@@ -60,6 +60,8 @@ jobs:
           ${{ steps.changelog.outputs.compareurl }}
           ${{ steps.changelog.outputs.changelog }}
 
+    - run: mkdir -p build
+
     - name: Converts kkt Markdown to HTML
       uses: jaywcjlove/markdown-to-html-cli@main
       with:
