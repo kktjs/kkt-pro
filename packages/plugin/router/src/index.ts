@@ -46,7 +46,7 @@ class ConfigRouterPlugin {
   /**处理图标菜单中图标引入问题*/
   analysisRoutersIcon?: RouterPluginProps['analysisRoutersIcon'];
   /**路由类型*/
-  routeType?: 'browser' | 'hash' = 'hash';
+  routeType?: 'browser' | 'hash' | 'memory' = 'hash';
   // -----------------------自动生成路由-------------------------------
   /**自动生成路由配置*/
   autoRoute: boolean = false;

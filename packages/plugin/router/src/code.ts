@@ -15,11 +15,17 @@ ${content}
 `;
 };
 
-const createRouterFunTemp = (type: 'browser' | 'hash') => `
+const Routertype = {
+  browser: 'createBrowserRouter',
+  hash: 'createHashRouter',
+  memory: 'createMemoryRouter',
+};
+
+const createRouterFunTemp = (type: 'browser' | 'hash' | 'memory') => `
 let router;
 let navigate;
 export const createrRouter = (options) => {
-  router = ${type === 'browser' ? 'createBrowserRouter' : 'createHashRouter'}(options);
+  router = ${Routertype[type]}(options);
   navigate = router.navigate;
   return router
 };
@@ -27,13 +33,16 @@ export { router,navigate }
 `;
 
 /**获取路由入口文件内容*/
-export const createIndexRouteTemp = (type: 'browser' | 'hash', fallbackElement?: string, authElement?: string) => {
+export const createIndexRouteTemp = (
+  type: 'browser' | 'hash' | 'memory',
+  fallbackElement?: string,
+  authElement?: string,
+) => {
   let importRouter = ``;
   importRouter = `
 import React from "react";
 import {
-  createBrowserRouter,
-  createHashRouter,
+  ${Routertype[type]},
   RouterProvider,
 } from 'react-router-dom';
 import routesConfig from "./config";

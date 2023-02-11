@@ -4,7 +4,7 @@ export interface RouterPluginProps {
   /**在src目录下生成的临时文件夹名称*/
   cacheDirName?: string;
   /**路由类型*/
-  routeType?: 'browser' | 'hash';
+  routeType?: 'browser' | 'hash' | 'memory';
   /**页面加载loading组件地址*/
   fallbackElement?: string;
   /**路由权限处理组件**/
