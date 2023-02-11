@@ -3,7 +3,6 @@ import { getLoadConfig } from './utils/getLoadConfig';
 import path from 'path';
 import fs from 'fs-extra';
 import { StartArgs } from 'kkt';
-import { fileExists } from './utils';
 import { overridePaths } from 'kkt/lib/overrides/paths';
 import overrideKKTPConfig from '@kkt/plugin-pro-config';
 import lessModules from '@kkt/less-modules';

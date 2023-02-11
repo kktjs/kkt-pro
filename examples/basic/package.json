@@ -5,9 +5,6 @@
   "private": true,
   "scripts": {
     "start": "kktp start",
-    "docs": "kktd @examples/basic-js/build",
-    "docs1": "kktd ./build --local",
-    "docs2": "kktd @examples/basic-js/build",
     "build": "kktp build",
     "test": "kktp test --env=jsdom",
     "coverage": "kktp test --env=jsdom --coverage"
@@ -24,8 +21,6 @@
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
-    "@examples/basic-js": "^0.0.7",
-    "@kkt/doc": "^0.0.7",
     "@types/jest": "~27.4.1",
     "@types/react": "~18.0.0",
     "@types/react-dom": "~18.0.0",
