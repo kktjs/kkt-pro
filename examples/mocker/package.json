@@ -1,0 +1,55 @@
+{
+  "name": "@examples/mocker",
+  "description": "基础模拟 API 示例",
+  "private": true,
+  "version": "0.0.7",
+  "scripts": {
+    "start": "kktp start",
+    "build": "kktp build",
+    "doc": "kktp doc --entry=./build --local",
+    "test": "kktp test --env=jsdom",
+    "coverage": "kktp test --env=jsdom --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kktjs/kkt.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@uiw-admin/exceptions": "~5.3.21",
+    "@rematch/core": "2.2.0",
+    "@rematch/loading": "2.1.2",
+    "react": "~18.2.0",
+    "react-dom": "~18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router": "~6.8.0",
+    "react-router-dom": "~6.8.0",
+    "web-vitals": "^2.1.2"
+  },
+  "devDependencies": {
+    "@kkt/less-modules": "^7.2.3",
+    "@types/jest": "~27.4.1",
+    "@types/react": "~18.0.0",
+    "@types/react-dom": "~18.0.0",
+    "kktp": "^0.0.7"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

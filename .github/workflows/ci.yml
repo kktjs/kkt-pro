@@ -85,6 +85,11 @@ jobs:
       working-directory: examples/config
     - run: cp -rp examples/config/config.zip build/zip
 
+    - name: Compress mocker Example.
+      run: zip -r -y mocker.zip . -x "node_modules/*"  -x "src/.kktp/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x "package-lock.json"
+      working-directory: examples/mocker
+    - run: cp -rp examples/mocker/mocker.zip build/zip
+
     - name: Add Download Page
       working-directory: build/zip
       run: |

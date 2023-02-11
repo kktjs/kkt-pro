@@ -1,13 +1,14 @@
+src/.kktp
 build
 node_modules
 npm-debug.log*
 package-lock.json
-src/.kktp
+
 .eslintcache
 .DS_Store
 .cache
 .vscode
-.kktp
+
 *.bak
 *.tem
 *.temp

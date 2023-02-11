@@ -76,10 +76,9 @@ kktp ===> `kkt pro`
 
 ```bash
 .
-├── config # 配置文件
-│    ├── index.js
-│    ├── proxy.js
-│    └── router.json
+├── config # 
+│    └── router.json # 路由菜单配置文件
+├── .kktprc.ts # 配置文件
 └── mock # mock 数据
     └── index.js
 ```
