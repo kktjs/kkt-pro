@@ -32,13 +32,14 @@
     "framework"
   ],
   "dependencies": {
+    "@swc-node/core": "1.9.2",
     "@kkt/doc": "^0.0.8-alpha.0",
     "@kkt/less-modules": "~7.3.2",
     "@kkt/plugin-pro-config": "^0.0.8-alpha.0",
-    "@proload/plugin-json": "~0.3.1",
-    "@proload/plugin-rc": "~0.2.1",
-    "@swc-node/register": "~1.5.4",
-    "@swc/core": "~1.3.22",
+    "@proload/plugin-json": "0.3.1",
+    "@proload/plugin-rc": "0.2.1",
+    "@swc-node/register": "~1.5.6",
+    "@swc/core": "~1.3.34",
     "carefree-proload": "^0.0.1",
     "kkt": "~7.2.3",
     "minimist": "~1.2.7",
