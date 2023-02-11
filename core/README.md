@@ -4,7 +4,7 @@ kktp
 ## 安装
 
 ```bash
-$ npm install kktp # yarn add kktp
+$ npm install kktp -D # yarn add kktp -D
 ```
 
 ## Command Help
