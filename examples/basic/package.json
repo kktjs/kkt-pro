@@ -26,7 +26,6 @@
   "devDependencies": {
     "@examples/basic-js": "^0.0.7",
     "@kkt/doc": "^0.0.7",
-    "@kkt/less-modules": "^7.2.3",
     "@types/jest": "~27.4.1",
     "@types/react": "~18.0.0",
     "@types/react-dom": "~18.0.0",
