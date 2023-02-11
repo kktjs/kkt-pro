@@ -1,6 +1,6 @@
 {
   "name": "@examples/basic-js",
-  "version": "0.0.8-alpha.0",
+  "version": "0.0.8-alpha.1",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -21,7 +21,7 @@
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
-    "kktp": "^0.0.8-alpha.0"
+    "kktp": "^0.0.8-alpha.1"
   },
   "eslintConfig": {
     "extends": [

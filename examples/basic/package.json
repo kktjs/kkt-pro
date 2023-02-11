@@ -1,6 +1,6 @@
 {
   "name": "@examples/basic",
-  "version": "0.0.8-alpha.0",
+  "version": "0.0.8-alpha.1",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -24,7 +24,7 @@
     "@types/jest": "~27.4.1",
     "@types/react": "~18.0.0",
     "@types/react-dom": "~18.0.0",
-    "kktp": "^0.0.8-alpha.0"
+    "kktp": "^0.0.8-alpha.1"
   },
   "eslintConfig": {
     "extends": [
