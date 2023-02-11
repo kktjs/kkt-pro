@@ -1,7 +1,6 @@
 import path from 'path';
 import recursive from 'recursive-readdir';
 import FS from 'fs-extra';
-import { toPascalCase } from '@kkt/plugin-pro-utils';
 
 export const getRouteContent = () => {
   // json > ts > js

@@ -1,6 +1,14 @@
 [
   {
+    "index": true,
+    "element": "@/app/App.tsx"
+  },
+  {
     "path": "/",
     "element": "@/app/App.tsx"
+  },
+  {
+    "path": "/403",
+    "element": "@uiw-admin/exceptions/lib/Exceptions/403"
   }
 ]

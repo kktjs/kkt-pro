@@ -17,6 +17,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@uiw-admin/exceptions": "~5.3.21",
     "@rematch/core": "2.2.0",
     "@rematch/loading": "2.1.2",
     "react": "~18.2.0",

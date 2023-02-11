@@ -92,6 +92,7 @@ export const analysisRoutersLoader = (content: string) => {
   const ast = getAst(content);
   const importLazy: Record<string, string> = {};
   let importLazyString = '';
+  let index = 0;
   traverse(ast, {
     ObjectProperty(path) {
       // 判断父级的父级是否是数组 如果是数组则进行转换
@@ -106,18 +107,29 @@ export const analysisRoutersLoader = (content: string) => {
         ) {
           if (t.isStringLiteral(node.value)) {
             const valus = node.value.value;
-            // 判断是否是 @/ 开头的地址
-            if (/^@\/.+/.test(valus)) {
-              const ComponentName = 'Components' + toPascalCase(valus.replace(/^@/, '').split('/').join(''));
-              node.value = getJSX(`${ComponentName}`);
-              importLazy[ComponentName] = valus;
-              importLazyString += `\nimport ${ComponentName} from "${valus}";\n`;
-              if (t.isObjectExpression(path.parent)) {
-                path.parent.properties.push(
-                  t.objectProperty(t.identifier('loader'), t.identifier(`${ComponentName}.loader`)),
-                );
-              }
+            // 这块需要进行处理 如果地址有可能是直接引用包里面的组件
+            const componentName = 'Components' + index + toPascalCase(valus);
+            index++;
+            node.value = getJSX(`${componentName}`);
+            importLazy[componentName] = valus;
+            importLazyString += `\nimport ${componentName} from "${valus}";\n`;
+            if (t.isObjectExpression(path.parent)) {
+              path.parent.properties.push(
+                t.objectProperty(t.identifier('loader'), t.identifier(`${componentName}.loader`)),
+              );
             }
+            // 判断是否是 @/ 开头的地址
+            // if (/^@\/.+/.test(valus)) {
+            //   const ComponentName = 'Components' + toPascalCase(valus.replace(/^@/, '').split('/').join(''));
+            //   node.value = getJSX(`${ComponentName}`);
+            //   importLazy[ComponentName] = valus;
+            //   importLazyString += `\nimport ${ComponentName} from "${valus}";\n`;
+            //   if (t.isObjectExpression(path.parent)) {
+            //     path.parent.properties.push(
+            //       t.objectProperty(t.identifier('loader'), t.identifier(`${ComponentName}.loader`)),
+            //     );
+            //   }
+            // }
           }
         }
         // 对 navigate 进行转换
