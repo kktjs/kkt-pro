@@ -9,10 +9,7 @@
     "test": "kktp test --env=jsdom",
     "coverage": "kktp test --env=jsdom --coverage"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kktjs/kkt.git"
-  },
+  "repository": "https://github.com/kktjs/kkt-pro",
   "author": "",
   "license": "MIT",
   "dependencies": {
