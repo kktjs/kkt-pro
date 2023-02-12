@@ -69,13 +69,17 @@ export default ()=>(${render})
 export const getRouterDataCode = (data: Map<string, string>, outletLayout?: string) => {
   let childCode = '';
   let importCode = '';
+  let index = 0;
   data.forEach((name, routePath, map) => {
+    index++;
     const pathStr = routePath.replace('@/pages/', '').replace(/\/index$/, '');
-    importCode += `import ${name} from "${routePath}";\n`;
+    // 防止名称相同
+    const newName = `${name}${index}`;
+    importCode += `import ${newName} from "${routePath}";\n`;
     if (pathStr === 'index') {
-      childCode += `\t{ index: true, element: <${name}/>, loader: ${name}.loader },\n`;
+      childCode += `\t{ index: true, element: <${newName}/>, loader: ${newName}.loader },\n`;
     } else {
-      childCode += `\t{ path: prefix + "${pathStr}", element: <${name}/>, loader: ${name}.loader },\n`;
+      childCode += `\t{ path: prefix + "${pathStr}", element: <${newName}/>, loader: ${newName}.loader },\n`;
     }
   });
   if (outletLayout) {
