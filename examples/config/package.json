@@ -1,6 +1,6 @@
 {
   "name": "@examples/config",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -28,7 +28,7 @@
     "@types/jest": "~27.4.1",
     "@types/react": "~18.0.0",
     "@types/react-dom": "~18.0.0",
-    "kktp": "^0.0.10"
+    "kktp": "^0.0.11"
   },
   "eslintConfig": {
     "extends": [
