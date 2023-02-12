@@ -70,6 +70,7 @@ export const getRouterDataCode = (data: Map<string, string>, outletLayout?: stri
   let childCode = '';
   let importCode = '';
   let index = 0;
+  let globalCode = '';
   data.forEach((name, routePath, map) => {
     index++;
     const pathStr = routePath.replace('@/pages/', '').replace(/\/index$/, '');
@@ -78,12 +79,14 @@ export const getRouterDataCode = (data: Map<string, string>, outletLayout?: stri
     importCode += `import ${newName} from "${routePath}";\n`;
     if (pathStr === 'index') {
       childCode += `\t{ index: true, element: <${newName}/>, loader: ${newName}.loader },\n`;
+    } else if (pathStr === '*') {
+      globalCode += `\t{ path: prefix + "${pathStr}", element: <${newName}/>, loader: ${newName}.loader },\n`;
     } else {
       childCode += `\t{ path: prefix + "${pathStr}", element: <${newName}/>, loader: ${newName}.loader },\n`;
     }
   });
   if (outletLayout) {
-    return `import React from "react";\nimport { Outlet } from "react-router-dom"\nimport OutletLayout from "${outletLayout}";\n${importCode}const prefix = PREFIX;\nexport default [\n{\n\tpath:prefix,\n\telement:<OutletLayout ><Outlet/></OutletLayout>,\n\tchildren:[\n\t${childCode}\t]\n}\n]`;
+    return `import React from "react";\nimport { Outlet } from "react-router-dom"\nimport OutletLayout from "${outletLayout}";\n${importCode}const prefix = PREFIX;\nexport default [\n{\n\tpath:prefix,\n\telement:<OutletLayout ><Outlet/></OutletLayout>,\n\tchildren:[\n\t${childCode}${globalCode}\t]\n}\n]`;
   }
-  return `import React from "react";\n${importCode}const prefix = PREFIX;\nexport default [\n${childCode}\n]`;
+  return `import React from "react";\n${importCode}const prefix = PREFIX;\nexport default [\n${childCode}${globalCode}\n]`;
 };

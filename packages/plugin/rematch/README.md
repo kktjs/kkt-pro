@@ -11,3 +11,7 @@ export interface ModelspluginProps {
   cacheDirName?: string;
 }
 ```
+
+## 自动收集文件引入
+
+1. 约定`src/**/models/**/*.(js|ts)`文件
