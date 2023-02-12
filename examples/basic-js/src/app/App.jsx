@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import logo from './logo.svg';
 import styles from './App.module.css';
 import { Button } from '../components';

@@ -75,10 +75,10 @@ jobs:
       working-directory: examples/basic
     - run: cp -rp examples/basic/basic.zip build/zip
 
-    - name: Compress auto-route Example.
-      run: zip -r -y auto-route.zip . -x "node_modules/*"  -x "src/.kktp/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x "package-lock.json"
-      working-directory: examples/auto-route
-    - run: cp -rp examples/auto-route/auto-route.zip build/zip
+    - name: Compress auto-routes Example.
+      run: zip -r -y auto-routes.zip . -x "node_modules/*"  -x "src/.kktp/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x "package-lock.json"
+      working-directory: examples/auto-routes
+    - run: cp -rp examples/auto-route/auto-routes.zip build/zip
 
     - name: Compress config Example.
       run: zip -r -y config.zip . -x "node_modules/*"  -x "src/.kktp/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x "package-lock.json"

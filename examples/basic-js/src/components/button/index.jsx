@@ -1,27 +1,8 @@
 import React from 'react';
 import './style/index.less';
 
-export type HTMLButtonProps = React.HTMLProps<HTMLButtonElement>;
-export type Type = 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'dark' | 'link';
-export type Size = 'large' | 'default' | 'small';
-export interface IButtonProps {
-  style?: React.CSSProperties;
-  className?: string;
-  prefixCls?: string;
-  icon?: JSX.Element | string | false | null;
-  intent?: string;
-  loading?: boolean;
-  disabled?: boolean;
-  block?: boolean;
-  active?: boolean;
-  basic?: boolean;
-  htmlType?: 'button' | 'submit' | 'reset';
-  type?: Type;
-  size?: Size;
-}
-
-export default class Button extends React.Component<IButtonProps & HTMLButtonProps> {
-  static defaultProps: IButtonProps = {
+export default class Button extends React.Component {
+  static defaultProps = {
     prefixCls: 'w-btn',
     disabled: false,
     active: false,

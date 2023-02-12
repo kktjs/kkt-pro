@@ -1,17 +1,17 @@
-Basic Example for auto-route
+Basic Example for auto-routes
 ===
 
 ## Quick Start
 
 ```bash
-$ npx create-kktp my-app -e auto-route
+$ npx create-kktp my-app -e auto-routes
 cd my-app
 npm install
 ```
 
 ## Open in CodeSandbox
 
-[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?logo=codesandbox)](https://codesandbox.io/s/github/kktjs/kktp/tree/main/examples/auto-route)
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?logo=codesandbox)](https://codesandbox.io/s/github/kktjs/kktp/tree/main/examples/auto-routes)
 
 ## Development
 
