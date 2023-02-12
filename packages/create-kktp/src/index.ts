@@ -41,7 +41,7 @@ async function run(): Promise<void> {
       path: 'https://kktjs.github.io/kkt-pro/zip/',
       output: '.',
       force: false,
-      example: 'basic',
+      example: 'auto-routes',
     },
   });
   if (argvs.h || argvs.help) {

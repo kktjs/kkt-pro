@@ -27,7 +27,7 @@ Options:
   --version, -v   Show version number
   --help, -h      Displays help information.
   --output, -o    Output directory.
-  --example, -e   Example from: http://kktjs.github.io/kkt-pro/, default: "basic"
+  --example, -e   Example from: http://kktjs.github.io/kkt-pro/, default: "auto-routes"
   --path, -p      Specify the download target git address.
                     default: "http://kktjs.github.io/kkt-pro/"
 
