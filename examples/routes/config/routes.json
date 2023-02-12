@@ -1,0 +1,18 @@
+[
+  {
+    "index": true,
+    "element": "@/pages"
+  },
+  {
+    "path": "/",
+    "element": "@/pages"
+  },
+  {
+    "path": "/about",
+    "element": "@/pages/About"
+  },
+  {
+    "path": "/home",
+    "element": "@/pages/Home"
+  }
+]

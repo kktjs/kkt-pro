@@ -90,6 +90,11 @@ jobs:
       working-directory: examples/mocker
     - run: cp -rp examples/mocker/mocker.zip build/zip
 
+    - name: Compress routes Example.
+      run: zip -r -y routes.zip . -x "node_modules/*"  -x "src/.kktp/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x "package-lock.json"
+      working-directory: examples/routes
+    - run: cp -rp examples/routes/routes.zip build/zip
+
     - name: Add Download Page
       working-directory: build/zip
       run: |
