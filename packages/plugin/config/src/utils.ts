@@ -73,7 +73,7 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
     /**自动生成入口文件*/
     initEntery = false,
     /**路由配置*/
-    initRoute = false,
+    initRoutes = false,
     /**自动生成models集合配置文件*/
     initModel = false,
   } = props;
@@ -81,10 +81,10 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
   if (initEntery) {
     pluginsArr.push(['@kkt/plugin-pro-entry', { redux: initModel, cacheDirName }]);
   }
-  if (initRoute) {
+  if (initRoutes) {
     pluginsArr.push([
       '@kkt/plugin-pro-router',
-      typeof initRoute === 'boolean' ? { cacheDirName } : { ...initRoute, cacheDirName },
+      typeof initRoutes === 'boolean' ? { cacheDirName } : { ...initRoutes, cacheDirName },
     ]);
   }
   if (initModel) {

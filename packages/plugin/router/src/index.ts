@@ -49,7 +49,7 @@ class ConfigRouterPlugin {
   routeType?: 'browser' | 'hash' | 'memory' = 'hash';
   // -----------------------自动生成路由-------------------------------
   /**自动生成路由配置*/
-  autoRoute: boolean = false;
+  autoRoutes: boolean = false;
   /**自动生成路由layout布局组件地址*/
   outletLayout: string = '';
   /** 入口文件夹位置 */
@@ -128,7 +128,7 @@ class RouterPlugin extends ConfigRouterPlugin {
     this.fallbackElement = props.fallbackElement;
     this.outletLayout = props.outletLayout;
     this.authElement = props.authElement;
-    this.autoRoute = props.autoRoute;
+    this.autoRoutes = props.autoRoutes;
 
     this.temp = path.resolve(this.rootDir, tmp, 'routes');
     this.temp_index_file = path.resolve(this.rootDir, tmp, 'routes', 'index.jsx');
@@ -200,7 +200,7 @@ class RouterPlugin extends ConfigRouterPlugin {
   }
   apply(compiler: webpack.Compiler) {
     compiler.hooks.afterPlugins.tap('RouterPlugin', () => {
-      if (this.autoRoute) {
+      if (this.autoRoutes) {
         this.auto_Watch();
       } else {
         this.config_Watch();

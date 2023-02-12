@@ -1,5 +1,7 @@
 import minimist from 'minimist';
+import path from 'path';
 import { create } from 'create-kkt';
+import fs from 'fs-extra';
 
 const helpExample: string = `Example:
 
@@ -53,7 +55,19 @@ async function run(): Promise<void> {
   }
   argvs.appName = argvs._[0];
   argvs.example = argvs.e = String(argvs.example).toLocaleLowerCase();
-  await create(argvs, helpExample);
+  try {
+    await create(argvs, helpExample);
+    const pkgPath = path.join(process.cwd(), argvs.output, argvs.appName, 'package.json');
+    if (fs.existsSync(pkgPath)) {
+      const pkg = require(pkgPath);
+      if (pkg.version) {
+        await fs.writeJSON(pkgPath, { ...pkg, name: argvs.appName || pkg.name, version: '1.0.0' }, { spaces: '  ' });
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
 }
 
 run();

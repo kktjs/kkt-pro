@@ -1,10 +1,10 @@
 import pkg from '../package.json';
 export default {
   initEntery: true,
-  initRoute: {
+  initRoutes: {
     fallbackElement: '@/Loading',
     authElement: '@/Auth',
-    autoRoute: true,
+    autoRoutes: true,
     outletLayout: '@/layouts',
   },
   initModel: true,

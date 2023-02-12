@@ -30,7 +30,7 @@ const overrideKKTPConfig = (
     /**自动生成入口文件*/
     initEntery = false,
     /**路由配置*/
-    initRoute = false,
+    initRoutes = false,
     /**自动生成models集合配置文件*/
     initModel = false,
     ...rest

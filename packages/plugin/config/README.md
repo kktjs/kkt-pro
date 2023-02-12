@@ -60,7 +60,7 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
   /**自动生成入口文件*/
   initEntery?: boolean;
   /**路由配置*/
-  initRoute?: RouterPluginProps | boolean;
+  initRoutes?: RouterPluginProps | boolean;
   /**自动生成models集合配置文件*/
   initModel?: boolean;
 }

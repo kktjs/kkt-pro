@@ -24,7 +24,7 @@ const Routertype = {
 const createRouterFunTemp = (type: 'browser' | 'hash' | 'memory') => `
 let router;
 let navigate;
-export const createrRouter = (options) => {
+export const createRouter = (options) => {
   router = ${Routertype[type]}(options);
   navigate = router.navigate;
   return router
@@ -51,12 +51,12 @@ import routesConfig from "./config";
     importRouter += `import FallbackElement from "${fallbackElement}";\n`;
   }
 
-  let render = `<RouterProvider router={createrRouter(routesConfig)} fallbackElement={${
+  let render = `<RouterProvider router={createRouter(routesConfig)} fallbackElement={${
     fallbackElement ? '<FallbackElement />' : '<div>loading...</div>'
   }} />`;
   if (authElement) {
     importRouter += `import AuthElement from "${authElement}";\n`;
-    render = `<AuthElement routes={routesConfig} createrRouter={createrRouter}>${render}</AuthElement>`;
+    render = `<AuthElement routes={routesConfig} createRouter={createRouter}>${render}</AuthElement>`;
   }
 
   return `
