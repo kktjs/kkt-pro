@@ -1,19 +1,18 @@
-Basic Example for TypeScript
+Basic Example 
 ===
 
-Use an example of `TypeScript`.
 
 ## Quick Start
 
 ```bash
-$ npx create-kkt my-app -e typescript
+$ npx create-kktp my-app -e basic-js
 cd my-app
 npm install
 ```
 
 ## Open in CodeSandbox
 
-[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?logo=codesandbox)](https://codesandbox.io/s/github/kktjs/kkt/tree/master/example/typescript)
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?logo=codesandbox)](https://codesandbox.io/s/github/kktjs/kktp/tree/main/examples/basic-js)
 
 ## Development
 

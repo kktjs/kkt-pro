@@ -1,11 +1,30 @@
 模拟 API 示例
 ====
 
-没有入口文件，入口文件自动生成
+## Quick Start
+
+```bash
+$ npx create-kktp my-app -e mocker
+cd my-app
+npm install
+```
+
+## Development
+
+**development**
+
+Runs the project in development mode.  
+
+```bash
+$ npm run start # 监听，开发模式
+```
+
+**production**
+
+Builds the app for production to the build folder.
 
 ```bash
 $ npm run build # 编译
-$ npm run start # 监听，开发模式
 ```
 
 ## 模拟 API
