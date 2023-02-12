@@ -20,7 +20,7 @@ const helpCli: string = `
     --version, -v   Show version number
     --help, -h      Displays help information.
     --output, -o    Output directory.
-    --example, -e   Example from: \x1b[34mhttp://kktjs.github.io/kkt-pro/\x1b[0m, default: "basic"
+    --example, -e   Example from: \x1b[34mhttp://kktjs.github.io/kkt-pro/\x1b[0m, default: "auto-routes"
     --path, -p      Specify the download target git address.
                       default: "\x1b[34mhttp://kktjs.github.io/kkt-pro/\x1b[0m"
   
