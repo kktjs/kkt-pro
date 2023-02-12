@@ -2,7 +2,7 @@
   "name": "@examples/mocker",
   "description": "基础模拟 API 示例",
   "private": true,
-  "version": "0.0.11",
+  "version": "0.0.12",
   "scripts": {
     "start": "kktp start",
     "build": "kktp build",
@@ -20,7 +20,7 @@
     "react-router-dom": "~6.8.0"
   },
   "devDependencies": {
-    "kktp": "^0.0.11"
+    "kktp": "^0.0.12"
   },
   "eslintConfig": {
     "extends": [
