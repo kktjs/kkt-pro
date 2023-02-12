@@ -10,13 +10,23 @@ const defaultConfig = [
       // 为了解决 js 文件 使用 export default 导出 (配置中使用 import 引入包有点问题)
       if (/\.(js|jsx|ts|tsx?)$/.test(fileName)) {
         const { register } = require('@swc-node/register/register');
-        register({ esModuleInterop: true, format: 'esm', extensions: ['.js', '.jsx', '.ts', '.tsx'] });
+        register({
+          esModuleInterop: true,
+          module: 'esnext',
+          format: 'esm',
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        });
       } else if (/\.([cm]ts|tsx?)$/.test(fileName)) {
         const { register } = require('@swc-node/register/register');
         if (fileName.endsWith('.cts')) {
           register({ format: 'cjs', extensions: ['.cts'] });
         } else {
-          register({ esModuleInterop: true, format: 'esm', extensions: ['.ts', '.tsx', '.mts'] });
+          register({
+            esModuleInterop: true,
+            module: 'esnext',
+            format: 'esm',
+            extensions: ['.ts', '.tsx', '.mts'],
+          });
         }
       }
     },

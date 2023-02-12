@@ -32,7 +32,6 @@
     "packages/plugin/*"
   ],
   "devDependencies": {
-    "@swc-node/core": "1.9.2",
     "ajv": "~8.11.2",
     "husky": "~8.0.2",
     "lerna": "~6.0.3",
