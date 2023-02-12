@@ -24,8 +24,8 @@ const Routertype = {
 const createRouterFunTemp = (type: 'browser' | 'hash' | 'memory') => `
 let router;
 let navigate;
-export const createRouter = (options) => {
-  router = ${Routertype[type]}(options);
+export const createRouter = (routes,options) => {
+  router = ${Routertype[type]}(routes,options);
   navigate = router.navigate;
   return router
 };
@@ -36,7 +36,7 @@ export { router,navigate }
 export const createIndexRouteTemp = (
   type: 'browser' | 'hash' | 'memory',
   fallbackElement?: string,
-  authElement?: string,
+  routesOutletElement?: string,
 ) => {
   let importRouter = ``;
   importRouter = `
@@ -54,9 +54,9 @@ import routesConfig from "./config";
   let render = `<RouterProvider router={createRouter(routesConfig)} fallbackElement={${
     fallbackElement ? '<FallbackElement />' : '<div>loading...</div>'
   }} />`;
-  if (authElement) {
-    importRouter += `import AuthElement from "${authElement}";\n`;
-    render = `<AuthElement routes={routesConfig} createRouter={createRouter}>${render}</AuthElement>`;
+  if (routesOutletElement) {
+    importRouter += `import RoutesOutletElement from "${routesOutletElement}";\n`;
+    render = `<RoutesOutletElement routes={routesConfig} createRouter={createRouter}>${render}</RoutesOutletElement>`;
   }
 
   return `
@@ -77,10 +77,10 @@ export const getRouterDataCode = (data: Map<string, string>, outletLayout?: stri
     // 防止名称相同
     const newName = `${name}${index}`;
     importCode += `import ${newName} from "${routePath}";\n`;
-    if (pathStr === 'index') {
-      childCode += `\t{ index: true, element: <${newName}/>, loader: ${newName}.loader },\n`;
-    } else if (pathStr === '*') {
+    if (pathStr === '*') {
       globalCode += `\t{ path: prefix + "${pathStr}", element: <${newName}/>, loader: ${newName}.loader },\n`;
+    } else if (pathStr === 'index') {
+      childCode += `\t{ index: true, element: <${newName}/>, loader: ${newName}.loader },\n`;
     } else {
       childCode += `\t{ path: prefix + "${pathStr}", element: <${newName}/>, loader: ${newName}.loader },\n`;
     }

@@ -34,7 +34,7 @@ class ConfigRouterPlugin {
   /**页面加载loading组件地址*/
   fallbackElement?: string = '';
   /**路由权限处理组件**/
-  authElement?: string = '';
+  routesOutletElement?: string = '';
   /**数据验证结果*/
   checkResult: { isArr: boolean; isImportReact: boolean; code: string } = {
     isArr: false,
@@ -46,7 +46,7 @@ class ConfigRouterPlugin {
   /**处理图标菜单中图标引入问题*/
   analysisRoutersIcon?: RouterPluginProps['analysisRoutersIcon'];
   /**路由类型*/
-  routeType?: 'browser' | 'hash' | 'memory' = 'hash';
+  routesType?: 'browser' | 'hash' | 'memory' = 'hash';
   // -----------------------自动生成路由-------------------------------
   /**自动生成路由配置*/
   autoRoutes: boolean = false;
@@ -61,7 +61,7 @@ class ConfigRouterPlugin {
   // ------------------------------------------------------
   /**创建路由入口文件*/
   createIndex() {
-    const routeTemp = createIndexRouteTemp(this.routeType, this.fallbackElement, this.authElement);
+    const routeTemp = createIndexRouteTemp(this.routesType, this.fallbackElement, this.routesOutletElement);
     if (this.pre_index_content !== routeTemp) {
       this.pre_index_content = routeTemp;
       FS.writeFileSync(this.temp_index_file, routeTemp, { encoding: 'utf-8', flag: 'w+' });
@@ -124,10 +124,10 @@ class RouterPlugin extends ConfigRouterPlugin {
   constructor(props: RouterPluginProps = {}) {
     super();
     const tmp = props.cacheDirName || '.kktp';
-    this.routeType = props.routeType || 'hash';
+    this.routesType = props.routesType || 'hash';
     this.fallbackElement = props.fallbackElement;
     this.outletLayout = props.outletLayout;
-    this.authElement = props.authElement;
+    this.routesOutletElement = props.routesOutletElement || props.authElement;
     this.autoRoutes = props.autoRoutes;
 
     this.temp = path.resolve(this.rootDir, tmp, 'routes');
