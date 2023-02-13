@@ -1,7 +1,7 @@
 生成路由配置
 ====
 
-`kktp`内置插件
+`kktp`内置插件，用于自动进行生成路由配置。使用此插件需要安装`react-router`和`react-router-dom`依赖包
 
 ## 参数
 
