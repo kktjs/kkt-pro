@@ -7,11 +7,6 @@ export interface RouterPluginProps {
   routesType?: 'browser' | 'hash' | 'memory';
   /**页面加载loading组件地址*/
   fallbackElement?: string;
-  /**
-   * 路由外层包裹组件，可以用于自定义添加路由
-   * @deprecated 推荐使用 `routesOutletElement`
-   */
-  authElement?: string;
   /**路由外层包裹组件，可以用于自定义添加路由**/
   routesOutletElement?: string;
   /**自动生成路由配置*/

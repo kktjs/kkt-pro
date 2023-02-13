@@ -127,7 +127,7 @@ class RouterPlugin extends ConfigRouterPlugin {
     this.routesType = props.routesType || 'hash';
     this.fallbackElement = props.fallbackElement;
     this.outletLayout = props.outletLayout;
-    this.routesOutletElement = props.routesOutletElement || props.authElement;
+    this.routesOutletElement = props.routesOutletElement;
     this.autoRoutes = props.autoRoutes;
 
     this.temp = path.resolve(this.rootDir, tmp, 'routes');
