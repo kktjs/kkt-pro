@@ -28,8 +28,6 @@ export interface RouterPluginProps {
   /**自动生成路由layout布局组件地址*/
   outletLayout?: string;
 }
-
-
 ```
 
 ## 通过配置进行生成路由
@@ -41,3 +39,16 @@ export interface RouterPluginProps {
 1. 约定`src/pages`文件夹为根据生成路由
 2. 约定`src/pages/index.(js|jsx|tsx)`文件为默认路由
 3. 约定`src/pages/**/index.(js|jsx|tsx)`文件为对应路由展示页面
+
+## `kktp`配置文件
+
+```ts
+// .kktrc.ts
+export default {
+  // ...
+  initRoutes:{
+    cacheDirName:".kktp",
+    outletLayout:"@/layout" // 自动生成路由layout布局组件地址
+  },
+}
+```

@@ -13,3 +13,14 @@ type InitEntryOptions = {
   redux?: boolean;
 };
 ```
+
+## `kktp`配置文件
+
+```ts
+// .kktrc.ts
+export default {
+  // ...
+  initEntery:true,
+  initRoutes:true,
+}
+```

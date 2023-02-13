@@ -66,3 +66,14 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
 }
 
 ```
+
+## 配置文件
+
+```ts
+// .kktrc.ts
+export default {
+  // ...
+  initEntery:true,
+  initRoutes:true,
+}
+```
