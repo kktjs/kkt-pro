@@ -50,7 +50,6 @@ export interface RouterPluginProps {
 export default {
   // ...
   initRoutes:{
-    cacheDirName:".kktp",
     outletLayout:"@/layout" // 自动生成路由layout布局组件地址
   },
 }
