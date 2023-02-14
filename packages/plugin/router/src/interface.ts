@@ -1,9 +1,15 @@
 export interface RouterPluginProps {
   /**处理图标菜单中图标引入问题*/
   analysisRoutersIcon?: (icons: { name: string; newName: string }[]) => string;
-  /**在src目录下生成的临时文件夹名称*/
+  /**
+   * @description 在src目录下生成的临时文件夹名称
+   * @default .kktp
+   * */
   cacheDirName?: string;
-  /**路由类型*/
+  /**
+   * @description 路由类型
+   * @default "hash"
+   */
   routesType?: 'browser' | 'hash' | 'memory';
   /**页面加载loading组件地址*/
   fallbackElement?: string;
