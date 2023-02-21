@@ -49,8 +49,7 @@ const overrideKKTPConfig = (
     },
   };
   const publicPath = conf.output.publicPath as string;
-  let prefixStr = ((publicPath.startsWith('/') ? publicPath : '/') + '/').replace(/\/+$/, '/');
-  prefixStr = prefixStr.endsWith('/') ? prefixStr : prefixStr + '/';
+  let prefixStr = `/${publicPath}/`.replace(/\/+/g, '/');
   /**处理kkt plugin**/
   conf = getKKTPlugins(kktPlugins, conf, env, options);
   /**处理 webpack plugin**/
