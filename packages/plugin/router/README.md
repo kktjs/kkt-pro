@@ -38,7 +38,7 @@ export interface RouterPluginProps {
 - 约定根目录下`config/routes.(json|js|ts)`为[路由菜单配置](https://reactrouter.com/en/6.8.1/route/route)
 
 
-- 结合[整体布局](https://github.com/uiwjs/uiw-admin/tree/yb/packages/basic-layouts)配置[路由参数](https://github.com/uiwjs/uiw-admin/tree/yb/packages/router-control)
+- 配合[@uiw-admin/basic-layouts](https://github.com/uiwjs/uiw-admin/tree/yb/packages/basic-layouts)使用。[配置参数](https://github.com/uiwjs/uiw-admin/tree/yb/packages/router-control)
 
 
 **2. 自动生成路由**
