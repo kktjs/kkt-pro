@@ -35,13 +35,17 @@ export interface RouterPluginProps {
 
 **1. 通过配置进行生成路由**
 
-1. 约定根目录下`config/routes.(json|js|ts)`为路由菜单配置
+- 约定根目录下`config/routes.(json|js|ts)`为[路由菜单配置](https://reactrouter.com/en/6.8.1/route/route)
+
+
+- 结合[整体布局](https://github.com/uiwjs/uiw-admin/tree/yb/packages/basic-layouts)配置[路由参数](https://github.com/uiwjs/uiw-admin/tree/yb/packages/router-control)
+
 
 **2. 自动生成路由**
 
-1. 约定`src/pages`文件夹为根据生成路由
-2. 约定`src/pages/index.(js|jsx|tsx)`文件为默认路由
-3. 约定`src/pages/**/index.(js|jsx|tsx)`文件为对应路由展示页面
+- 约定`src/pages`文件夹为根据生成路由
+- 约定`src/pages/index.(js|jsx|tsx)`文件为默认路由
+- 约定`src/pages/**/index.(js|jsx|tsx)`文件为对应路由展示页面
 
 ## `kktp`配置文件
 

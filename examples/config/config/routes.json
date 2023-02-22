@@ -1,11 +1,26 @@
 [
   {
-    "index": true,
-    "element": "@/app/App.tsx"
-  },
-  {
     "path": "/",
-    "element": "@/app/App.tsx"
+    "element": "@/layout",
+    "children": [
+      {
+        "index": true,
+        "redirect": "/home",
+        "element": "@/pages/Home"
+      },
+      {
+        "path": "/home",
+        "element": "@/pages/Home"
+      },
+      {
+        "path": "/about",
+        "element": "@/pages/About"
+      },
+      {
+        "path": "/ceshi",
+        "element": "@/pages/Ceshi"
+      }
+    ]
   },
   {
     "path": "/403",
