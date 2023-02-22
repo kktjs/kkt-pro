@@ -6,13 +6,18 @@
 ## 参数
 
 ```ts
-
 export interface RouterPluginProps {
   /**处理图标菜单中图标引入问题*/
   analysisRoutersIcon?: (icons: { name: string; newName: string }[]) => string;
-  /**在src目录下生成的临时文件夹名称*/
+  /**
+   * @description 在src目录下生成的临时文件夹名称
+   * @default .kktp
+   * */
   cacheDirName?: string;
-  /**路由类型*/
+  /**
+   * @description 路由类型
+   * @default "hash"
+   */
   routesType?: 'browser' | 'hash' | 'memory';
   /**页面加载loading组件地址*/
   fallbackElement?: string;
@@ -23,13 +28,16 @@ export interface RouterPluginProps {
   /**自动生成路由layout布局组件地址*/
   outletLayout?: string;
 }
+
 ```
 
-## 通过配置进行生成路由
+## 路由生成方式
+
+**1. 通过配置进行生成路由**
 
 1. 约定根目录下`config/routes.(json|js|ts)`为路由菜单配置
 
-## 自动生成路由
+**2. 自动生成路由**
 
 1. 约定`src/pages`文件夹为根据生成路由
 2. 约定`src/pages/index.(js|jsx|tsx)`文件为默认路由
@@ -42,7 +50,6 @@ export interface RouterPluginProps {
 export default {
   // ...
   initRoutes:{
-    cacheDirName:".kktp",
     outletLayout:"@/layout" // 自动生成路由layout布局组件地址
   },
 }

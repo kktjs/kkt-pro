@@ -73,7 +73,49 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
 // .kktrc.ts
 export default {
   // ...
+  alias:{
+    "react-native":"react-native-web",
+  },
+  define:{
+    "BAST":"111",
+    "TEST":"222"
+  }
   initEntery:true,
   initRoutes:true,
+}
+```
+
+**plugins使用**
+
+```ts
+// .kktrc.ts
+export default {
+  // ...
+  plugins:["@kkt/plugin-pro-router"]
+  // plugins:[["@kkt/plugin-pro-router",{ autoRoutes:true, }]]  
+}
+```
+
+**plugins 使用**
+
+```ts
+// .kktrc.ts
+export default {
+  // ...
+  plugins:["@kkt/plugin-pro-router"]
+  // plugins:[["@kkt/plugin-pro-router",{ autoRoutes:true, }]]  
+}
+```
+
+**overrideWebpack 使用**
+
+```ts
+// .kktrc.ts
+export default {
+  // ...
+  overrideWebpack:(conf, env, options)=>{
+    // 处理 conf
+    return conf
+  }
 }
 ```
