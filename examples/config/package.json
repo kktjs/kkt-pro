@@ -16,7 +16,7 @@
   "dependencies": {
     "@rematch/core": "2.2.0",
     "@rematch/loading": "2.1.2",
-    "@uiw-admin/exceptions": "6.0.0-bate-1.1",
+    "@uiw-admin/exceptions": "~5.3.21",
     "react": "~18.2.0",
     "react-dom": "~18.2.0",
     "react-redux": "^8.0.5",

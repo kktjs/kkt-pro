@@ -88,7 +88,7 @@ export const getJSX = (name: string) => {
 
 /**创建模板*/
 export const createTemplateExpression = (value: string) => {
-  const fn = template.expression({ plugins: pluginsConfig })`<Navigate to="${value}" />`;
+  const fn = template.expression({ plugins: pluginsConfig })`${value}`;
   return fn();
 };
 

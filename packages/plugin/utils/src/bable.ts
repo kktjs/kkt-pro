@@ -142,7 +142,9 @@ export const analysisRoutersLoader = (content: string) => {
               });
               if (!isElement) {
                 isRedirect = true;
-                path.parent.properties.push(createObjectProperty('element', createTemplateExpression(newValues)));
+                path.parent.properties.push(
+                  createObjectProperty('element', createTemplateExpression(`<Navigate to="${newValues}" />`)),
+                );
               }
             }
           }
