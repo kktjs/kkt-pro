@@ -1,8 +1,9 @@
 import { parse, ParserOptions, ParserPlugin } from '@babel/parser';
 import { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
+import template from '@babel/template';
 
-const pluginsConfig: ParserPlugin[] = [
+export const pluginsConfig: ParserPlugin[] = [
   'jsx',
   'typescript',
   'classProperties',
@@ -83,4 +84,28 @@ export const getJSX = (name: string) => {
   const one = t.jsxOpeningElement(t.jsxIdentifier(name), [], true);
   const two = t.jsxElement(one, null, []);
   return two;
+};
+
+/**创建模板*/
+export const createTemplateExpression = (value: string) => {
+  const fn = template.expression({ plugins: pluginsConfig })`<Navigate to="${value}" />`;
+  return fn();
+};
+
+/**创建一个 ast 对象*/
+export const createObjectProperty = (key: string, value: t.Expression) => {
+  return t.objectProperty(t.identifier(key), value);
+};
+
+/**
+ * 判断值是否相等
+ * **/
+export const isCheckStringOrIdentifierValue = (node: t.ObjectProperty, value: string) => {
+  if (
+    (t.isStringLiteral(node.key) && node.key.value === value) ||
+    (t.isIdentifier(node.key) && node.key.name === value)
+  ) {
+    return true;
+  }
+  return false;
 };
