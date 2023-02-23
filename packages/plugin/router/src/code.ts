@@ -16,16 +16,16 @@ ${content}
 };
 
 const Routertype = {
-  browser: 'createBrowserRouter',
-  hash: 'createHashRouter',
-  memory: 'createMemoryRouter',
+  browser: { create: 'createBrowserRouter', route: 'BrowserRouter' },
+  hash: { create: 'createHashRouter', route: 'HashRouter' },
+  memory: { create: 'createMemoryRouter', route: 'MemoryRouter' },
 };
 
 const createRouterFunTemp = (type: 'browser' | 'hash' | 'memory') => `
 let router;
 let navigate;
 export const createRouter = (routes,options) => {
-  router = ${Routertype[type]}(routes,options);
+  router = ${Routertype[type].create}(routes,options);
   navigate = router.navigate;
   return router
 };
@@ -38,31 +38,88 @@ export const createIndexRouteTemp = (
   fallbackElement?: string,
   routesOutletElement?: string,
 ) => {
-  let importRouter = ``;
-  importRouter = `
-import React from "react";
+  let importRouter = `
+import React, { useMemo, cloneElement } from "react";
 import {
-  ${Routertype[type]},
-  RouterProvider,
+  ${Routertype[type].create},
+  ${Routertype[type].route},
+  useRoutes,
+  useLocation,
+  Navigate
 } from 'react-router-dom';
 import routesConfig from "./config";
-`;
+  `;
+
   if (fallbackElement) {
-    importRouter += `import FallbackElement from "${fallbackElement}";\n`;
+    importRouter += `
+import FallbackElement from "${fallbackElement}";\n`;
   }
 
-  let render = `<RouterProvider router={createRouter(routesConfig)} fallbackElement={${
-    fallbackElement ? '<FallbackElement />' : '<div>loading...</div>'
-  }} />`;
+  let App = `
+const loopRoutes = (routes, props) => {
+  return routes.map(item => {
+    const newItem = { ...item };
+    if (item.children && item.children.length > 0) {
+      newItem.children = loopRoutes(item.children, props)
+    }
+    if (item.element) {
+      newItem.element = cloneElement(item.element, props)
+    }
+    return newItem;
+  })
+}\n
+const loopPath = (routes, path) => {
+  let route = {};
+  (function getRoute(data) {
+    data.forEach(item => {
+      if (item.path === path) {
+        if (item.children && item.children.length > 0) {
+          const childItem = item.children.find(item => item.index && item.redirect);
+          if (childItem) {
+            route = { path: childItem.redirect, redirect: true }
+          }
+        } else {
+          route = { path: item.path, redirect: false }
+        }
+      } else if (item.children && item.children.length > 0) {
+        getRoute(item.children)
+      }
+    });
+  })(routes);
+  return route;
+}\n
+const App = () => {
+  const location = useLocation();
+  const { pathname } = location;
+  const { path, redirect } = loopPath(routesConfig, pathname);
+  const routes = useMemo(() => {
+    return loopRoutes(routesConfig, {
+      routes: routesConfig,
+      router: location
+    })
+  }, [])
+  if (redirect) {
+    return <Navigate to={path} replace />
+  }
+  const elements = useRoutes(routes);
+  return elements;
+}\n`;
+
+  let render = `<${Routertype[type].route}>\n`;
+
   if (routesOutletElement) {
     importRouter += `import RoutesOutletElement from "${routesOutletElement}";\n`;
-    render = `<RoutesOutletElement routes={routesConfig} createRouter={createRouter}>${render}</RoutesOutletElement>`;
+    render += `    <RoutesOutletElement routes={routesConfig} createRouter={createRouter}><App /></RoutesOutletElement>\n`;
+  } else {
+    render += `    <App />\n`;
   }
+  render += `  </${Routertype[type].route}>`;
 
   return `
 ${importRouter}
 ${createRouterFunTemp(type)}
-export default ()=>(${render})
+${App}
+export default ()=>(\n  ${render}\n)
 `;
 };
 /**自动生成-获取路由配置数据*/

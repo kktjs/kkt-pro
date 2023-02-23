@@ -1,4 +1,12 @@
 const Home = () => {
-  return <div>测试页面Home</div>;
+  return (
+    <div>
+      <button>add route</button>
+    </div>
+  );
+};
+Home.loader = () => {
+  console.log(3333);
+  return true;
 };
 export default Home;
