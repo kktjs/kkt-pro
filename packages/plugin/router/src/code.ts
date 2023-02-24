@@ -37,15 +37,16 @@ export const createIndexRouteTemp = (
   type: 'browser' | 'hash' | 'memory',
   fallbackElement?: string,
   routesOutletElement?: string,
+  authDir?: string | boolean,
 ) => {
   let importRouter = `
-import React, { useMemo, cloneElement } from "react";
+import React, { useMemo, cloneElement, useEffect } from "react";
 import {
   ${Routertype[type].create},
   ${Routertype[type].route},
   useRoutes,
   useLocation,
-  Navigate
+  useNavigate
 } from 'react-router-dom';
 import routesConfig from "./config";
   `;
@@ -53,6 +54,21 @@ import routesConfig from "./config";
   if (fallbackElement) {
     importRouter += `
 import FallbackElement from "${fallbackElement}";\n`;
+  }
+
+  let auth = '';
+  if (authDir) {
+    importRouter += `
+import ${authDir} from "@/${authDir}";\n`;
+    auth = `
+  const navigate = useNavigate();
+  useEffect(() => {
+    const path = ${authDir}(pathname);
+    if (path) {
+      navigate(path, { replace: true });
+    }
+  }, [pathname]);
+    `;
   }
 
   let App = `
@@ -71,6 +87,7 @@ const loopRoutes = (routes, props) => {
 const App = () => {
   const location = useLocation();
   const { pathname } = location;
+  ${auth}
   const routes = useMemo(() => {
     return loopRoutes(routesConfig, {
       routes: routesConfig,

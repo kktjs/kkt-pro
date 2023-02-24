@@ -19,6 +19,8 @@ export interface RouterPluginProps {
    * @default "hash"
    */
   routesType?: 'browser' | 'hash' | 'memory';
+  /** 路由权限名称，默认查找src目录下access.[js | ts]文件 */
+  accessDirName?: string;
   /**页面加载loading组件地址*/
   fallbackElement?: string;
   /**路由外层包裹组件，可以用于自定义添加路由**/
@@ -46,6 +48,25 @@ export interface RouterPluginProps {
 - 约定`src/pages`文件夹为根据生成路由
 - 约定`src/pages/index.(js|jsx|tsx)`文件为默认路由
 - 约定`src/pages/**/index.(js|jsx|tsx)`文件为对应路由展示页面
+
+## `access`
+
+权限控制，当`src`目录下存在`access.[js|ts]`文件则默认开启。 可以在业务中根据路径来定制需求。
+
+```ts
+/**
+ * src/access.ts
+ * @path: 当前页面地址
+*/
+const access = async (path: string) => {
+  if (path === '/ceshi') {
+    return '/403'
+  }
+  return false;
+}
+
+export default access;
+```
 
 ## `kktp`配置文件
 
