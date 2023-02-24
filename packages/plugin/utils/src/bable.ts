@@ -12,6 +12,7 @@ import {
   isCheckStringOrIdentifierValue,
   createObjectProperty,
   createTemplateExpression,
+  getStringOrIdentifierValue,
 } from './utils';
 
 /**
@@ -104,7 +105,7 @@ export const analysisRoutersLoader = (content: string) => {
   let importLazyString = '';
   let index = 0;
   let isRedirect = false;
-  let isRedirect2 = false;
+  let isImportNavigate = false;
 
   traverse(ast, {
     ObjectProperty(path) {
@@ -113,12 +114,13 @@ export const analysisRoutersLoader = (content: string) => {
         const { node } = path;
         // 对组件进行处理
         if (isCheckStringOrIdentifierValue(node, 'element')) {
-          if (t.isStringLiteral(node.value)) {
-            const valus = node.value.value;
+          const valus = getStringOrIdentifierValue(node);
+          if (valus) {
             // 这块需要进行处理 如果地址有可能是直接引用包里面的组件
             const componentName = 'Components' + index + toPascalCase(valus);
             index++;
-            node.value = getJSX(`${componentName}`);
+            // node.value = getJSX(`${componentName}`);
+            node.value = createTemplateExpression(`<${componentName} />`);
             importLazy[componentName] = valus;
             importLazyString += `\nimport ${componentName} from "${valus}";\n`;
             if (t.isObjectExpression(path.parent)) {
@@ -129,11 +131,10 @@ export const analysisRoutersLoader = (content: string) => {
 
         // 1. 判断值是否为 redirect
         if (isCheckStringOrIdentifierValue(node, 'redirect')) {
-          if (t.isStringLiteral(node.value)) {
-            const newValues = node.value.value;
+          const newValues = getStringOrIdentifierValue(node);
+          if (newValues) {
             // 判断是否存在 element 属性
             if (t.isObjectExpression(path.parent)) {
-              // 模板进行生成
               let isElement = false;
               path.parent.properties.forEach((item) => {
                 if (t.isObjectProperty(item) && item.key && isCheckStringOrIdentifierValue(node, 'element')) {
@@ -142,6 +143,7 @@ export const analysisRoutersLoader = (content: string) => {
               });
               if (!isElement) {
                 isRedirect = true;
+                // 添加 element 属性值
                 path.parent.properties.push(
                   createObjectProperty('element', createTemplateExpression(`<Navigate to="${newValues}" />`)),
                 );
@@ -166,14 +168,16 @@ export const analysisRoutersLoader = (content: string) => {
         t.isStringLiteral(path.parent.source) &&
         ['react-router-dom', 'react-router'].includes(path.parent.source.value)
       ) {
-        isRedirect2 = true;
+        isImportNavigate = true;
       }
     },
   });
   const jsonCode = generate(ast).code;
 
   const newImportLazyString =
-    isRedirect && !isRedirect2 ? `import { Navigate } from "react-router-dom";\n` + importLazyString : importLazyString;
+    isRedirect && !isImportNavigate
+      ? `import { Navigate } from "react-router-dom";\n` + importLazyString
+      : importLazyString;
 
   return {
     /**code代码*/

@@ -109,3 +109,14 @@ export const isCheckStringOrIdentifierValue = (node: t.ObjectProperty, value: st
   }
   return false;
 };
+
+/**获取值*/
+export const getStringOrIdentifierValue = (node: t.ObjectProperty) => {
+  if (t.isStringLiteral(node.value)) {
+    return node.value.value;
+  }
+  if (t.isIdentifier(node.value)) {
+    return node.value.name;
+  }
+  return false;
+};
