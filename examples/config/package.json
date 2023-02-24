@@ -23,7 +23,7 @@
     "react-router": "~6.8.0",
     "react-router-dom": "~6.8.0",
     "web-vitals": "^2.1.2",
-    "uiw": "^5.0.0-bate-9",
+    "uiw": "^4.21.23",
     "redux": "^4.2.1",
     "styled-components": "^5.3.6"
   },
