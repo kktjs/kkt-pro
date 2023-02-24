@@ -68,39 +68,15 @@ const loopRoutes = (routes, props) => {
     return newItem;
   })
 }\n
-const loopPath = (routes, path) => {
-  let route = {};
-  (function getRoute(data) {
-    data.forEach(item => {
-      if (item.path === path) {
-        if (item.children && item.children.length > 0) {
-          const childItem = item.children.find(item => item.index && item.redirect);
-          if (childItem) {
-            route = { path: childItem.redirect, redirect: true }
-          }
-        } else {
-          route = { path: item.path, redirect: false }
-        }
-      } else if (item.children && item.children.length > 0) {
-        getRoute(item.children)
-      }
-    });
-  })(routes);
-  return route;
-}\n
 const App = () => {
   const location = useLocation();
   const { pathname } = location;
-  const { path, redirect } = loopPath(routesConfig, pathname);
   const routes = useMemo(() => {
     return loopRoutes(routesConfig, {
       routes: routesConfig,
       router: location
     })
-  }, [])
-  if (redirect) {
-    return <Navigate to={path} replace />
-  }
+  }, []);
   const elements = useRoutes(routes);
   return elements;
 }\n`;

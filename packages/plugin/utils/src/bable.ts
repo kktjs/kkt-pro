@@ -2,7 +2,18 @@ import traverse, { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
 import template from '@babel/template';
 import generate from '@babel/generator';
-import { getAst, getTSNode, getVarInit, getJSX, getToUpperCase, toPascalCase, NodeFun } from './utils';
+import {
+  getAst,
+  getTSNode,
+  getVarInit,
+  getJSX,
+  getToUpperCase,
+  toPascalCase,
+  isCheckStringOrIdentifierValue,
+  createObjectProperty,
+  createTemplateExpression,
+  getStringOrIdentifierValue,
+} from './utils';
 
 /**
  * 1. 判断路由文件
@@ -93,69 +104,86 @@ export const analysisRoutersLoader = (content: string) => {
   const importLazy: Record<string, string> = {};
   let importLazyString = '';
   let index = 0;
+  let isRedirect = false;
+  let isImportNavigate = false;
+
   traverse(ast, {
     ObjectProperty(path) {
       // 判断父级的父级是否是数组 如果是数组则进行转换
       if (t.isArrayExpression(path.parentPath.parent)) {
         const { node } = path;
         // 对组件进行处理
-        if (
-          (t.isStringLiteral(node.key) && node.key.value === 'component') ||
-          (t.isIdentifier(node.key) && node.key.name === 'component') ||
-          (t.isStringLiteral(node.key) && node.key.value === 'element') ||
-          (t.isIdentifier(node.key) && node.key.name === 'element')
-        ) {
-          if (t.isStringLiteral(node.value)) {
-            const valus = node.value.value;
+        if (isCheckStringOrIdentifierValue(node, 'element')) {
+          const valus = getStringOrIdentifierValue(node);
+          if (valus) {
             // 这块需要进行处理 如果地址有可能是直接引用包里面的组件
             const componentName = 'Components' + index + toPascalCase(valus);
             index++;
-            node.value = getJSX(`${componentName}`);
+            // node.value = getJSX(`${componentName}`);
+            node.value = createTemplateExpression(`<${componentName} />`);
             importLazy[componentName] = valus;
             importLazyString += `\nimport ${componentName} from "${valus}";\n`;
             if (t.isObjectExpression(path.parent)) {
-              path.parent.properties.push(
-                t.objectProperty(t.identifier('loader'), t.identifier(`${componentName}.loader`)),
-              );
+              path.parent.properties.push(createObjectProperty('loader', t.identifier(`${componentName}.loader`)));
             }
-            // 判断是否是 @/ 开头的地址
-            // if (/^@\/.+/.test(valus)) {
-            //   const ComponentName = 'Components' + toPascalCase(valus.replace(/^@/, '').split('/').join(''));
-            //   node.value = getJSX(`${ComponentName}`);
-            //   importLazy[ComponentName] = valus;
-            //   importLazyString += `\nimport ${ComponentName} from "${valus}";\n`;
-            //   if (t.isObjectExpression(path.parent)) {
-            //     path.parent.properties.push(
-            //       t.objectProperty(t.identifier('loader'), t.identifier(`${ComponentName}.loader`)),
-            //     );
-            //   }
-            // }
           }
         }
+
+        // 1. 判断值是否为 redirect
+        if (isCheckStringOrIdentifierValue(node, 'redirect')) {
+          const newValues = getStringOrIdentifierValue(node);
+          if (newValues) {
+            // 判断是否存在 element 属性
+            if (t.isObjectExpression(path.parent)) {
+              let isElement = false;
+              path.parent.properties.forEach((item) => {
+                if (t.isObjectProperty(item) && item.key && isCheckStringOrIdentifierValue(node, 'element')) {
+                  isElement = true;
+                }
+              });
+              if (!isElement) {
+                isRedirect = true;
+                // 添加 element 属性值
+                path.parent.properties.push(
+                  createObjectProperty('element', createTemplateExpression(`<Navigate to="${newValues}" />`)),
+                );
+              }
+            }
+          }
+        }
+
         // 对 navigate 进行转换
-        if (
-          (t.isStringLiteral(node.key) && node.key.value === 'navigate') ||
-          (t.isIdentifier(node.key) && node.key.name === 'navigate')
-        ) {
+        if (isCheckStringOrIdentifierValue(node, 'navigate')) {
           if (t.isStringLiteral(node.value)) {
-            const valus = node.value.value;
-            const fn = template(valus);
-            const newValue = fn();
-            if (t.isExpressionStatement(newValue)) {
-              node.value = newValue.expression;
-            }
+            node.value = createTemplateExpression(node.value.value);
           }
         }
+      }
+    },
+    ImportSpecifier(path) {
+      const node = path.node;
+      if (
+        node.local.name === 'Navigate' &&
+        t.isImportDeclaration(path.parent) &&
+        t.isStringLiteral(path.parent.source) &&
+        ['react-router-dom', 'react-router'].includes(path.parent.source.value)
+      ) {
+        isImportNavigate = true;
       }
     },
   });
   const jsonCode = generate(ast).code;
 
+  const newImportLazyString =
+    isRedirect && !isImportNavigate
+      ? `import { Navigate } from "react-router-dom";\n` + importLazyString
+      : importLazyString;
+
   return {
     /**code代码*/
     code: jsonCode,
     importLazy,
-    importLazyString,
+    importLazyString: newImportLazyString,
   };
 };
 

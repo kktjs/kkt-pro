@@ -5,11 +5,11 @@
     "children": [
       {
         "index": true,
-        "redirect": "/home",
-        "element": "@/pages/Home"
+        "redirect": "/home"
       },
       {
         "path": "/home",
+        "navigate": "()=>console.log(2)",
         "element": "@/pages/Home"
       },
       {
