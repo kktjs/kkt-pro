@@ -11,4 +11,5 @@ export default {
   define: {
     VERSION: pkg.version,
   },
+  access: true,
 };

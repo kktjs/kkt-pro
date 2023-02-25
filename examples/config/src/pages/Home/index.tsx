@@ -6,7 +6,7 @@ const Home = () => {
   );
 };
 Home.loader = () => {
-  console.log(3333);
+  // console.log(3333);
   return true;
 };
 export default Home;

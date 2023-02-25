@@ -20,7 +20,8 @@
     "noEmit": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@@/*": ["./src/.kktp/*"]
+      "@@/*": ["./src/.kktp/*"],
+      "kktp": ["./src/.kktp/*"]
     }
   },
   "include": ["src", "config/.kktprc.ts"]

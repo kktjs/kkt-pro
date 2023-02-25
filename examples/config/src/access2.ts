@@ -3,7 +3,7 @@
  * @path: 当前页面地址
  */
 const access = async (path: string) => {
+  console.log(44444);
   return false;
 };
-
 export default access;
