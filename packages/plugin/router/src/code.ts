@@ -16,16 +16,16 @@ ${content}
 };
 
 const Routertype = {
-  browser: 'createBrowserRouter',
-  hash: 'createHashRouter',
-  memory: 'createMemoryRouter',
+  browser: { create: 'createBrowserRouter', route: 'BrowserRouter' },
+  hash: { create: 'createHashRouter', route: 'HashRouter' },
+  memory: { create: 'createMemoryRouter', route: 'MemoryRouter' },
 };
 
 const createRouterFunTemp = (type: 'browser' | 'hash' | 'memory') => `
 let router;
 let navigate;
 export const createRouter = (routes,options) => {
-  router = ${Routertype[type]}(routes,options);
+  router = ${Routertype[type].create}(routes,options);
   navigate = router.navigate;
   return router
 };
@@ -37,32 +37,82 @@ export const createIndexRouteTemp = (
   type: 'browser' | 'hash' | 'memory',
   fallbackElement?: string,
   routesOutletElement?: string,
+  authDir?: string | boolean,
 ) => {
-  let importRouter = ``;
-  importRouter = `
-import React from "react";
+  let importRouter = `
+import React, { useMemo, cloneElement, useEffect } from "react";
 import {
-  ${Routertype[type]},
-  RouterProvider,
+  ${Routertype[type].create},
+  ${Routertype[type].route},
+  useRoutes,
+  useLocation,
+  useNavigate
 } from 'react-router-dom';
 import routesConfig from "./config";
-`;
+  `;
+
   if (fallbackElement) {
-    importRouter += `import FallbackElement from "${fallbackElement}";\n`;
+    importRouter += `
+import FallbackElement from "${fallbackElement}";\n`;
   }
 
-  let render = `<RouterProvider router={createRouter(routesConfig)} fallbackElement={${
-    fallbackElement ? '<FallbackElement />' : '<div>loading...</div>'
-  }} />`;
+  let auth = '';
+  if (authDir) {
+    importRouter += `
+import ${authDir} from "@/${authDir}";\n`;
+    auth = `
+  const navigate = useNavigate();
+  useEffect(() => {
+    const path = ${authDir}(pathname);
+    if (path) {
+      navigate(path, { replace: true });
+    }
+  }, [pathname]);
+    `;
+  }
+
+  let App = `
+const loopRoutes = (routes, props) => {
+  return routes.map(item => {
+    const newItem = { ...item };
+    if (item.children && item.children.length > 0) {
+      newItem.children = loopRoutes(item.children, props)
+    }
+    if (item.element) {
+      newItem.element = cloneElement(item.element, props)
+    }
+    return newItem;
+  })
+}\n
+const App = () => {
+  const location = useLocation();
+  const { pathname } = location;
+  ${auth}
+  const routes = useMemo(() => {
+    return loopRoutes(routesConfig, {
+      routes: routesConfig,
+      router: location
+    })
+  }, []);
+  const elements = useRoutes(routes);
+  return elements;
+}\n`;
+
+  let render = `<${Routertype[type].route}>\n`;
+
   if (routesOutletElement) {
     importRouter += `import RoutesOutletElement from "${routesOutletElement}";\n`;
-    render = `<RoutesOutletElement routes={routesConfig} createRouter={createRouter}>${render}</RoutesOutletElement>`;
+    render += `    <RoutesOutletElement routes={routesConfig} createRouter={createRouter}><App /></RoutesOutletElement>\n`;
+  } else {
+    render += `    <App />\n`;
   }
+  render += `  </${Routertype[type].route}>`;
 
   return `
 ${importRouter}
 ${createRouterFunTemp(type)}
-export default ()=>(${render})
+${App}
+export default ()=>(\n  ${render}\n)
 `;
 };
 /**自动生成-获取路由配置数据*/

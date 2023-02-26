@@ -76,6 +76,8 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
     initRoutes = false,
     /**自动生成models集合配置文件*/
     initModel = false,
+    /** 是否添加权限 */
+    access = false,
   } = props;
   const pluginsArr = [...plugins];
   if (initEntery) {
@@ -89,6 +91,9 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
   }
   if (initModel) {
     pluginsArr.push(['@kkt/plugin-pro-rematch', { cacheDirName }]);
+  }
+  if (access) {
+    pluginsArr.push(['@kkt/plugin-pro-access', { access }]);
   }
   return pluginsArr;
 };

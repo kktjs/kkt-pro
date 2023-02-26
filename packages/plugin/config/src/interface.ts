@@ -55,4 +55,6 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
   initRoutes?: RouterPluginProps | boolean;
   /**自动生成models集合配置文件*/
   initModel?: boolean;
+  /** 是否添加权限 */
+  access?: boolean;
 }

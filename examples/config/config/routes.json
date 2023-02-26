@@ -5,11 +5,11 @@
     "children": [
       {
         "index": true,
-        "redirect": "/home",
-        "element": "@/pages/Home"
+        "redirect": "/home"
       },
       {
         "path": "/home",
+        "navigate": "()=>console.log(2)",
         "element": "@/pages/Home"
       },
       {
@@ -19,6 +19,14 @@
       {
         "path": "/ceshi",
         "element": "@/pages/Ceshi"
+      },
+      {
+        "path": "/403",
+        "element": "@uiw-admin/exceptions/lib/Exceptions/403"
+      },
+      {
+        "path": "*",
+        "element": "@uiw-admin/exceptions/lib/Exceptions/403"
       }
     ]
   },

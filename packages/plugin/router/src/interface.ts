@@ -11,6 +11,8 @@ export interface RouterPluginProps {
    * @default "hash"
    */
   routesType?: 'browser' | 'hash' | 'memory';
+  /** 路由权限名称，默认auth.[js | ts] */
+  accessDirName?: string;
   /**页面加载loading组件地址*/
   fallbackElement?: string;
   /**路由外层包裹组件，可以用于自定义添加路由**/
