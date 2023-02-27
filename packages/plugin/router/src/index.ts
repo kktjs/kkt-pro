@@ -116,6 +116,7 @@ class RouterPlugin extends ConfigRouterPlugin {
         this.config_Watch();
         this.createFile();
       }
+      this.createFile();
     });
   }
 }

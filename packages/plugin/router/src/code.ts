@@ -37,7 +37,6 @@ export const createIndexRouteTemp = (
   type: 'browser' | 'hash' | 'memory',
   fallbackElement?: string,
   routesOutletElement?: string,
-  authDir?: string | boolean,
 ) => {
   let importRouter = `
 import React from "react";
@@ -86,17 +85,17 @@ export const getRouterDataCode = (data: Map<string, string>, outletLayout?: stri
     const newName = `${name}${index}`;
     importCode += `import ${newName} from "${routePath}";\n`;
     if (pathStr === '*') {
-      globalCode += `\t{ path: prefix + "${pathStr}", element: <${newName}/>, loader: ${newName}.loader },\n`;
+      globalCode += `\t{ path: prefix + "${pathStr}", element: () => import("${routePath}"), loader: ${newName}.loader },\n`;
     } else if (pathStr === 'index') {
-      childCode += `\t{ index: true, element: <${newName}/>, loader: ${newName}.loader },\n`;
+      childCode += `\t{ index: true, element: <Navigate to={prefix + "${pathStr}"} />, loader: ${newName}.loader },\n`;
     } else {
-      childCode += `\t{ path: prefix + "${pathStr}", element: <${newName}/>, loader: ${newName}.loader },\n`;
+      childCode += `\t{ path: prefix + "${pathStr}", element: () => import("${routePath}"), loader: ${newName}.loader },\n`;
     }
   });
   if (outletLayout) {
     return `import React from "react";\nimport { Outlet } from "react-router-dom"\nimport OutletLayout from "${outletLayout}";\n${importCode}// eslint-disable-next-line no-undef\nconst prefix = PREFIX;\nexport default [\n{\n\tpath:prefix,\n\telement:<OutletLayout ><Outlet/></OutletLayout>,\n\tchildren:[\n\t${childCode}${globalCode}\t]\n}\n]`;
   }
-  return `import React from "react";\n${importCode}// eslint-disable-next-line no-undef\nconst prefix = PREFIX;\nexport default [\n${childCode}${globalCode}\n]`;
+  return `import React from "react";\nimport { Navigate } from "react-router-dom";\n${importCode}// eslint-disable-next-line no-undef\nconst prefix = PREFIX;\nexport default [\n${childCode}${globalCode}\n]`;
 };
 
 export const createDynamic = () => {
