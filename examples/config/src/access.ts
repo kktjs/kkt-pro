@@ -1,9 +1,19 @@
 /**
- * 路由权限名称，默认access.[js | ts]
+ * 路由拦截，开启 access 配置 自动生成 access文件
  * @path: 当前页面地址
+ * @return 返回true则通过，返回路由则表示跳转
  */
-const access = async (path: string) => {
-  return false;
+const routeBefore = (path: string) => {
+  // 模拟页面跳转接口请求
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // 已登录
+      resolve(true);
+
+      // 未登录, 跳转到 登录页面
+      // resolve('/login')
+    }, 2000);
+  });
 };
 
-export default access;
+export default routeBefore;

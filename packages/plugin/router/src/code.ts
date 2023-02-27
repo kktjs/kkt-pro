@@ -40,15 +40,10 @@ export const createIndexRouteTemp = (
   authDir?: string | boolean,
 ) => {
   let importRouter = `
-import React, { useMemo, cloneElement, useEffect } from "react";
-import {
-  ${Routertype[type].create},
-  ${Routertype[type].route},
-  useRoutes,
-  useLocation,
-  useNavigate
-} from 'react-router-dom';
+import React from "react";
+import { ${Routertype[type].create}, ${Routertype[type].route}, useRoutes } from 'react-router-dom';
 import routesConfig from "./config";
+import { loopRoutes } from './utils';
   `;
 
   if (fallbackElement) {
@@ -56,46 +51,9 @@ import routesConfig from "./config";
 import FallbackElement from "${fallbackElement}";\n`;
   }
 
-  let auth = '';
-  if (authDir) {
-    importRouter += `
-import ${authDir} from "@/${authDir}";\n`;
-    auth = `
-  const navigate = useNavigate();
-  useEffect(() => {
-    const path = ${authDir}(pathname);
-    if (path) {
-      navigate(path, { replace: true });
-    }
-  }, [pathname]);
-    `;
-  }
-
   let App = `
-const loopRoutes = (routes, props) => {
-  return routes.map(item => {
-    const newItem = { ...item };
-    if (item.children && item.children.length > 0) {
-      newItem.children = loopRoutes(item.children, props)
-    }
-    if (item.element) {
-      newItem.element = cloneElement(item.element, props)
-    }
-    return newItem;
-  })
-}\n
 const App = () => {
-  const location = useLocation();
-  const { pathname } = location;
-  ${auth}
-  const routes = useMemo(() => {
-    return loopRoutes(routesConfig, {
-      routes: routesConfig,
-      router: location
-    })
-  }, []);
-  const elements = useRoutes(routes);
-  return elements;
+  return useRoutes(loopRoutes(routesConfig));
 }\n`;
 
   let render = `<${Routertype[type].route}>\n`;
@@ -139,4 +97,90 @@ export const getRouterDataCode = (data: Map<string, string>, outletLayout?: stri
     return `import React from "react";\nimport { Outlet } from "react-router-dom"\nimport OutletLayout from "${outletLayout}";\n${importCode}// eslint-disable-next-line no-undef\nconst prefix = PREFIX;\nexport default [\n{\n\tpath:prefix,\n\telement:<OutletLayout ><Outlet/></OutletLayout>,\n\tchildren:[\n\t${childCode}${globalCode}\t]\n}\n]`;
   }
   return `import React from "react";\n${importCode}// eslint-disable-next-line no-undef\nconst prefix = PREFIX;\nexport default [\n${childCode}${globalCode}\n]`;
+};
+
+export const createDynamic = () => {
+  const dynamic = `
+import React from "react";
+
+export default class DynamicImport extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: false,
+      Component: null,
+    }
+  }
+
+  componentDidMount() {
+    const { element } = this.props
+    this.handlerLoadComponent(element)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.element.toString() !== this.props.element.toString()) {
+      this.handlerLoadComponent(this.props.element)
+    }
+  }
+
+  handlerLoadComponent(element) {
+    this.setState({ loading: true })
+    element().then(module => module.default || module).then(Component => {
+      this.setState({ Component })
+    }).catch(err => {
+      throw err
+    }).finally(() => {
+      this.setState({ loading: false })
+    })
+  }
+  render() {
+    const { Component, loading } = this.state
+    if (loading) {
+      return this.props.loading
+    }
+    return Component ? <Component /> : null
+  }
+}
+  `;
+  return dynamic;
+};
+
+export const creatUtils = (access: boolean) => {
+  let element = '';
+  if (access) {
+    element = `if (item.children && item.children.length > 0) {
+          newItem.element = element;
+        } else {
+          newItem.element = ${access ? '<Access>{element}</Access>;' : 'element;'}
+        }`;
+  } else {
+    element = `newItem.element = element;`;
+  }
+  const utils = `
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from 'react-router-dom';
+import DynamicImport from './dynamic';
+${access ? `import Access from '@@/access';` : ''}
+
+const getDataType = (data) => {
+  return Object.prototype.toString.call(data);
+};
+
+export const loopRoutes = (routes) => {
+  return routes.map(item => {
+    const newItem = { ...item };
+    if (item.children && item.children.length > 0) {
+      newItem.children = loopRoutes(item.children);
+    }
+    if (item.element) {
+      if (getDataType(item.element) === '[object Function]') {
+        const element = <DynamicImport element={item.element} />;
+        ${element}
+      }
+    }
+    return newItem;
+  })
+}
+  `;
+  return utils;
 };

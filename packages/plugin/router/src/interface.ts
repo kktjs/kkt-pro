@@ -21,4 +21,5 @@ export interface RouterPluginProps {
   autoRoutes?: boolean;
   /**自动生成路由layout布局组件地址*/
   outletLayout?: string;
+  access?: boolean;
 }

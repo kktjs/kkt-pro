@@ -6,9 +6,36 @@ export default;
 
 export const createIndex = () => {
   const jsContent = `
-import React from 'react';\n
-const App = () => (<div>3333</div>);\n
-export default App;
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import RouteAccess from '@/access';
+
+const Access = ({ children }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { pathname } = location;
+  const [isAccess, setIsAccess] = useState(null);
+  useEffect(() => {
+    setIsAccess(false);
+    getAccess()
+  }, [pathname]);
+
+  const getAccess = async () => {
+    const access = await RouteAccess(pathname);
+    if (typeof access === 'string' && access) {
+      navigate(access)
+    } else if (access) {
+      setIsAccess(true)
+    }
+  }
+  if (!isAccess) {
+    return <div>loading....</div>;
+  }
+  return children
+}
+
+export default Access;
+
 `;
   return jsContent;
 };
@@ -19,13 +46,14 @@ export default App;
 export const createAccess = (isTS?: boolean) => {
   const jsContent = `
 /**
- * 路由权限名称，默认access.[js | ts]
+ * 路由拦截，开启 access 配置 自动生成 access文件
  * @path: 当前页面地址
+ * @return 返回true则通过，返回路由则表示跳转
  */
 const routeBefore = async (path${isTS ? ': string' : ''}) => {
-  return false;
+  return true;
 };
-export default access;
+export default routeBefore;
 `;
   return jsContent;
 };

@@ -86,7 +86,7 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
   if (initRoutes) {
     pluginsArr.push([
       '@kkt/plugin-pro-router',
-      typeof initRoutes === 'boolean' ? { cacheDirName } : { ...initRoutes, cacheDirName },
+      typeof initRoutes === 'boolean' ? { cacheDirName } : { ...initRoutes, cacheDirName, access },
     ]);
   }
   if (initModel) {

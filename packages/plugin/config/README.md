@@ -55,14 +55,16 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
   overrideWebpack?: OverrideWebpackType;
   /** 输出 */
   output?: Omit<WebpackConfiguration['output'], 'publicPath'>;
-  /**自动生成文件目录名称**/
+  /** 自动生成文件目录名称 **/
   cacheDirName?: string;
-  /**自动生成入口文件*/
+  /** 自动生成入口文件 */
   initEntery?: boolean;
-  /**路由配置*/
+  /** 路由配置 */
   initRoutes?: RouterPluginProps | boolean;
-  /**自动生成models集合配置文件*/
+  /** 自动生成models集合配置文件 */
   initModel?: boolean;
+  /** 是否开启权限 */
+  access?: boolean;
 }
 
 ```
@@ -110,7 +112,7 @@ export default {
 **overrideWebpack 使用**
 
 ```ts
-// .kktrc.ts
+// .kktprc.ts
 export default {
   // ...
   overrideWebpack:(conf, env, options)=>{

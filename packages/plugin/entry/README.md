@@ -17,7 +17,7 @@ type InitEntryOptions = {
 ## `kktp`配置文件
 
 ```ts
-// .kktrc.ts
+// .kktprc.ts
 export default {
   // ...
   initEntery:true,

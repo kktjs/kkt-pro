@@ -12,13 +12,14 @@ import path from 'path';
 import chokidar from 'chokidar';
 import FS from 'fs-extra';
 import { getFilesPath } from './utils';
-import { getRouterDataCode } from './code';
+import { getRouterDataCode, createDynamic, creatUtils } from './code';
 import { RouterPluginProps } from './interface';
 import { toPascalCase } from '@kkt/plugin-pro-utils';
 import { ConfigRouterPlugin } from './config-plugin';
 export * from './interface';
 
 class RouterPlugin extends ConfigRouterPlugin {
+  access?: boolean;
   constructor(props: RouterPluginProps = {}) {
     super();
     const tmp = props.cacheDirName || '.kktp';
@@ -27,6 +28,7 @@ class RouterPlugin extends ConfigRouterPlugin {
     this.outletLayout = props.outletLayout;
     this.routesOutletElement = props.routesOutletElement;
     this.autoRoutes = props.autoRoutes;
+    this.access = props.access;
 
     this.temp = path.resolve(this.rootDir, tmp, 'routes');
     this.temp_index_file = path.resolve(this.rootDir, tmp, 'routes', 'index.jsx');
@@ -96,12 +98,23 @@ class RouterPlugin extends ConfigRouterPlugin {
       });
     }
   }
+  createFile() {
+    FS.writeFile(path.join(this.temp, `dynamic.jsx`), createDynamic(), {
+      encoding: 'utf-8',
+      flag: 'w+',
+    });
+    FS.writeFile(path.join(this.temp, `utils.jsx`), creatUtils(this.access), {
+      encoding: 'utf-8',
+      flag: 'w+',
+    });
+  }
   apply(compiler: webpack.Compiler) {
     compiler.hooks.afterPlugins.tap('RouterPlugin', () => {
       if (this.autoRoutes) {
         this.auto_Watch();
       } else {
         this.config_Watch();
+        this.createFile();
       }
     });
   }
