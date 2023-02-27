@@ -114,8 +114,8 @@ class RouterPlugin extends ConfigRouterPlugin {
         this.auto_Watch();
       } else {
         this.config_Watch();
-        this.createFile();
       }
+      this.createFile();
     });
   }
 }
