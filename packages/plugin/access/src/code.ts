@@ -29,9 +29,9 @@ const Access = ({ children }) => {
     }
   }
   if (!isAccess) {
-    return <div>loading....</div>;
+    return <div />;
   }
-  return children
+  return children;
 }
 
 export default Access;

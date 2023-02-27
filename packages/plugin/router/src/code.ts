@@ -157,8 +157,7 @@ export const creatUtils = (access: boolean) => {
     element = `newItem.element = element;`;
   }
   const utils = `
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import React from "react";
 import DynamicImport from './dynamic';
 ${access ? `import Access from '@@/access';` : ''}
 
