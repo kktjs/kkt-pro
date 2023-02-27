@@ -3,6 +3,10 @@
 
 `kktp`内置插件,需要配合`@kkt/plugin-pro-router`插件使用
 
+## 全局样式
+
+`kktp` 中约定`src/global.css 为全局样式`, 如果存在此文件，会被自动引入到入口文件最前面。
+
 ## 参数
 
 ```ts
