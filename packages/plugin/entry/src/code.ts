@@ -20,12 +20,20 @@ ReactClient.createRoot(document.getElementById('root')).render(${renderString});
 `;
 };
 
-export const getInitCSSCode = () => `body {
+export const getInitCSSCode = () => `
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+body, html, #root {
+  height: 100%;
 }
 `;

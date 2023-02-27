@@ -19,7 +19,7 @@ export interface ModelspluginProps {
 ## `kktp`配置文件
 
 ```ts
-// .kktrc.ts
+// .kktprc.ts
 export default {
   // ...
   initModel:true,

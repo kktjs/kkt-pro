@@ -1,5 +1,9 @@
 [
   {
+    "path": "/login",
+    "element": "@/pages/Login"
+  },
+  {
     "path": "/",
     "element": "@/layout",
     "children": [

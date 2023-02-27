@@ -1,11 +1,22 @@
+<<<<<<< HEAD
+权限配置
+====
+
+权限控制，开启 access 配置, 则src目录下自动生成 access文件。可以在业务中根据路径来定制需求。
+=======
 生成路由配置
 ====
 
 `kktp`内置插件，用于自动进行生成路由配置。使用此插件需要安装`react-router`和`react-router-dom`依赖包
+>>>>>>> c4055fd163ed4d6c7f79265af30fe30aa09f2346
 
 ## 参数
 
 ```ts
+<<<<<<< HEAD
+export interface AccessPluginProps {
+  access?: string;
+=======
 export interface RouterPluginProps {
   /**处理图标菜单中图标引入问题*/
   analysisRoutersIcon?: (icons: { name: string; newName: string }[]) => string;
@@ -29,10 +40,36 @@ export interface RouterPluginProps {
   autoRoutes?: boolean;
   /**自动生成路由layout布局组件地址*/
   outletLayout?: string;
+>>>>>>> c4055fd163ed4d6c7f79265af30fe30aa09f2346
 }
 
 ```
 
+<<<<<<< HEAD
+## access.ts
+
+模拟页面跳转拦截：
+
+```ts
+/**
+ * access.ts
+ * @path: 当前页面地址
+ * @return 返回true则通过，返回路由则表示跳转
+ */
+const routeBefore = (path: string) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // 已登录
+      resolve(true)
+      
+      // 未登录, 跳转到 登录页面
+      // resolve('/login')
+    }, 2000)
+  })
+};
+
+export default routeBefore;
+=======
 ## 路由生成方式
 
 **1. 通过配置进行生成路由**
@@ -66,6 +103,7 @@ const access = async (path: string) => {
 }
 
 export default access;
+>>>>>>> c4055fd163ed4d6c7f79265af30fe30aa09f2346
 ```
 
 ## `kktp`配置文件
@@ -73,9 +111,13 @@ export default access;
 ```ts
 // .kktrc.ts
 export default {
+<<<<<<< HEAD
+  access: true
+=======
   // ...
   initRoutes:{
     outletLayout:"@/layout" // 自动生成路由layout布局组件地址
   },
+>>>>>>> c4055fd163ed4d6c7f79265af30fe30aa09f2346
 }
 ```

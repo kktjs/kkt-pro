@@ -71,7 +71,7 @@ export default access;
 ## `kktp`配置文件
 
 ```ts
-// .kktrc.ts
+// .kktprc.ts
 export default {
   // ...
   initRoutes:{

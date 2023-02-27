@@ -9,7 +9,7 @@ import { createIndex, createAccess } from './code';
 class AccessPlugin {
   access?: boolean;
   /** 路由权限名称，默认auth.[js | ts] */
-  accessDirName?: string = 'access2';
+  accessDirName?: string = 'access';
   /** 入口文件夹位置 */
   rootDir = path.resolve(process.cwd(), 'src');
   temp: string = path.join(process.cwd(), 'src', '.kktp');
@@ -22,11 +22,10 @@ class AccessPlugin {
   /** 生成目录 */
   async createDir() {
     FS.ensureDirSync(this.tempDir);
-    // FS.writeFile(path.join(this.tempDir, `index.jsx`), createIndex(), {
-    //   encoding: 'utf-8',
-    //   flag: 'w+',
-    // });
-    FS.copySync(path.join(__dirname, 'waiter'), this.tempDir);
+    FS.writeFile(path.join(this.tempDir, `index.jsx`), createIndex(), {
+      encoding: 'utf-8',
+      flag: 'w+',
+    });
   }
   /** 初始获取路径数据 */
   async auto_GetFiles() {
