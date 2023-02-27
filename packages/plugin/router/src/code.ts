@@ -98,52 +98,6 @@ export const getRouterDataCode = (data: Map<string, string>, outletLayout?: stri
   return `import React from "react";\nimport { Navigate } from "react-router-dom";\n${importCode}// eslint-disable-next-line no-undef\nconst prefix = PREFIX;\nexport default [\n${childCode}${globalCode}\n]`;
 };
 
-export const createDynamic = () => {
-  const dynamic = `
-import React from "react";
-
-export default class DynamicImport extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: false,
-      Component: null,
-    }
-  }
-
-  componentDidMount() {
-    const { element } = this.props
-    this.handlerLoadComponent(element)
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.element.toString() !== this.props.element.toString()) {
-      this.handlerLoadComponent(this.props.element)
-    }
-  }
-
-  handlerLoadComponent(element) {
-    this.setState({ loading: true })
-    element().then(module => module.default || module).then(Component => {
-      this.setState({ Component })
-    }).catch(err => {
-      throw err
-    }).finally(() => {
-      this.setState({ loading: false })
-    })
-  }
-  render() {
-    const { Component, loading } = this.state
-    if (loading) {
-      return this.props.loading
-    }
-    return Component ? <Component /> : null
-  }
-}
-  `;
-  return dynamic;
-};
-
 export const creatUtils = (access: boolean) => {
   let element = '';
   if (access) {
@@ -157,7 +111,7 @@ export const creatUtils = (access: boolean) => {
   }
   const utils = `
 import React from "react";
-import DynamicImport from './dynamic';
+import { useNavigate } from 'react-router-dom';
 ${access ? `import Access from '@@/access';` : ''}
 
 const getDataType = (data) => {
@@ -172,7 +126,14 @@ export const loopRoutes = (routes) => {
     }
     if (item.element) {
       if (getDataType(item.element) === '[object Function]') {
-        const element = <DynamicImport element={item.element} />;
+        const roles = item.roles;
+        const Element = React.lazy(item.element);
+        const navigate = useNavigate();
+        const element = (
+          <React.Suspense>
+            <Element roles={roles} navigate={navigate} />
+          </React.Suspense>
+        )
         ${element}
       }
     }

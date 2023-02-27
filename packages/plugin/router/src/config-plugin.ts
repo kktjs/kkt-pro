@@ -53,12 +53,7 @@ export class ConfigRouterPlugin {
   createIndex() {
     const accessDirName = this.accessDirName.replace(/(.(js|ts))/, '');
     const auth = isFile(`${this.rootDir}/${accessDirName}`) ? accessDirName : false;
-    const routeTemp = createIndexRouteTemp(
-      this.routesType,
-      this.fallbackElement,
-      this.routesOutletElement,
-      this.autoRoutes,
-    );
+    const routeTemp = createIndexRouteTemp(this.routesType, this.fallbackElement, this.routesOutletElement);
     if (this.pre_index_content !== routeTemp) {
       this.pre_index_content = routeTemp;
       FS.writeFileSync(this.temp_index_file, routeTemp, { encoding: 'utf-8', flag: 'w+' });
