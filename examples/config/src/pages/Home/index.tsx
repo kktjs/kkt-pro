@@ -1,7 +1,11 @@
-const Home = () => {
+const Home = (props: any) => {
+  const { navigate } = props;
+  const click = () => {
+    navigate('/ceshi');
+  };
   return (
     <div>
-      <button>add route</button>
+      <button onClick={click}>add route</button>
     </div>
   );
 };
