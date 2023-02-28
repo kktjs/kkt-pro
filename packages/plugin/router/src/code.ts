@@ -119,6 +119,7 @@ const getDataType = (data) => {
 };
 
 export const loopRoutes = (routes) => {
+  const navigate = useNavigate();
   return routes.map(item => {
     const newItem = { ...item };
     if (item.children && item.children.length > 0) {
@@ -128,7 +129,6 @@ export const loopRoutes = (routes) => {
       if (getDataType(item.element) === '[object Function]') {
         const roles = item.roles;
         const Element = React.lazy(item.element);
-        const navigate = useNavigate();
         const element = (
           <React.Suspense>
             <Element roles={roles} navigate={navigate} />
