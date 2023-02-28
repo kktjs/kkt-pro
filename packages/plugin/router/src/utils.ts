@@ -43,7 +43,7 @@ export const getFilesPath = (currentPath: string): Promise<string[]> => {
 
 export const isFile = (path: string) => {
   let isPath: boolean = false;
-  ['ts', 'js'].forEach((item) => {
+  ['jsx', 'js', 'tsx'].forEach((item) => {
     const isExists = FS.existsSync(`${path}.${item}`);
     if (isExists) {
       isPath = true;

@@ -51,21 +51,22 @@ export interface RouterPluginProps {
 
 ## `access`
 
-权限控制，当`src`目录下存在`access.[js|ts]`文件则默认开启。 可以在业务中根据路径来定制需求。
+权限控制，开启`access`权限，则`src`目录下自动生成`access`文件。 可以在业务中根据路径来定制需求。
 
 ```ts
 /**
  * src/access.ts
  * @path: 当前页面地址
+ * @return 返回true则通过，返回路由则表示跳转
 */
-const access = async (path: string) => {
+const routeBefore = async (path: string) => {
   if (path === '/ceshi') {
     return '/403'
   }
-  return false;
+  return true;
 }
 
-export default access;
+export default routeBefore;
 ```
 
 ## `kktp`配置文件

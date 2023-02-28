@@ -10,23 +10,22 @@ interface RoutesOutletElementProps {
   createRouter: (routes: RouteObject[], options?: any) => RemixRouter;
 }
 const RoutesOutletElement = (props: RoutesOutletElementProps) => {
-  const { createRouter } = props;
-
+  // 模拟添加路由
   const newRoutes = useMemo(() => {
     return props.routes.concat([
       {
-        path: '/home',
+        path: '/home2',
         element: <Home />,
       },
       {
-        path: '/about',
+        path: '/about2',
         element: <About />,
       },
     ]);
   }, [props.routes]);
 
   return cloneElement(props.children as JSX.Element, {
-    router: createRouter(newRoutes),
+    routes: newRoutes,
   });
 };
 export default RoutesOutletElement;

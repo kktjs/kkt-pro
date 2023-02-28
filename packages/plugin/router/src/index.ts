@@ -12,7 +12,7 @@ import path from 'path';
 import chokidar from 'chokidar';
 import FS from 'fs-extra';
 import { getFilesPath } from './utils';
-import { getRouterDataCode, creatUtils } from './code';
+import { getRouterDataCode, creatLoop } from './code';
 import { RouterPluginProps } from './interface';
 import { toPascalCase } from '@kkt/plugin-pro-utils';
 import { ConfigRouterPlugin } from './config-plugin';
@@ -99,7 +99,7 @@ class RouterPlugin extends ConfigRouterPlugin {
     }
   }
   createFile() {
-    FS.writeFile(path.join(this.temp, `utils.jsx`), creatUtils(this.access), {
+    FS.writeFile(path.join(this.temp, `loop.jsx`), creatLoop(this.access, this.fallbackElement), {
       encoding: 'utf-8',
       flag: 'w+',
     });

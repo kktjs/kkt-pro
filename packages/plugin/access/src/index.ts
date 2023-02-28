@@ -5,6 +5,7 @@ import FS from 'fs-extra';
 import { AccessPluginProps } from './interface';
 import { getExt, isFile } from './utils';
 import { createIndex, createAccess } from './code';
+import RouterPlugin from '@kkt/plugin-pro-router';
 
 class AccessPlugin {
   access?: boolean;
@@ -16,13 +17,15 @@ class AccessPlugin {
   tempDir = path.join(process.cwd(), 'src', '.kktp', 'access');
   /**判断是否是存在tsconfig文件配置*/
   isTS: boolean = FS.existsSync(path.join(process.cwd(), 'tsconfig.json'));
+  fallbackElement?: string;
   constructor(props: AccessPluginProps = {}) {
     this.access = props.access;
+    this.fallbackElement = props.fallbackElement;
   }
   /** 生成目录 */
   async createDir() {
     FS.ensureDirSync(this.tempDir);
-    FS.writeFile(path.join(this.tempDir, `index.jsx`), createIndex(), {
+    FS.writeFile(path.join(this.tempDir, `index.jsx`), createIndex(this.fallbackElement), {
       encoding: 'utf-8',
       flag: 'w+',
     });

@@ -16,21 +16,10 @@ ${content}
 };
 
 const Routertype = {
-  browser: { create: 'createBrowserRouter', route: 'BrowserRouter' },
-  hash: { create: 'createHashRouter', route: 'HashRouter' },
-  memory: { create: 'createMemoryRouter', route: 'MemoryRouter' },
+  browser: 'BrowserRouter',
+  hash: 'HashRouter',
+  memory: 'MemoryRouter',
 };
-
-const createRouterFunTemp = (type: 'browser' | 'hash' | 'memory') => `
-let router;
-let navigate;
-export const createRouter = (routes,options) => {
-  router = ${Routertype[type].create}(routes,options);
-  navigate = router.navigate;
-  return router
-};
-export { router,navigate }
-`;
 
 /**获取路由入口文件内容*/
 export const createIndexRouteTemp = (
@@ -40,34 +29,35 @@ export const createIndexRouteTemp = (
 ) => {
   let importRouter = `
 import React from "react";
-import { ${Routertype[type].create}, ${Routertype[type].route}, useRoutes } from 'react-router-dom';
+import { ${Routertype[type]}, useRoutes } from 'react-router-dom';
 import routesConfig from "./config";
-import { loopRoutes } from './utils';
+import { loopRoutes } from './loop';
   `;
 
   if (fallbackElement) {
     importRouter += `
-import FallbackElement from "${fallbackElement}";\n`;
+import FallbackElement from "${fallbackElement}";`;
   }
 
   let App = `
-const App = () => {
-  return useRoutes(loopRoutes(routesConfig));
+const App = (props) => {
+  const { routes = routesConfig } = props;
+  return useRoutes(loopRoutes(routes));
 }\n`;
 
-  let render = `<${Routertype[type].route}>\n`;
+  let render = `<${Routertype[type]}>\n`;
 
   if (routesOutletElement) {
-    importRouter += `import RoutesOutletElement from "${routesOutletElement}";\n`;
-    render += `    <RoutesOutletElement routes={routesConfig} createRouter={createRouter}><App /></RoutesOutletElement>\n`;
+    importRouter += `
+import RoutesOutletElement from "${routesOutletElement}";\n`;
+    render += `    <RoutesOutletElement routes={routesConfig}><App /></RoutesOutletElement>\n`;
   } else {
     render += `    <App />\n`;
   }
-  render += `  </${Routertype[type].route}>`;
+  render += `  </${Routertype[type]}>`;
 
   return `
 ${importRouter}
-${createRouterFunTemp(type)}
 ${App}
 export default ()=>(\n  ${render}\n)
 `;
@@ -85,21 +75,23 @@ export const getRouterDataCode = (data: Map<string, string>, outletLayout?: stri
     const newName = `${name}${index}`;
     importCode += `import ${newName} from "${routePath}";\n`;
     if (pathStr === '*') {
-      globalCode += `\t{ path: prefix + "${pathStr}", element: () => import("${routePath}"), loader: ${newName}.loader },\n`;
+      globalCode += `\t{ path: prefix + "${pathStr}", element: React.lazy(() => import("${routePath}")), loader: ${newName}.loader },\n`;
     } else if (pathStr === 'index') {
       childCode += `\t{ index: true, element: <Navigate to={prefix + "${pathStr}"} />, loader: ${newName}.loader },\n`;
+      childCode += `\t{ path: prefix + "${pathStr}", element: React.lazy(() => import("${routePath}")), loader: ${newName}.loader },\n`;
     } else {
-      childCode += `\t{ path: prefix + "${pathStr}", element: () => import("${routePath}"), loader: ${newName}.loader },\n`;
+      childCode += `\t{ path: prefix + "${pathStr}", element: React.lazy(() => import("${routePath}")), loader: ${newName}.loader },\n`;
     }
   });
   if (outletLayout) {
-    return `import React from "react";\nimport { Outlet } from "react-router-dom"\nimport OutletLayout from "${outletLayout}";\n${importCode}// eslint-disable-next-line no-undef\nconst prefix = PREFIX;\nexport default [\n{\n\tpath:prefix,\n\telement:<OutletLayout ><Outlet/></OutletLayout>,\n\tchildren:[\n\t${childCode}${globalCode}\t]\n}\n]`;
+    return `import React from "react";\nimport { Navigate } from "react-router-dom";\nimport { Outlet } from "react-router-dom"\nimport OutletLayout from "${outletLayout}";\n${importCode}// eslint-disable-next-line no-undef\nconst prefix = PREFIX;\nexport default [\n{\n\tpath:prefix,\n\telement:<OutletLayout ><Outlet/></OutletLayout>,\n\tchildren:[\n\t${childCode}${globalCode}\t]\n}\n]`;
   }
   return `import React from "react";\nimport { Navigate } from "react-router-dom";\n${importCode}// eslint-disable-next-line no-undef\nconst prefix = PREFIX;\nexport default [\n${childCode}${globalCode}\n]`;
 };
 
-export const creatUtils = (access: boolean) => {
+export const creatLoop = (access: boolean, fallbackElement: string) => {
   let element = '';
+  let fallback = '<></>';
   if (access) {
     element = `if (item.children && item.children.length > 0) {
           newItem.element = element;
@@ -109,14 +101,14 @@ export const creatUtils = (access: boolean) => {
   } else {
     element = `newItem.element = element;`;
   }
-  const utils = `
+  if (fallbackElement && !access) {
+    fallback = '<Fallback />';
+  }
+  const str = `
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 ${access ? `import Access from '@@/access';` : ''}
-
-const getDataType = (data) => {
-  return Object.prototype.toString.call(data);
-};
+${fallbackElement ? `import Fallback from '${fallbackElement}';` : ''}
 
 export const loopRoutes = (routes) => {
   const navigate = useNavigate();
@@ -126,12 +118,11 @@ export const loopRoutes = (routes) => {
       newItem.children = loopRoutes(item.children);
     }
     if (item.element) {
-      if (getDataType(item.element) === '[object Function]') {
-        const roles = item.roles;
-        const Element = React.lazy(item.element);
+      if (!React.isValidElement(item.element)) {
+        const Element = item.element;
         const element = (
-          <React.Suspense>
-            <Element roles={roles} navigate={navigate} />
+          <React.Suspense fallback={${fallback}}>
+            <Element roles={item.roles} navigate={navigate} />
           </React.Suspense>
         )
         ${element}
@@ -141,5 +132,5 @@ export const loopRoutes = (routes) => {
   })
 }
   `;
-  return utils;
+  return str;
 };

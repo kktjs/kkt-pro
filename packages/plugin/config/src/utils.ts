@@ -93,7 +93,8 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
     pluginsArr.push(['@kkt/plugin-pro-rematch', { cacheDirName }]);
   }
   if (access) {
-    pluginsArr.push(['@kkt/plugin-pro-access', { access }]);
+    const fallbackElement = typeof initRoutes === 'boolean' ? null : initRoutes?.fallbackElement;
+    pluginsArr.push(['@kkt/plugin-pro-access', { access, fallbackElement }]);
   }
   return pluginsArr;
 };

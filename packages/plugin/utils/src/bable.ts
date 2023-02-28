@@ -121,7 +121,7 @@ export const analysisRoutersLoader = (content: string) => {
             index++;
             // node.value = getJSX(`${componentName}`);
             // node.value = createTemplateExpression(`<${componentName} />`);
-            node.value = createTemplateExpression(`() => import("${valus}")`);
+            node.value = createTemplateExpression(`React.lazy(() => import("${valus}"))`);
             importLazy[componentName] = valus;
             importLazyString += `\nimport ${componentName} from "${valus}";\n`;
             if (t.isObjectExpression(path.parent)) {

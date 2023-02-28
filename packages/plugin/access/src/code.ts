@@ -4,11 +4,13 @@ const App = () => (<div>3333</div>);\n
 export default;
 `;
 
-export const createIndex = () => {
+export const createIndex = (fallbackElement?: string) => {
+  const loading = fallbackElement ? '<Fallback />' : '<></>';
   const jsContent = `
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import RouteAccess from '@/access';
+${fallbackElement ? `import Fallback from '${fallbackElement}';` : ''}
 
 const Access = ({ children }) => {
   const location = useLocation();
@@ -29,7 +31,7 @@ const Access = ({ children }) => {
     }
   }
   if (!isAccess) {
-    return <div />;
+    return ${loading};
   }
   return children;
 }
