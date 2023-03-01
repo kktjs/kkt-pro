@@ -1,7 +1,8 @@
 权限配置
 ====
 
-权限控制，开启 access 配置, 则src目录下自动生成 access文件。可以在业务中根据路径来定制需求。
+权限控制，开启 `access` 配置, 则`src`目录下自动生成 `access` 文件。可以在业务中根据路径来定制需求。
+
 
 ## 参数
 
@@ -11,6 +12,28 @@ export interface AccessPluginProps {
   access?: string;
 }
 
+```
+
+## roles
+
+当路由配置`roles`参数，在页面中可以直接获取`roles`用于页面模块校验权限。
+```ts
+// router config
+const routes = [
+  {
+    path: '/demo',
+    element: '@/pages/demo',
+    roles: ['admin', 'users']
+  }
+]
+
+// page
+const Page = (props) => {
+  const { roles = []} = props;
+
+  return <div />
+}
+export default Page;
 ```
 
 ## access.ts

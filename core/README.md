@@ -71,6 +71,7 @@ kktp ===> `kkt pro`
 5. 支持`react-router 6`
 6. 支持`react-redux`
 7. 默认封装`mocker`代理配置
+8. 支持路由拦截 / 权限控制
 
 ## 约定配置位置
 

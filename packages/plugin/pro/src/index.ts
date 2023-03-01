@@ -25,6 +25,8 @@ export interface KktproRoutesProps extends Omit<RouteObject, 'children' | 'eleme
   roles?: string[];
   /** 隐藏主菜单 */
   hiddenMainMenu?: boolean;
+  /** 是否隐藏菜单 */
+  hideInMenu?: boolean;
   /** 自定义 跳转 */
   // navigate?: (navigate: NavigateFunction) => void;
   navigate?: string;

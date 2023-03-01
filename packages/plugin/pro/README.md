@@ -20,17 +20,19 @@ export interface KktproRoutesProps extends Omit<RouteObject, 'children' | 'eleme
   roles?: string[];
   /** 隐藏主菜单 */
   hiddenMainMenu?: boolean;
+  /** 是否隐藏菜单 */
+  hideInMenu?: boolean;
   /** 自定义 跳转 */
   // navigate?: (navigate: NavigateFunction) => void;
   navigate?: string;
   /** 控制是否侧边只展示子路由 **/
   side?: boolean;
+  /** 是否渲染当前路由 */
+  hideRoute?: boolean;
   /** route component */
   element?: string | React.LazyExoticComponent<() => JSX.Element> | JSX.Element;
   /** 子集 路由 */
   children?: KktproRoutesProps[];
-  /** 是否渲染当前路由 */
-  hideRoute?: boolean;
 }
 ```
 

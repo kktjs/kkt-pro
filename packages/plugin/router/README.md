@@ -37,10 +37,8 @@ export interface RouterPluginProps {
 
 **1. 通过配置进行生成路由**
 
-- 约定根目录下`config/routes.(json|js|ts)`为[路由菜单配置](https://reactrouter.com/en/6.8.1/route/route)
+- 约定根目录下`config/routes.(json|js|ts)`为[路由菜单配置](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/pro#kktproroutesprops)
 
-
-- 配合[@uiw-admin/basic-layouts](https://github.com/uiwjs/uiw-admin/tree/yb/packages/basic-layouts)使用。[配置参数](https://github.com/uiwjs/uiw-admin/tree/yb/packages/router-control)
 
 
 **2. 自动生成路由**
@@ -49,25 +47,6 @@ export interface RouterPluginProps {
 - 约定`src/pages/index.(js|jsx|tsx)`文件为默认路由
 - 约定`src/pages/**/index.(js|jsx|tsx)`文件为对应路由展示页面
 
-## `access`
-
-权限控制，开启`access`权限，则`src`目录下自动生成`access`文件。 可以在业务中根据路径来定制需求。
-
-```ts
-/**
- * src/access.ts
- * @path: 当前页面地址
- * @return 返回true则通过，返回路由则表示跳转
-*/
-const routeBefore = async (path: string) => {
-  if (path === '/ceshi') {
-    return '/403'
-  }
-  return true;
-}
-
-export default routeBefore;
-```
 
 ## `kktp`配置文件
 
