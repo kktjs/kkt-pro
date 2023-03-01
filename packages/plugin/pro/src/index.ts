@@ -1,4 +1,5 @@
 import { RouteObject, NavigateFunction } from 'react-router-dom';
+export * from '@@/export';
 
 export * from 'react-router-dom';
 export * from 'react-router';

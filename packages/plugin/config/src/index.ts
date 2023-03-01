@@ -39,13 +39,15 @@ const overrideKKTPConfig = (
   if (env === 'development') {
     conf.output.publicPath = '/';
   }
+  const { plugins: newPluginsArr, newAlias } = getInitPlugin(overrideConfigProps);
+
   conf.resolve = {
     ...conf.resolve,
     alias: {
       ...conf.resolve?.alias,
+      ...newAlias,
       '@': options.paths.appSrc,
       '@@': path.resolve(options.paths.appSrc, cacheDirName),
-      ...(alias || {}),
     },
   };
   const publicPath = conf.output.publicPath as string;
@@ -53,8 +55,7 @@ const overrideKKTPConfig = (
   /**处理kkt plugin**/
   conf = getKKTPlugins(kktPlugins, conf, env, options);
   /**处理 webpack plugin**/
-  const newPlugins = getWebpackPlugins(getInitPlugin(overrideConfigProps));
-
+  const newPlugins = getWebpackPlugins(newPluginsArr);
   // 修复 publicUrlOrPath 指向新的前缀
   // 此举完美的解决了命令启动跳转新路由，路由刷新空白的问题
   overridePaths(undefined, { publicUrlOrPath: prefixStr });

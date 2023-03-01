@@ -1,4 +1,6 @@
 import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
+import FS from 'fs-extra';
+import path from 'path';
 
 import { DefaultDefineType, PluginsType, KKTPlugins, OverrideKKTPConfigProps } from './interface';
 /** 全局默认公共参数  */
@@ -64,6 +66,16 @@ export const getKKTPlugins = (
   return conf;
 };
 
+/**生成导出文件*/
+const createExportField = (pathList: string[], cacheDirName: string) => {
+  if (pathList.length) {
+    const contentPath = path.join(process.cwd(), 'src', cacheDirName, 'export.ts');
+    const content = pathList.map((bod) => `export * from "./${bod}";`).join('\n');
+    FS.ensureFileSync(contentPath);
+    FS.writeFileSync(contentPath, content, { flag: 'w+', encoding: 'utf-8' });
+  }
+};
+
 /**内置插件判断*/
 export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
   const {
@@ -78,8 +90,11 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
     initModel = false,
     /** 是否添加权限 */
     access = false,
+    alias = {},
   } = props;
   const pluginsArr = [...plugins];
+  const exportPath = [];
+  const newAlias = { ...alias };
   if (initEntery) {
     pluginsArr.push(['@kkt/plugin-pro-entry', { redux: initModel, cacheDirName }]);
   }
@@ -88,13 +103,25 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
       '@kkt/plugin-pro-router',
       typeof initRoutes === 'boolean' ? { cacheDirName } : { ...initRoutes, cacheDirName, access },
     ]);
+    exportPath.push('routes');
   }
   if (initModel) {
     pluginsArr.push(['@kkt/plugin-pro-rematch', { cacheDirName }]);
+    exportPath.push('rematch');
   }
   if (access) {
     const fallbackElement = typeof initRoutes === 'boolean' ? null : initRoutes?.fallbackElement;
     pluginsArr.push(['@kkt/plugin-pro-access', { access, fallbackElement }]);
+    exportPath.push('access');
   }
-  return pluginsArr;
+  createExportField(exportPath, cacheDirName);
+  /**这是为了解决导出问题*/
+  if (!exportPath.length) {
+    newAlias['@@/export'] = './export';
+  }
+  return {
+    plugins: pluginsArr,
+    isExport: !!exportPath.length,
+    newAlias,
+  };
 };
