@@ -31,18 +31,16 @@ export const createIndexRouteTemp = (
 import React from "react";
 import { ${Routertype[type]}, useRoutes } from 'react-router-dom';
 import routesConfig from "./config";
-import { loopRoutes } from './loop';
-  `;
-
-  if (fallbackElement) {
-    importRouter += `
-import FallbackElement from "${fallbackElement}";`;
-  }
+import { loopRoutes, loopChildRoutes } from './loop';`;
 
   let App = `
 const App = (props) => {
   const { routes = routesConfig } = props;
-  return useRoutes(loopRoutes(routes));
+  const childRoutes = React.useMemo(() => {
+    const data = routes.find((item) => item.path === '/')
+    return data ? loopChildRoutes(data.children) : [];
+  }, [routes])
+  return useRoutes(loopRoutes(routes, childRoutes));
 }\n`;
 
   let render = `<${Routertype[type]}>\n`;
@@ -93,7 +91,7 @@ export const creatLoop = (access: boolean, fallbackElement: string) => {
   let element = '';
   let fallback = '<></>';
   if (access) {
-    element = `if (item.children && item.children.length > 0) {
+    element = `if (item.children && item.children.length > 0 || item.path === '*') {
           newItem.element = element;
         } else {
           newItem.element = ${access ? '<Access>{element}</Access>;' : 'element;'}
@@ -108,28 +106,44 @@ export const creatLoop = (access: boolean, fallbackElement: string) => {
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 ${access ? `import Access from '@@/access';` : ''}
-${fallbackElement ? `import Fallback from '${fallbackElement}';` : ''}
-
-export const loopRoutes = (routes) => {
-  const navigate = useNavigate();
-  return routes.map(item => {
+${fallbackElement && !access ? `import Fallback from '${fallbackElement}';` : ''}
+export const loopChildRoutes = (routes) => {
+  return routes.filter(item => !item.hideRoute).map(item => {
     const newItem = { ...item };
     if (item.children && item.children.length > 0) {
-      newItem.children = loopRoutes(item.children);
-    }
-    if (item.element) {
-      if (!React.isValidElement(item.element)) {
-        const Element = item.element;
-        const element = (
-          <React.Suspense fallback={${fallback}}>
-            <Element roles={item.roles} navigate={navigate} />
-          </React.Suspense>
-        )
-        ${element}
-      }
+      newItem.children = loopChildRoutes(item.children);
     }
     return newItem;
   })
+}
+
+export const loopRoutes = (routes, childRoutes) => {
+  const navigate = useNavigate();
+  return routes.filter(item => !item.hideRoute).map(item => {
+    const newItem = { ...item };
+    if (item.children && item.children.length > 0) {
+      newItem.children = loopRoutes(item.children, childRoutes);
+    }
+    if (item.element) {
+      const Element = item.element;
+      const roles = item.roles || [];
+      if (!React.isValidElement(item.element)) {
+        const element = (
+          <React.Suspense fallback={${fallback}}>
+            <Element roles={roles} navigate={navigate} routes={childRoutes} />
+          </React.Suspense>
+        )
+        ${element}
+      } else {
+        newItem.element = React.cloneElement(Element, {
+          roles: roles,
+          navigate: navigate,
+          routes: childRoutes
+        })
+      }
+    }
+    return newItem;
+  });
 }
   `;
   return str;

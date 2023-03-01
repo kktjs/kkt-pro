@@ -85,11 +85,12 @@ kktp ===> `kkt pro`
 
 ## 插件
 
-1. 配置处理包[@kkt/plugin-pro-config](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/config)
-2. 自动生成入口[@kkt/plugin-pro-entry](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/entry)
-3. 生成路由配置[@kkt/plugin-pro-router](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/router)
-4. 状态管理[@kkt/plugin-pro-rematch](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/rematch)
-5. 权限管理[@kkt/plugin-pro-access](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/access)
+1. 配置处理包[@kkt/plugin-pro-config](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/config)
+2. 自动生成入口[@kkt/plugin-pro-entry](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/entry)
+3. 生成路由配置[@kkt/plugin-pro-router](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/router)
+4. 状态管理[@kkt/plugin-pro-rematch](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/rematch)
+5. 权限管理[@kkt/plugin-pro-access](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/access)
+5. 类型管理[@kkt/pro](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/pro)
 
 ## 配置加载
 

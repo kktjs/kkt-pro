@@ -14,15 +14,18 @@
       {
         "path": "/home",
         "navigate": "()=>console.log(2)",
-        "element": "@/pages/Home"
+        "element": "@/pages/Home",
+        "roles": ["admin", "user"]
       },
       {
         "path": "/about",
-        "element": "@/pages/About"
+        "element": "@/pages/About",
+        "hideRoute": true
       },
       {
         "path": "/ceshi",
-        "element": "@/pages/Ceshi"
+        "element": "@/pages/Ceshi",
+        "roles": ["admin", "user"]
       },
       {
         "path": "/403",
