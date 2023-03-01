@@ -54,6 +54,8 @@ jobs:
             npm i @kkt/plugin-pro-entry@${{steps.create_tag.outputs.version}}
             npm i @kkt/plugin-pro-rematch@${{steps.create_tag.outputs.version}}
             npm i @kkt/plugin-pro-router@${{steps.create_tag.outputs.version}}
+            npm i @kkt/plugin-pro-access@${{steps.create_tag.outputs.version}}
+            npm i @kkt/pro@${{steps.create_tag.outputs.version}}
             ```
             ${{ steps.changelog.outputs.compareurl }}
             ${{ steps.changelog.outputs.changelog }}
@@ -92,6 +94,11 @@ jobs:
         run: zip -r -y routes.zip . -x "node_modules/*"  -x "src/.kktp/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x "package-lock.json"
         working-directory: examples/routes
       - run: cp -rp examples/routes/routes.zip build/zip
+
+      - name: Compress access Example.
+        run: zip -r -y access.zip . -x "node_modules/*"  -x "src/.kktp/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x "package-lock.json"
+        working-directory: examples/access
+      - run: cp -rp examples/access/access.zip build/zip
 
       - name: Add Download Page
         working-directory: build/zip
