@@ -1,6 +1,6 @@
 {
   "name": "kktp",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-bate.1",
   "description": "kktp cli",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -35,7 +35,7 @@
   "dependencies": {
     "@kkt/doc": "^1.0.0",
     "@kkt/less-modules": "~7.3.2",
-    "@kkt/plugin-pro-config": "^1.0.0-alpha.1",
+    "@kkt/plugin-pro-config": "^1.0.0-bate.1",
     "@proload/plugin-json": "~0.3.1",
     "@proload/plugin-rc": "~0.2.1",
     "@swc-node/register": "~1.6.1",
