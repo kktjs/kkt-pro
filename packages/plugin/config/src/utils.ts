@@ -1,4 +1,5 @@
 import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
+
 import FS from 'fs-extra';
 import path from 'path';
 
@@ -77,7 +78,7 @@ const createExportField = (pathList: string[], cacheDirName: string) => {
 };
 
 /**内置插件判断*/
-export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
+export const getInitPlugin = (props: OverrideKKTPConfigProps, options?: LoaderConfOptions) => {
   const {
     plugins = [],
     /**自动生成文件目录**/
@@ -91,6 +92,8 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
     /** 是否添加权限 */
     access = false,
     alias = {},
+    /** 分析产物构成 */
+    analyze,
   } = props;
   const pluginsArr = [...plugins];
   const exportPath = [];
@@ -113,6 +116,18 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
     const fallbackElement = typeof initRoutes === 'boolean' ? null : initRoutes?.fallbackElement;
     pluginsArr.push(['@kkt/plugin-pro-access', { access, fallbackElement }]);
     exportPath.push('access');
+  }
+  /**分析产物*/
+  if (options.analyzer && options.analyzer === 1) {
+    const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+    pluginsArr.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'server',
+        analyzerPort: 9999,
+        openAnalyzer: true,
+        ...analyze,
+      }),
+    );
   }
   createExportField(exportPath, cacheDirName);
   /**这是为了解决导出问题*/

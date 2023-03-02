@@ -38,7 +38,10 @@ const App = (props) => {
   const { routes = routesConfig } = props;
   const childRoutes = React.useMemo(() => {
     const data = routes.find((item) => item.path === '/')
-    return data ? loopChildRoutes(data.children) : [];
+    if(data && Array.isArray(data.children) && data.children.length){
+      return  loopChildRoutes(data.children);
+    }
+    return [];
   }, [routes])
   return useRoutes(loopRoutes(routes, childRoutes));
 }\n`;
@@ -100,7 +103,7 @@ export const creatLoop = (access: boolean, fallbackElement: string) => {
   let element = '';
   let fallback = '<></>';
   if (access) {
-    element = `if (item.children && item.children.length > 0 || item.path === '*') {
+    element = `if (Array.isArray(item.children) && item.children.length || item.path === '*') {
           newItem.element = element;
         } else {
           newItem.element = ${access ? '<Access>{element}</Access>;' : 'element;'}
@@ -119,7 +122,7 @@ ${fallbackElement && !access ? `import Fallback from '${fallbackElement}';` : ''
 export const loopChildRoutes = (routes) => {
   return routes.filter(item => !item.hideRoute).map(item => {
     const newItem = { ...item };
-    if (item.children && item.children.length > 0) {
+    if (Array.isArray(item.children) && item.children.length) {
       newItem.children = loopChildRoutes(item.children);
     }
     return newItem;
@@ -130,7 +133,7 @@ export const loopRoutes = (routes, childRoutes) => {
   const navigate = useNavigate();
   return routes.filter(item => !item.hideRoute).map(item => {
     const newItem = { ...item };
-    if (item.children && item.children.length > 0) {
+    if (Array.isArray(item.children) && item.children.length) {
       newItem.children = loopRoutes(item.children, childRoutes);
     }
     if (item.element) {

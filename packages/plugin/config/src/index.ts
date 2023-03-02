@@ -42,7 +42,7 @@ const overrideKKTPConfig = (
   if (env === 'development') {
     conf.output.publicPath = '/';
   }
-  const { plugins: newPluginsArr, newAlias } = getInitPlugin(overrideConfigProps);
+  const { plugins: newPluginsArr, newAlias } = getInitPlugin(overrideConfigProps, options);
 
   conf.resolve = {
     ...conf.resolve,
@@ -62,17 +62,6 @@ const overrideKKTPConfig = (
   // 修复 publicUrlOrPath 指向新的前缀
   // 此举完美的解决了命令启动跳转新路由，路由刷新空白的问题
   overridePaths(undefined, { publicUrlOrPath: prefixStr });
-  if (options.analyzer && options.analyzer === 1) {
-    const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-    conf.plugins.push(
-      new BundleAnalyzerPlugin({
-        analyzerMode: 'server',
-        analyzerPort: 9999,
-        openAnalyzer: true,
-        ...analyze,
-      }),
-    );
-  }
   conf.plugins.push(
     new webpack.DefinePlugin({
       ...transformationDefineString(define || {}),
