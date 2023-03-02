@@ -103,19 +103,6 @@ export default {
 }
 ```
 
-**overrideWebpack 使用**
-
-```ts
-// .kktprc.ts
-export default {
-  // ...
-  overrideWebpack:(conf, env, options)=>{
-    // 处理 conf
-    return conf
-  }
-}
-```
-
 **analyze 使用**
 
 用于分析 bundle 构成。通过配置`--analyzer=1`生效。可以通过`analyze`选项自定义配置。`analyze` 插件的具体配置项，见 [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
