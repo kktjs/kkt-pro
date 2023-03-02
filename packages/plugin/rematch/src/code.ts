@@ -6,7 +6,7 @@ export const createModelsConfigFile = (
   const importString = modelsData
     .map((item) => {
       const { filePath, variableName } = item;
-      return `import ${variableName} from "${filePath}";`;
+      return `import ${variableName} from "${filePath.replace(/\.(js|ts)$/, '')}";`;
     })
     .join('\n');
   const modelsString = modelsData
