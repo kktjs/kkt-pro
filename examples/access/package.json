@@ -8,7 +8,8 @@
     "build": "kktp build",
     "doc": "kktp doc --entry=./build --local",
     "test": "kktp test --env=jsdom",
-    "coverage": "kktp test --env=jsdom --coverage"
+    "coverage": "kktp test --env=jsdom --coverage",
+    "nalyze": "kktp build --analyzer=1"
   },
   "repository": "https://github.com/kktjs/kkt-pro",
   "author": "",

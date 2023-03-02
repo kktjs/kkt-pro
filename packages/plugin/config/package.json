@@ -34,6 +34,8 @@
     "@kkt/plugin-pro-entry": "^1.0.0-bate.1",
     "@kkt/plugin-pro-rematch": "^1.0.0-bate.1",
     "@kkt/plugin-pro-router": "^1.0.0-bate.1",
+    "webpack-bundle-analyzer": "^4.8.0",
+    "@types/webpack-bundle-analyzer": "^4.6.0",
     "kkt": "^7.3.2"
   }
 }

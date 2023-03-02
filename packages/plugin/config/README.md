@@ -9,6 +9,7 @@
 import webpack from 'webpack';
 import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 import { RouterPluginProps } from '@kkt/plugin-pro-router';
+import type { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export type DefaultDefineType = {};
 
@@ -34,6 +35,8 @@ export type KKTPlugins = (
   | string
   | [string, Record<string, any>]
 )[];
+
+export type KKTAnalyze = BundleAnalyzerPlugin['opts'];
 
 export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   /**
@@ -65,6 +68,8 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
   initModel?: boolean;
   /** 是否开启权限 */
   access?: boolean;
+  /** 分析产物构成 */
+  analyze?: KKTAnalyze;
 }
 
 ```
@@ -98,17 +103,38 @@ export default {
 }
 ```
 
-**plugins 使用**
+**overrideWebpack 使用**
 
 ```ts
-// .kktrc.ts
+// .kktprc.ts
 export default {
   // ...
-  plugins:["@kkt/plugin-pro-router"]
-  // plugins:[["@kkt/plugin-pro-router",{ autoRoutes:true, }]]  
+  overrideWebpack:(conf, env, options)=>{
+    // 处理 conf
+    return conf
+  }
 }
 ```
 
+**analyze 使用**
+
+用于分析 bundle 构成。通过配置`--analyzer=1`生效。可以通过`analyze`选项自定义配置。`analyze` 插件的具体配置项，见 [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+
+```ts
+// package.json
+"scripts": {
+  "start": "kktp start --analyzer=1",
+  "build": "kktp build --analyzer=1"
+},
+
+// .kktprc.ts
+export default {
+  // ...
+  analyzer: {
+    analyzerPort: 9999 // 自定义端口
+  }
+}
+```
 **overrideWebpack 使用**
 
 ```ts

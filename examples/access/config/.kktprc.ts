@@ -10,4 +10,7 @@ export default {
     VERSION: pkg.version,
   },
   access: true,
+  analyze: {
+    analyzerPort: '2222',
+  },
 };

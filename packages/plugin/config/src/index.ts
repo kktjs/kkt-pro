@@ -5,6 +5,7 @@ import { overridePaths } from 'kkt/lib/overrides/paths';
 import path from 'path';
 import { OverrideKKTPConfigProps } from './interface';
 import { transformationDefineString, getKKTPlugins, getWebpackPlugins, getInitPlugin } from './utils';
+export * from './interface';
 /**
  * @Description: 默认配置
  *
@@ -33,6 +34,8 @@ const overrideKKTPConfig = (
     initRoutes = false,
     /**自动生成models集合配置文件*/
     initModel = false,
+    /** 分析产物构成 */
+    analyze,
     ...rest
   } = overrideConfigProps;
   conf.output = { ...conf.output, ...output, publicPath: prefix };
@@ -59,6 +62,17 @@ const overrideKKTPConfig = (
   // 修复 publicUrlOrPath 指向新的前缀
   // 此举完美的解决了命令启动跳转新路由，路由刷新空白的问题
   overridePaths(undefined, { publicUrlOrPath: prefixStr });
+  if (options.analyzer && options.analyzer === 1) {
+    const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+    conf.plugins.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'server',
+        analyzerPort: 9999,
+        openAnalyzer: true,
+        ...analyze,
+      }),
+    );
+  }
   conf.plugins.push(
     new webpack.DefinePlugin({
       ...transformationDefineString(define || {}),
