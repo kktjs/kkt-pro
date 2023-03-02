@@ -20,7 +20,7 @@
     "react-router-dom": "~6.8.0"
   },
   "devDependencies": {
-    "kktp": "^1.0.1-bate.1"
+    "@kkt/pro": "^1.0.1-bate.1"
   },
   "eslintConfig": {
     "extends": [
