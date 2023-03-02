@@ -1,6 +1,6 @@
 {
   "name": "@examples/basic",
-  "version": "1.0.1-bate.0",
+  "version": "1.0.1-bate.1",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@kkt/pro": "^1.0.1-bate.0",
+    "@kkt/pro": "^1.0.1-bate.1",
     "react": "~18.2.0",
     "react-dom": "~18.2.0",
     "web-vitals": "^2.1.2"
@@ -22,7 +22,7 @@
     "@types/jest": "~27.4.1",
     "@types/react": "~18.0.0",
     "@types/react-dom": "~18.0.0",
-    "kktp": "^1.0.1-bate.0"
+    "kktp": "^1.0.1-bate.1"
   },
   "eslintConfig": {
     "extends": [
