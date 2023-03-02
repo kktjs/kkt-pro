@@ -31,9 +31,8 @@
     "framework"
   ],
   "dependencies": {
-    "react-redux": "^8.0.5",
     "react-router": "~6.8.0",
     "react-router-dom": "~6.8.0",
-    "redux": "^4.2.1"
+    "kktp": "1.0.0-bate.1"
   }
 }

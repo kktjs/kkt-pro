@@ -32,6 +32,7 @@ class RouterPlugin extends ConfigRouterPlugin {
 
     this.temp = path.resolve(this.rootDir, tmp, 'routes');
     this.temp_index_file = path.resolve(this.rootDir, tmp, 'routes', 'index.jsx');
+    this.temp_ts_file = path.resolve(this.rootDir, tmp, 'routes', 'index.d.ts');
     this.temp_config_file = path.resolve(this.rootDir, tmp, 'routes', 'config.jsx');
     this.analysisRoutersIcon = props.analysisRoutersIcon;
     if (!FS.existsSync(this.temp)) {

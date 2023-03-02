@@ -1,4 +1,4 @@
-import { useLocation, KktproPageProps } from '@kkt/pro';
+import { KktproPageProps, useLocation } from '@kkt/pro';
 import Ceshi from '../Ceshi';
 
 const Home = (props: KktproPageProps) => {

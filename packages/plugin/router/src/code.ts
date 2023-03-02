@@ -56,10 +56,19 @@ import RoutesOutletElement from "${routesOutletElement}";\n`;
 
   return `
 ${importRouter}
+export * from 'react-router-dom';
+export * from 'react-router';
 ${App}
 export default ()=>(\n  ${render}\n)
 `;
 };
+
+export const createRouteTsTemp = () => {
+  const temp = `export * from 'react-router-dom';
+export * from 'react-router';`;
+  return temp;
+};
+
 /**自动生成-获取路由配置数据*/
 export const getRouterDataCode = (data: Map<string, string>, outletLayout?: string) => {
   let childCode = '';
