@@ -1,6 +1,6 @@
 {
   "name": "@examples/access",
-  "version": "1.0.0-bate.1",
+  "version": "1.0.1-bate.0",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -32,7 +32,7 @@
     "@types/jest": "~27.4.1",
     "@types/react": "~18.0.0",
     "@types/react-dom": "~18.0.0",
-    "kktp": "^1.0.0-bate.1"
+    "kktp": "^1.0.1-bate.0"
   },
   "eslintConfig": {
     "extends": [
