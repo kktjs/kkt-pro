@@ -29,7 +29,7 @@ export interface KktproRoutesProps extends Omit<RouteObject, 'children' | 'eleme
   /** 控制是否侧边只展示子路由 **/
   side?: boolean;
   /** route component */
-  element?: string | React.LazyExoticComponent<() => JSX.Element> | JSX.Element;
+  element?: any;
   /** 子集 路由 */
   children?: KktproRoutesProps[];
   /** 是否渲染当前路由 */
@@ -42,5 +42,13 @@ export interface KktproPageProps extends KktproIProps {
   roles?: string;
   navigate: NavigateFunction;
   /** path="/" 路由下的子集路由集合 */
+  routes: KktproRoutesProps[];
+}
+
+/**
+ * 路由外层包裹组件类型
+ */
+export interface KKtproOutletElementProps {
+  children: React.ReactNode;
   routes: KktproRoutesProps[];
 }
