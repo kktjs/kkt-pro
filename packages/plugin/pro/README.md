@@ -1,10 +1,19 @@
-类型管理
+包集成管理
 ====
 
-为方便用户导出类型。集成了`react-router-dom`, `react-redux`。
+1. 为了方便把自动生成文件内的数据导出使用
+2. 根据使用的`plugin`，导出对应相关包内方法
+3. 导出一部分自定义类型
 
+## install
 
-## KktproRoutesProps
+```bash
+$ npm install @kkt/pro -D # yarn add @kkt/pro -D
+```
+
+## 类型
+
+**KktproRoutesProps**
 
 路由类型
 
@@ -36,7 +45,7 @@ export interface KktproRoutesProps extends Omit<RouteObject, 'children' | 'eleme
 }
 ```
 
-## KktproPageProps
+**KktproPageProps**
 
 页面`props`类型
 

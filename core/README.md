@@ -92,7 +92,7 @@ kktp ===> `kkt pro`
 3. 生成路由配置[@kkt/plugin-pro-router](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/router)
 4. 状态管理[@kkt/plugin-pro-rematch](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/rematch)
 5. 权限管理[@kkt/plugin-pro-access](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/access)
-5. 类型管理[@kkt/pro](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/pro)
+6. 包集成管理[@kkt/pro](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/pro)
 
 ## 配置加载
 
