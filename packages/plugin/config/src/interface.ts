@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 import { RouterPluginProps } from '@kkt/plugin-pro-router';
+import type { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export type DefaultDefineType = {};
 
@@ -26,6 +27,8 @@ export type KKTPlugins = (
   | string
   | [string, Record<string, any>]
 )[];
+
+export type KKTAnalyze = BundleAnalyzerPlugin['opts'];
 
 export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   /**
@@ -55,4 +58,8 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
   initRoutes?: RouterPluginProps | boolean;
   /**自动生成models集合配置文件*/
   initModel?: boolean;
+  /** 是否开启权限 */
+  access?: boolean;
+  /** 分析产物构成 */
+  analyze?: KKTAnalyze;
 }

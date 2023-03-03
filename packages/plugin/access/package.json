@@ -1,0 +1,41 @@
+{
+  "name": "@kkt/plugin-pro-access",
+  "version": "1.0.1-bate.1",
+  "description": "kktp plugins",
+  "author": "SunLxy <1011771396@qq.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "module": "esm/index.js",
+  "repository": "https://github.com/kktjs/kkt-pro",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "watch": "tsbb watch",
+    "build": "tsbb build"
+  },
+  "files": [
+    "lib",
+    "esm",
+    "src"
+  ],
+  "keywords": [
+    "kkt",
+    "ncc",
+    "nodejs",
+    "cra",
+    "build-tools",
+    "create-react-app",
+    "zero-configuration",
+    "framework"
+  ],
+  "dependencies": {
+    "@kkt/plugin-pro-utils": "^1.0.1-bate.1",
+    "@types/fs-extra": "~11.0.1",
+    "@types/recursive-readdir": "~2.2.1",
+    "chokidar": "~3.5.3",
+    "fs-extra": "~11.1.0",
+    "recursive-readdir": "~2.2.3"
+  }
+}

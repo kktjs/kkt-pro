@@ -12,13 +12,14 @@ import path from 'path';
 import chokidar from 'chokidar';
 import FS from 'fs-extra';
 import { getFilesPath } from './utils';
-import { getRouterDataCode } from './code';
+import { getRouterDataCode, creatLoop } from './code';
 import { RouterPluginProps } from './interface';
 import { toPascalCase } from '@kkt/plugin-pro-utils';
 import { ConfigRouterPlugin } from './config-plugin';
 export * from './interface';
 
 class RouterPlugin extends ConfigRouterPlugin {
+  access?: boolean;
   constructor(props: RouterPluginProps = {}) {
     super();
     const tmp = props.cacheDirName || '.kktp';
@@ -27,9 +28,11 @@ class RouterPlugin extends ConfigRouterPlugin {
     this.outletLayout = props.outletLayout;
     this.routesOutletElement = props.routesOutletElement;
     this.autoRoutes = props.autoRoutes;
+    this.access = props.access;
 
     this.temp = path.resolve(this.rootDir, tmp, 'routes');
     this.temp_index_file = path.resolve(this.rootDir, tmp, 'routes', 'index.jsx');
+    this.temp_ts_file = path.resolve(this.rootDir, tmp, 'routes', 'index.d.ts');
     this.temp_config_file = path.resolve(this.rootDir, tmp, 'routes', 'config.jsx');
     this.analysisRoutersIcon = props.analysisRoutersIcon;
     if (!FS.existsSync(this.temp)) {
@@ -96,13 +99,21 @@ class RouterPlugin extends ConfigRouterPlugin {
       });
     }
   }
+  createFile() {
+    FS.writeFile(path.join(this.temp, `loop.jsx`), creatLoop(this.access, this.fallbackElement), {
+      encoding: 'utf-8',
+      flag: 'w+',
+    });
+  }
   apply(compiler: webpack.Compiler) {
     compiler.hooks.afterPlugins.tap('RouterPlugin', () => {
       if (this.autoRoutes) {
         this.auto_Watch();
       } else {
         this.config_Watch();
+        this.createFile();
       }
+      this.createFile();
     });
   }
 }

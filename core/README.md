@@ -71,6 +71,8 @@ kktp ===> `kkt pro`
 5. 支持`react-router 6`
 6. 支持`react-redux`
 7. 默认封装`mocker`代理配置
+8. 支持路由拦截 / 权限控制
+9. 支持生成代码分析报告
 
 ## 约定配置位置
 
@@ -85,10 +87,12 @@ kktp ===> `kkt pro`
 
 ## 插件
 
-1. 配置处理包[@kkt/plugin-pro-config](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/config)
-2. 自动生成入口[@kkt/plugin-pro-entry](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/entry)
-3. 生成路由配置[@kkt/plugin-pro-router](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/router)
-4. 状态管理[@kkt/plugin-pro-rematch](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/rematch)
+1. 配置处理包[@kkt/plugin-pro-config](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/config)
+2. 自动生成入口[@kkt/plugin-pro-entry](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/entry)
+3. 生成路由配置[@kkt/plugin-pro-router](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/router)
+4. 状态管理[@kkt/plugin-pro-rematch](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/rematch)
+5. 权限管理[@kkt/plugin-pro-access](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/access)
+5. 类型管理[@kkt/pro](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/pro)
 
 ## 配置加载
 
@@ -97,15 +101,104 @@ kktp ===> `kkt pro`
 
 export default {
   // ...
-  /**自动生成入口文件*/
+  /** 自动生成入口文件 */
   initEntery:true,
-  /**路由配置*/
+  /** 路由配置 */
   initRoutes:true,
-  /**自动生成models集合配置文件*/
+  /** 自动生成models集合配置文件 */
   initModel:true;
+  /** 是否开启权限 */
+  access: true;
 }
 
 ```
+
+## kkt 升级到 kktpro
+
+**依赖处理**
+
+项目的 package.json 需要升级 `kkt`, 并替换掉对应的 `kkt` 插件。
+```ts
+// package.json
+{
+  "devDependencies": {
++   "@kkt/pro": "^1.0.0",
+-   "kkt": "^7.0.0",
+-   "@kkt/***": "^1.0.0"
+  }
+}
+```
+
+**启动命令**
+
+将原有的`kkt`命令替换成`kktp`。
+```ts
+// package.json
+{
+  "scripts": {
+-    "start": "kkt start",
+-    "build": "kkt build"
++    "start": "kktp start",
++    "build": "kktp build",
+  }
+}
+```
+
+**配置层迁移**
+
+`.kktrc.[ts|js]` 文件替换成 `.kktprc.[ts|js]`文件。`kktprc`配置文档参考[@kkt/plugin-pro-config](https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/config)
+
+**路由配置修改**
+
+- `kktp`中约定 `config/routes.[json|js|ts]`为路由文件。
+- `kktp`中路由配置规则与`react-router@6`同步，所以路由相关的一些 api 存在着使用上的差异。
+- `kktp`中约定`element`路径为字符串，在`kktp`内部会自动处理成异步加载。
+
+```ts
+// config/routes.json
+[
+  {
+     "path": "/page",
+-    "component": "@/layouts/BasicLayout",
++    "element": "@/layouts/BasicLayout",
+-    "routes": [],
++    "children": [],
+     // ...
+  }
+]
+```
+
+**代码层修改**
+
+为了减少代码量，`kktp`中集成了部分导出类型，如：`router` / `rematch` 等常用功能。 
+
+例如：配置了`initRoutes`, `initModel`, 则页面中可以直接通过`@kkt/pro`来导出对应的类型。
+
+```ts
+import {
+  useLocation,
+  Outlet,
+  Dispatch,
+  ...
+} from '@kkt/pro';
+```
+
+**rematch 修改**
+
+如果原项目中使用了`rematch`, 则需要修改所有的`models`文件。
+
+```ts
+- createModel()({
++ {
+    name: 'name',
+    state: {},
+    reducers: {},
+    effects: (dispatch) => ({}),
++ }
+- })
+```
+
+
 
 ## 配置加载使用 proload 替换
 

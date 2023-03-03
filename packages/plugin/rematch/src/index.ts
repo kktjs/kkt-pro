@@ -107,7 +107,11 @@ class RematchPlugin {
             ignored: [this.temp],
           })
           .on('all', (event, pathName) => {
-            if (['change', 'add', 'unlink'].includes(event) && /(models|models\/.+).(ts|js)$/.test(pathName)) {
+            if (
+              ['change', 'add', 'unlink'].includes(event) &&
+              /(models|models\/.+).(ts|js)$/.test(pathName) &&
+              !/\.d\.ts$/.test(pathName)
+            ) {
               if (event === 'unlink') {
                 this.unlinkFiles(path.resolve(this.root, pathName));
               } else {

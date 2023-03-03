@@ -1,0 +1,38 @@
+{
+  "name": "@kkt/pro",
+  "version": "1.0.1-bate.1",
+  "description": "kktp plugins",
+  "author": "SunLxy <1011771396@qq.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "module": "esm/index.js",
+  "repository": "https://github.com/kktjs/kkt-pro",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "watch": "tsbb watch",
+    "build": "tsbb build"
+  },
+  "files": [
+    "lib",
+    "esm",
+    "src"
+  ],
+  "keywords": [
+    "kkt",
+    "ncc",
+    "nodejs",
+    "cra",
+    "build-tools",
+    "create-react-app",
+    "zero-configuration",
+    "framework"
+  ],
+  "dependencies": {
+    "kktp": "^1.0.1-bate.1",
+    "react-router": "~6.8.0",
+    "react-router-dom": "~6.8.0"
+  }
+}

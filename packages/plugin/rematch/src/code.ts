@@ -6,7 +6,7 @@ export const createModelsConfigFile = (
   const importString = modelsData
     .map((item) => {
       const { filePath, variableName } = item;
-      return `import ${variableName} from "${filePath}";`;
+      return `import ${variableName} from "${filePath.replace(/\.(js|ts)$/, '')}";`;
     })
     .join('\n');
   const modelsString = modelsData
@@ -50,7 +50,8 @@ import {
   RematchDispatch,
 } from '@rematch/core';
 import loading,{ExtraModelsFromLoading} from '@rematch/loading';
-import models,{ ModelsType } from "./config"
+import models,{ ModelsType } from "./config";
+export * from 'react-redux';
 export interface RootModel extends Models<RootModel>,ModelsType {};
 export type FullModel = ExtraModelsFromLoading<RootModel>
 export const store = init<RootModel, FullModel>({ models, plugins: [loading()]})

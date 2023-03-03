@@ -7,6 +7,7 @@ import { overridePaths } from 'kkt/lib/overrides/paths';
 import overrideKKTPConfig from '@kkt/plugin-pro-config';
 import lessModules from '@kkt/less-modules';
 import { staticDocServer } from '@kkt/doc';
+// import { explore } from 'source-map-explorer';
 
 function help() {
   console.log('\n  Usage: \x1b[34;1mkktp\x1b[0m [build|watch|doc] [input-file] [--help|h]');
@@ -66,6 +67,7 @@ interface KKTPArgs extends StartArgs {}
       overridePaths(undefined, { ...oPaths });
     }
     const isWatch = /^(watch|start)$/gi.test(scriptName);
+
     argvs.overridesWebpack = (conf, env, options) => {
       /** 移除入口警告 */
       overridePaths(undefined, { ...oPaths });
@@ -75,6 +77,9 @@ interface KKTPArgs extends StartArgs {}
       if (initEntery) {
         conf.entry = oPaths.appIndexJs;
         fs.ensureFileSync(conf.entry);
+      }
+      if (argvs['analyzer'] === 1) {
+        options['analyzer'] = 1;
       }
       conf = overrideKKTPConfig(overrideConfig, conf, env, options);
       return conf;
