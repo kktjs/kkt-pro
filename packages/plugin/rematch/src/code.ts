@@ -52,6 +52,7 @@ import {
 import loading,{ExtraModelsFromLoading} from '@rematch/loading';
 import models,{ ModelsType } from "./config";
 export * from 'react-redux';
+export * from '@rematch/core';
 export interface RootModel extends Models<RootModel>,ModelsType {};
 export type FullModel = ExtraModelsFromLoading<RootModel>
 export const store = init<RootModel, FullModel>({ models, plugins: [loading()]})
