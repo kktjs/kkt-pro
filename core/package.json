@@ -1,6 +1,6 @@
 {
   "name": "kktp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "kktp cli",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -33,9 +33,9 @@
     "framework"
   ],
   "dependencies": {
-    "@kkt/doc": "^1.0.0",
+    "@kkt/doc": "^1.0.3",
     "@kkt/less-modules": "~7.3.2",
-    "@kkt/plugin-pro-config": "^1.0.2",
+    "@kkt/plugin-pro-config": "^1.0.3",
     "@proload/plugin-json": "~0.3.1",
     "@proload/plugin-rc": "~0.2.1",
     "@swc-node/register": "~1.6.1",

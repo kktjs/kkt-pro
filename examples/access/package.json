@@ -1,6 +1,6 @@
 {
   "name": "@examples/access",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -29,7 +29,7 @@
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
-    "@kkt/pro": "^1.0.2",
+    "@kkt/pro": "^1.0.3",
     "@types/jest": "~27.4.1",
     "@types/react": "~18.0.0",
     "@types/react-dom": "~18.0.0"
