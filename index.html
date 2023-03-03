@@ -295,6 +295,113 @@ export default {
 }
 
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+    <h2 id="kkt-升级到-kktpro"><a class="anchor" aria-hidden="true" tabindex="-1" href="#kkt-升级到-kktpro"><span class="octicon octicon-link"></span></a>kkt 升级到 kktpro</h2>
+    <p><strong>依赖处理</strong></p>
+    <p>项目的 package.json 需要升级 <code>kkt</code>, 并替换掉对应的 <code>kkt</code> 插件。</p>
+    <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1"><span class="token comment">// package.json</span>
+</span><span class="code-line line-number" line="2"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="3">  <span class="token string-property property">"devDependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="4"><span class="token operator">+</span>   <span class="token string">"@kkt/pro"</span><span class="token operator">:</span> <span class="token string">"^1.0.0"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="5"><span class="token operator">-</span>   <span class="token string">"kkt"</span><span class="token operator">:</span> <span class="token string">"^7.0.0"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6"><span class="token operator">-</span>   <span class="token string">"@kkt/***"</span><span class="token operator">:</span> <span class="token string">"^1.0.0"</span>
+</span><span class="code-line line-number" line="7">  <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="8"><span class="token punctuation">}</span>
+</span></code><div onclick="copied(this)" data-code="// package.json
+{
+  &#x22;devDependencies&#x22;: {
++   &#x22;@kkt/pro&#x22;: &#x22;^1.0.0&#x22;,
+-   &#x22;kkt&#x22;: &#x22;^7.0.0&#x22;,
+-   &#x22;@kkt/***&#x22;: &#x22;^1.0.0&#x22;
+  }
+}
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+    <p><strong>启动命令</strong></p>
+    <p>将原有的<code>kkt</code>命令替换成<code>kktp</code>。</p>
+    <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1"><span class="token comment">// package.json</span>
+</span><span class="code-line line-number" line="2"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="3">  <span class="token string-property property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="4"><span class="token operator">-</span>    <span class="token string">"start"</span><span class="token operator">:</span> <span class="token string">"kkt start"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="5"><span class="token operator">-</span>    <span class="token string">"build"</span><span class="token operator">:</span> <span class="token string">"kkt build"</span>
+</span><span class="code-line line-number" line="6"><span class="token operator">+</span>    <span class="token string">"start"</span><span class="token operator">:</span> <span class="token string">"kktp start"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="7"><span class="token operator">+</span>    <span class="token string">"build"</span><span class="token operator">:</span> <span class="token string">"kktp build"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="8">  <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="9"><span class="token punctuation">}</span>
+</span></code><div onclick="copied(this)" data-code="// package.json
+{
+  &#x22;scripts&#x22;: {
+-    &#x22;start&#x22;: &#x22;kkt start&#x22;,
+-    &#x22;build&#x22;: &#x22;kkt build&#x22;
++    &#x22;start&#x22;: &#x22;kktp start&#x22;,
++    &#x22;build&#x22;: &#x22;kktp build&#x22;,
+  }
+}
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+    <p><strong>配置层迁移</strong></p>
+    <p><code>.kktrc.[ts|js]</code> 文件替换成 <code>.kktprc.[ts|js]</code>文件。<code>kktprc</code>配置文档参考<a href="https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/config">@kkt/plugin-pro-config</a></p>
+    <p><strong>路由配置修改</strong></p>
+    <ul>
+      <li><code>kktp</code>中约定 <code>config/routes.[json|js|ts]</code>为路由文件。</li>
+      <li><code>kktp</code>中路由配置规则与<code>react-router@6</code>同步，所以路由相关的一些 api 存在着使用上的差异。</li>
+      <li><code>kktp</code>中约定<code>element</code>路径为字符串，在<code>kktp</code>内部会自动处理成异步加载。</li>
+    </ul>
+    <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1"><span class="token comment">// config/routes.json</span>
+</span><span class="code-line line-number" line="2"><span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="3">  <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="4">     <span class="token string-property property">"path"</span><span class="token operator">:</span> <span class="token string">"/page"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="5"><span class="token operator">-</span>    <span class="token string">"component"</span><span class="token operator">:</span> <span class="token string">"@/layouts/BasicLayout"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6"><span class="token operator">+</span>    <span class="token string">"element"</span><span class="token operator">:</span> <span class="token string">"@/layouts/BasicLayout"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="7"><span class="token operator">-</span>    <span class="token string">"routes"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="8"><span class="token operator">+</span>    <span class="token string">"children"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="9">     <span class="token comment">// ...</span>
+</span><span class="code-line line-number" line="10">  <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="11"><span class="token punctuation">]</span>
+</span></code><div onclick="copied(this)" data-code="// config/routes.json
+[
+  {
+     &#x22;path&#x22;: &#x22;/page&#x22;,
+-    &#x22;component&#x22;: &#x22;@/layouts/BasicLayout&#x22;,
++    &#x22;element&#x22;: &#x22;@/layouts/BasicLayout&#x22;,
+-    &#x22;routes&#x22;: [],
++    &#x22;children&#x22;: [],
+     // ...
+  }
+]
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+    <p><strong>代码层修改</strong></p>
+    <p>为了减少代码量，<code>kktp</code>中集成了部分导出类型，如：<code>router</code> / <code>rematch</code> 等常用功能。</p>
+    <p>例如：配置了<code>initRoutes</code>, <code>initModel</code>, 则页面中可以直接通过<code>@kkt/pro</code>来导出对应的类型。</p>
+    <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">import</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">  useLocation<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="3">  Outlet<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="4">  Dispatch<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="5">  <span class="token operator">...</span>
+</span><span class="code-line line-number" line="6"><span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@kkt/pro'</span><span class="token punctuation">;</span>
+</span></code><div onclick="copied(this)" data-code="import {
+  useLocation,
+  Outlet,
+  Dispatch,
+  ...
+} from &#x27;@kkt/pro&#x27;;
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+    <p><strong>rematch 修改</strong></p>
+    <p>如果原项目中使用了<code>rematch</code>, 则需要修改所有的<code>models</code>文件。</p>
+    <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1"><span class="token operator">-</span> <span class="token function">createModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2"><span class="token operator">+</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="3">    name<span class="token operator">:</span> <span class="token string">'name'</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="4">    state<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="5">    reducers<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6">    <span class="token function-variable function">effects</span><span class="token operator">:</span> <span class="token punctuation">(</span>dispatch<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="7"><span class="token operator">+</span> <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="8"><span class="token operator">-</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span></code><div onclick="copied(this)" data-code="- createModel()({
++ {
+    name: &#x27;name&#x27;,
+    state: {},
+    reducers: {},
+    effects: (dispatch) => ({}),
++ }
+- })
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
     <h2 id="配置加载使用-proload-替换"><a class="anchor" aria-hidden="true" tabindex="-1" href="#配置加载使用-proload-替换"><span class="octicon octicon-link"></span></a>配置加载使用 proload 替换</h2>
     <p>Github: <a href="https://github.com/natemoo-re/proload">https://github.com/natemoo-re/proload</a></p>
     <h4 id="问题"><a class="anchor" aria-hidden="true" tabindex="-1" href="#问题"><span class="octicon octicon-link"></span></a>问题</h4>
