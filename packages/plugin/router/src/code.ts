@@ -29,13 +29,14 @@ export const createIndexRouteTemp = (
 ) => {
   let importRouter = `
 import React from "react";
-import { ${Routertype[type]}, useRoutes } from 'react-router-dom';
+import { ${Routertype[type]}, useRoutes ,useNavigate} from 'react-router-dom';
 import routesConfig from "./config";
 import { loopRoutes, loopChildRoutes } from './loop';`;
 
   let App = `
 const App = (props) => {
   const { routes = routesConfig } = props;
+  const navigate = useNavigate();
   const childRoutes = React.useMemo(() => {
     const data = routes.find((item) => item.path === '/')
     if(data && Array.isArray(data.children) && data.children.length){
@@ -43,7 +44,7 @@ const App = (props) => {
     }
     return [];
   }, [routes])
-  return useRoutes(loopRoutes(routes, childRoutes));
+  return useRoutes(loopRoutes(routes, childRoutes,navigate));
 }\n`;
 
   let render = `<${Routertype[type]}>\n`;
@@ -129,12 +130,11 @@ export const loopChildRoutes = (routes) => {
   })
 }
 
-export const loopRoutes = (routes, childRoutes) => {
-  const navigate = useNavigate();
+export const loopRoutes = (routes, childRoutes,navigate) => {
   return routes.filter(item => !item.hideRoute).map(item => {
     const newItem = { ...item };
     if (Array.isArray(item.children) && item.children.length) {
-      newItem.children = loopRoutes(item.children, childRoutes);
+      newItem.children = loopRoutes(item.children, childRoutes,navigate);
     }
     if (item.element) {
       const Element = item.element;
