@@ -170,7 +170,7 @@ export default {
 
 **代码层修改**
 
-为了减少代码量，`kktp`中集成了部分导出类型，如：`router` / `rematch` 等常用功能。 
+为了减少代码量，`kktp`中集成了部分导出类型，如：`router` / `rematch` 等常用功能。
 
 例如：配置了`initRoutes`, `initModel`, 则页面中可以直接通过`@kkt/pro`来导出对应的类型。
 
