@@ -42,7 +42,7 @@ class RematchPlugin {
     /**判断文件生成是否一样，一样不进行重新生成*/
     if (this.preConfigString !== configContent) {
       this.preConfigString = configContent;
-      FS.writeFile(path.join(this.tempDir, `config.${getExt(this.isTS)}`), configContent, {
+      FS.writeFileSync(path.join(this.tempDir, `config.${getExt(this.isTS)}`), configContent, {
         encoding: 'utf-8',
         flag: 'w+',
       });
@@ -50,7 +50,7 @@ class RematchPlugin {
     /**判断文件生成是否一样，一样不进行重新生成*/
     if (this.preIndexString !== indexContent) {
       this.preIndexString = indexContent;
-      FS.writeFile(path.join(this.tempDir, `index.${getExt(this.isTS)}`), indexContent, {
+      FS.writeFileSync(path.join(this.tempDir, `index.${getExt(this.isTS)}`), indexContent, {
         encoding: 'utf-8',
         flag: 'w+',
       });

@@ -22,36 +22,17 @@ const Routertype = {
 };
 
 /**获取路由入口文件内容*/
-export const createIndexRouteTemp = (
-  type: 'browser' | 'hash' | 'memory',
-  fallbackElement?: string,
-  routesOutletElement?: string,
-) => {
+export const createIndexRouteTemp = (type: 'browser' | 'hash' | 'memory', routesOutletElement?: string) => {
   let importRouter = `
 import React from "react";
 import { ${Routertype[type]}, useRoutes ,useNavigate} from 'react-router-dom';
 import routesConfig from "./config";
-import { loopRoutes, loopChildRoutes } from './loop';`;
-
-  let App = `
-const App = (props) => {
-  const { routes = routesConfig } = props;
-  const navigate = useNavigate();
-  const childRoutes = React.useMemo(() => {
-    const data = routes.find((item) => item.path === '/')
-    if(data && Array.isArray(data.children) && data.children.length){
-      return  loopChildRoutes(data.children);
-    }
-    return [];
-  }, [routes])
-  return useRoutes(loopRoutes(routes, childRoutes,navigate));
-}\n`;
+import { handleRoutes, filterEmptyChildRoutes } from './utils';
+`;
 
   let render = `<${Routertype[type]}>\n`;
-
   if (routesOutletElement) {
-    importRouter += `
-import RoutesOutletElement from "${routesOutletElement}";\n`;
+    importRouter += `import RoutesOutletElement from "${routesOutletElement}";\n`;
     render += `    <RoutesOutletElement routes={routesConfig}><App /></RoutesOutletElement>\n`;
   } else {
     render += `    <App />\n`;
@@ -62,14 +43,24 @@ import RoutesOutletElement from "${routesOutletElement}";\n`;
 ${importRouter}
 export * from 'react-router-dom';
 export * from 'react-router';
-${App}
+const App = (props) => {
+  const { routes = routesConfig } = props;
+  const navigate = useNavigate();
+  const childRoutes = React.useMemo(() => {
+    const data = routes.find((item) => item.path === '/')
+    if(data && Array.isArray(data.children) && data.children.length){
+      return  filterEmptyChildRoutes(data.children);
+    }
+    return [];
+  }, [routes])
+  return useRoutes(handleRoutes(routes, childRoutes,navigate));
+}
 export default ()=>(\n  ${render}\n)
 `;
 };
 
 export const createRouteTsTemp = () => {
-  const temp = `export * from 'react-router-dom';
-export * from 'react-router';`;
+  const temp = `export * from 'react-router-dom';\nexport * from 'react-router';`;
   return temp;
 };
 
@@ -115,26 +106,37 @@ export const creatLoop = (access: boolean, fallbackElement: string) => {
   if (fallbackElement && !access) {
     fallback = '<Fallback />';
   }
-  const str = `
+
+  return `
 import React from "react";
-import { useNavigate } from 'react-router-dom';
 ${access ? `import Access from '@@/access';` : ''}
 ${fallbackElement && !access ? `import Fallback from '${fallbackElement}';` : ''}
-export const loopChildRoutes = (routes) => {
-  return routes.filter(item => !item.hideRoute).map(item => {
-    const newItem = { ...item };
-    if (Array.isArray(item.children) && item.children.length) {
-      newItem.children = loopChildRoutes(item.children);
-    }
-    return newItem;
-  })
-}
 
-export const loopRoutes = (routes, childRoutes,navigate) => {
+export const filterEmptyChildRoutes = (routes) => {
+  const newRoutes = [];
+  routes.forEach((item) => {
+    const newItem = { ...item };
+    if (newItem.hideRoute) {
+      // 隐藏的路由不需要放入
+    } else if (Array.isArray(newItem.children)) {
+      if (newItem.children.length) {
+        newItem.children = filterEmptyChildRoutes(newItem.children);
+      }
+      if (newItem.children.length) {
+        newRoutes.push({ ...newItem });
+      }
+    } else {
+      newRoutes.push({ ...newItem });
+    }
+  });
+  return newRoutes;
+};
+
+export const handleRoutes = (routes, childRoutes,navigate) => {
   return routes.filter(item => !item.hideRoute).map(item => {
     const newItem = { ...item };
     if (Array.isArray(item.children) && item.children.length) {
-      newItem.children = loopRoutes(item.children, childRoutes,navigate);
+      newItem.children = handleRoutes(item.children, childRoutes,navigate);
     }
     if (item.element) {
       const Element = item.element;
@@ -157,6 +159,25 @@ export const loopRoutes = (routes, childRoutes,navigate) => {
     return newItem;
   });
 }
-  `;
-  return str;
+`;
+};
+
+const filterEmptyChildRoutes = (routes: any[]) => {
+  const newRoutes: any[] = [];
+  routes.forEach((item) => {
+    const newItem = { ...item };
+    if (newItem.hideRoute) {
+      // 隐藏的路由不需要放入
+    } else if (Array.isArray(newItem.children)) {
+      if (newItem.children.length) {
+        newItem.children = filterEmptyChildRoutes(newItem.children);
+      }
+      if (newItem.children.length) {
+        newRoutes.push({ ...newItem });
+      }
+    } else {
+      newRoutes.push({ ...newItem });
+    }
+  });
+  return newRoutes;
 };

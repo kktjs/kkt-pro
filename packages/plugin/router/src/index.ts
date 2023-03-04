@@ -19,7 +19,6 @@ import { ConfigRouterPlugin } from './config-plugin';
 export * from './interface';
 
 class RouterPlugin extends ConfigRouterPlugin {
-  access?: boolean;
   constructor(props: RouterPluginProps = {}) {
     super();
     const tmp = props.cacheDirName || '.kktp';
@@ -99,21 +98,15 @@ class RouterPlugin extends ConfigRouterPlugin {
       });
     }
   }
-  createFile() {
-    FS.writeFile(path.join(this.temp, `loop.jsx`), creatLoop(this.access, this.fallbackElement), {
-      encoding: 'utf-8',
-      flag: 'w+',
-    });
-  }
+
   apply(compiler: webpack.Compiler) {
     compiler.hooks.afterPlugins.tap('RouterPlugin', () => {
+      this.createUtilsFile();
       if (this.autoRoutes) {
         this.auto_Watch();
       } else {
         this.config_Watch();
-        this.createFile();
       }
-      this.createFile();
     });
   }
 }
