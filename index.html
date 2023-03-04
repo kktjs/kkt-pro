@@ -258,12 +258,12 @@ kktp doc --entry ./build --local # 使用本地地址进行预览
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
     <h2 id="插件"><a class="anchor" aria-hidden="true" tabindex="-1" href="#插件"><span class="octicon octicon-link"></span></a>插件</h2>
     <ol>
-      <li>配置处理包<a href="https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/config">@kkt/plugin-pro-config</a></li>
-      <li>自动生成入口<a href="https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/entry">@kkt/plugin-pro-entry</a></li>
-      <li>生成路由配置<a href="https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/router">@kkt/plugin-pro-router</a></li>
-      <li>状态管理<a href="https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/rematch">@kkt/plugin-pro-rematch</a></li>
-      <li>权限管理<a href="https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/access">@kkt/plugin-pro-access</a></li>
-      <li>包集成管理<a href="https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/pro">@kkt/pro</a></li>
+      <li>配置处理包<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/config">@kkt/plugin-pro-config</a></li>
+      <li>自动生成入口<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/entry">@kkt/plugin-pro-entry</a></li>
+      <li>生成路由配置<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/router">@kkt/plugin-pro-router</a></li>
+      <li>状态管理<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/rematch">@kkt/plugin-pro-rematch</a></li>
+      <li>权限管理<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/access">@kkt/plugin-pro-access</a></li>
+      <li>包集成管理<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/pro">@kkt/pro</a></li>
     </ol>
     <h2 id="配置加载"><a class="anchor" aria-hidden="true" tabindex="-1" href="#配置加载"><span class="octicon octicon-link"></span></a>配置加载</h2>
     <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1"><span class="token comment">// .kktprc.ts</span>
@@ -337,7 +337,7 @@ export default {
 }
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
     <p><strong>配置层迁移</strong></p>
-    <p><code>.kktrc.[ts|js]</code> 文件替换成 <code>.kktprc.[ts|js]</code>文件。<code>kktprc</code>配置文档参考<a href="https://github.com/kktjs/kkt-pro/tree/dev/packages/plugin/config">@kkt/plugin-pro-config</a></p>
+    <p><code>.kktrc.[ts|js]</code> 文件替换成 <code>.kktprc.[ts|js]</code>文件。<code>kktprc</code>配置文档参考<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/config">@kkt/plugin-pro-config</a></p>
     <p><strong>路由配置修改</strong></p>
     <ul>
       <li><code>kktp</code>中约定 <code>config/routes.[json|js|ts]</code>为路由文件。</li>
