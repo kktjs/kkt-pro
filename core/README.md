@@ -6,6 +6,28 @@ kktp
 ```bash
 $ npm install kktp -D # yarn add kktp -D
 ```
+## 说明
+
+
+kktp ===> `kkt pro`
+
+把现存的`uiw-admin`进行简化
+
+功能参考：`umi`、 `antd component pro`
+
+## 功能
+
+对`kkt`进行封装配置集成,功能方面可以使用插件(plugin)
+
+1. 入口文件自动生成
+2. 默认全局样式文件
+3. 配置文件路由自动生成/通过配置自动通过文件路径生成路由
+4. 菜单icon图标处理
+5. 支持`react-router 6`
+6. 支持`react-redux`
+7. 默认封装`mocker`代理配置
+8. 支持路由拦截 / 权限控制
+9. 支持生成代码分析报告
 
 ## Command Help
 
@@ -51,28 +73,6 @@ package.json 中配置命令
 
 ```
 
-## 说明
-
-
-kktp ===> `kkt pro`
-
-把现存的`uiw-admin`进行简化
-
-功能参考：`umi`、 `antd component pro`
-
-## 功能
-
-对`kkt`进行封装配置集成,功能方面可以使用插件(plugin)
-
-1. 入口文件自动生成
-2. 默认全局样式文件
-3. 配置文件路由自动生成/通过配置自动通过文件路径生成路由
-4. 菜单icon图标处理
-5. 支持`react-router 6`
-6. 支持`react-redux`
-7. 默认封装`mocker`代理配置
-8. 支持路由拦截 / 权限控制
-9. 支持生成代码分析报告
 
 ## 约定配置位置
 
@@ -182,23 +182,6 @@ import {
   ...
 } from '@kkt/pro';
 ```
-
-**rematch 修改**
-
-如果原项目中使用了`rematch`, 则需要修改所有的`models`文件。
-
-```ts
-- createModel()({
-+ {
-    name: 'name',
-    state: {},
-    reducers: {},
-    effects: (dispatch) => ({}),
-+ }
-- })
-```
-
-
 
 ## 配置加载使用 proload 替换
 
