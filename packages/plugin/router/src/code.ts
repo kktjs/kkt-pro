@@ -161,23 +161,3 @@ export const handleRoutes = (routes, childRoutes,navigate) => {
 }
 `;
 };
-
-const filterEmptyChildRoutes = (routes: any[]) => {
-  const newRoutes: any[] = [];
-  routes.forEach((item) => {
-    const newItem = { ...item };
-    if (newItem.hideRoute) {
-      // 隐藏的路由不需要放入
-    } else if (Array.isArray(newItem.children)) {
-      if (newItem.children.length) {
-        newItem.children = filterEmptyChildRoutes(newItem.children);
-      }
-      if (newItem.children.length) {
-        newRoutes.push({ ...newItem });
-      }
-    } else {
-      newRoutes.push({ ...newItem });
-    }
-  });
-  return newRoutes;
-};

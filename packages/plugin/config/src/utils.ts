@@ -98,6 +98,7 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps, options?: LoaderCo
   const pluginsArr = [...plugins];
   const exportPath = [];
   const newAlias = { ...alias };
+
   if (initEntery) {
     pluginsArr.push(['@kkt/plugin-pro-entry', { redux: initModel, cacheDirName }]);
   }
@@ -108,7 +109,7 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps, options?: LoaderCo
     ]);
     exportPath.push('routes');
   }
-  if (initModel) {
+  if (typeof initModel === 'boolean' && initModel) {
     pluginsArr.push(['@kkt/plugin-pro-rematch', { cacheDirName }]);
     exportPath.push('rematch');
   }

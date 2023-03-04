@@ -1,13 +1,18 @@
 type InitCode = {
-  redux?: boolean;
+  redux?: boolean | string;
 };
 
 export const getInitCode = ({ redux }: InitCode = { redux: false }) => {
   let importString = '';
   let renderString = '<Route />';
   if (redux) {
-    importString = `import { Provider } from 'react-redux';\nimport { store } from "./rematch"\n`;
-    renderString = `<Provider store={store} ><Route /></Provider>`;
+    if (typeof redux === 'boolean') {
+      importString = `import { Provider } from 'react-redux';\nimport { store } from "./rematch"\n`;
+      renderString = `<Provider store={store} ><Route /></Provider>`;
+    } else {
+      importString = `import Provider from '${redux}'`;
+      renderString = `<Provider><Route /></Provider>`;
+    }
   }
 
   return `import React from 'react';
