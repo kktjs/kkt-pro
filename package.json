@@ -20,6 +20,7 @@
     "routes": "lerna exec --scope @examples/routes -- npm run start",
     "mocker": "lerna exec --scope @examples/mocker -- npm run start",
     "access": "lerna exec --scope @examples/access -- npm run start",
+    "rematch": "lerna exec --scope @examples/rematch -- npm run start",
     "-------------": "----------------------------------------------",
     "version": "lerna version --force-publish=* --no-changelog --no-git-tag-version --no-push",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",

@@ -73,6 +73,16 @@ jobs:
         working-directory: examples/basic
       - run: cp -rp examples/basic/basic.zip build/zip
 
+      - name: Compress access Example.
+        run: zip -r -y access.zip . -x "node_modules/*"  -x "src/.kktp/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x "package-lock.json"
+        working-directory: examples/access
+      - run: cp -rp examples/access/access.zip build/zip  
+
+      - name: Compress rematch Example.
+        run: zip -r -y rematch.zip . -x "node_modules/*"  -x "src/.kktp/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x "package-lock.json"
+        working-directory: examples/rematch
+      - run: cp -rp examples/rematch/rematch.zip build/zip
+
       - name: Compress auto-routes Example.
         run: zip -r -y auto-routes.zip . -x "node_modules/*"  -x "src/.kktp/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x "package-lock.json"
         working-directory: examples/auto-routes
