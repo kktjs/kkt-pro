@@ -119,10 +119,9 @@ export const filterEmptyChildRoutes = (routes) => {
     if (newItem.hideRoute) {
       // 隐藏的路由不需要放入
     } else if (Array.isArray(newItem.children)) {
-      if (newItem.children.length) {
-        newItem.children = filterEmptyChildRoutes(newItem.children);
-      }
-      if (newItem.children.length) {
+      const children = filterEmptyChildRoutes(newItem.children);
+      if (children.length) {
+        newItem.children = children;
         newRoutes.push({ ...newItem });
       }
     } else {
