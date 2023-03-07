@@ -5,6 +5,7 @@ import { overridePaths } from 'kkt/lib/overrides/paths';
 import path from 'path';
 import { OverrideKKTPConfigProps } from './interface';
 import { transformationDefineString, getKKTPlugins, getWebpackPlugins, getInitPlugin } from './utils';
+import { iconModule } from '@kkt/plugin-pro-icons';
 export * from './interface';
 /**
  * @Description: 默认配置
@@ -24,6 +25,7 @@ const overrideKKTPConfig = (
     plugins = [],
     alias = {},
     kktPlugins,
+    rules = [],
     overrideWebpack,
     output = {},
     /**自动生成文件目录**/
@@ -36,6 +38,8 @@ const overrideKKTPConfig = (
     initModel = false,
     /** 分析产物构成 */
     analyze,
+    /** 是否开始本地 icon 功能 */
+    icons = false,
     ...rest
   } = overrideConfigProps;
   conf.output = { ...conf.output, ...output, publicPath: prefix };
@@ -57,6 +61,17 @@ const overrideKKTPConfig = (
   let prefixStr = `/${publicPath}/`.replace(/\/+/g, '/');
   /**处理kkt plugin**/
   conf = getKKTPlugins(kktPlugins, conf, env, options);
+  /**处理webpack module rules*/
+  conf.module.rules = conf.module.rules.map((rule) => {
+    if (typeof rule === 'object' && rule.oneOf) {
+      let newRule = rules;
+      if (icons) {
+        newRule = [...newRule, ...iconModule];
+      }
+      rule.oneOf = newRule.concat(rule.oneOf);
+    }
+    return rule;
+  });
   /**处理 webpack plugin**/
   const newPlugins = getWebpackPlugins(newPluginsArr);
   // 修复 publicUrlOrPath 指向新的前缀

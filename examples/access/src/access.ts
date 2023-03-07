@@ -20,7 +20,7 @@ const routeBefore = (path: string) => {
 
       // 未登录, 跳转到 登录页面
       // resolve('/login')
-    }, 2000);
+    }, 0);
   });
 };
 

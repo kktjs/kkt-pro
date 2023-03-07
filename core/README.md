@@ -92,7 +92,8 @@ package.json 中配置命令
 3. 生成路由配置[@kkt/plugin-pro-router](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/router)
 4. 状态管理[@kkt/plugin-pro-rematch](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/rematch)
 5. 权限管理[@kkt/plugin-pro-access](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/access)
-6. 包集成管理[@kkt/pro](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/pro)
+6. 本地icon图标使用 [@kkt/plugin-pro-icons](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/icons)
+7. 包集成管理[@kkt/pro](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/pro)
 
 ## 配置加载
 
@@ -106,9 +107,11 @@ export default {
   /** 路由配置 */
   initRoutes:true,
   /** 自动生成models集合配置文件 */
-  initModel:true;
+  initModel:true,
   /** 是否开启权限 */
-  access: true;
+  access: true,
+  /** 是否开始本地 icon 功能 */
+  icons: true,
 }
 
 ```

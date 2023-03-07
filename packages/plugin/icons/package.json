@@ -1,5 +1,5 @@
 {
-  "name": "@kkt/plugin-pro-config",
+  "name": "@kkt/plugin-pro-icons",
   "version": "1.0.5",
   "description": "kktp plugins",
   "author": "SunLxy <1011771396@qq.com>",
@@ -31,12 +31,13 @@
     "framework"
   ],
   "dependencies": {
-    "@kkt/plugin-pro-entry": "^1.0.5",
-    "@kkt/plugin-pro-rematch": "^1.0.5",
-    "@kkt/plugin-pro-router": "^1.0.5",
-    "@kkt/plugin-pro-icons": "^1.0.5",
-    "@types/webpack-bundle-analyzer": "^4.6.0",
-    "kkt": "^7.3.2",
-    "webpack-bundle-analyzer": "^4.8.0"
+    "@kkt/plugin-pro-utils": "^1.0.5",
+    "@types/fs-extra": "~11.0.1",
+    "@types/recursive-readdir": "~2.2.1",
+    "chokidar": "~3.5.3",
+    "fs-extra": "~11.1.0",
+    "recursive-readdir": "~2.2.3",
+    "@types/webpack-env": "^1.18.0",
+    "svg-sprite-loader": "^6.0.11"
   }
 }

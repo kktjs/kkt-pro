@@ -7,7 +7,6 @@ import { overridePaths } from 'kkt/lib/overrides/paths';
 import overrideKKTPConfig from '@kkt/plugin-pro-config';
 import lessModules from '@kkt/less-modules';
 import { staticDocServer } from '@kkt/doc';
-// import { explore } from 'source-map-explorer';
 
 function help() {
   console.log('\n  Usage: \x1b[34;1mkktp\x1b[0m [build|watch|doc] [input-file] [--help|h]');

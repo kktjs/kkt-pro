@@ -11,6 +11,7 @@
     "watch:models": "lerna exec --scope  @kkt/plugin-pro-rematch -- npm run watch",
     "watch:utils": "lerna exec --scope  @kkt/plugin-pro-utils -- npm run watch",
     "watch:access": "lerna exec --scope  @kkt/plugin-pro-access -- npm run watch",
+    "watch:icons": "lerna exec --scope  @kkt/plugin-pro-icons -- npm run watch",
     "watch:pro": "lerna exec --scope  @kkt/pro -- npm run watch",
     "------------": "----------------案例------------------------------",
     "basic": "lerna exec --scope @examples/basic -- npm run start",

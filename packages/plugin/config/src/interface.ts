@@ -44,6 +44,8 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
   define?: Record<string, any> & DefaultDefineType;
   /** kkt plugin  */
   kktPlugins?: KKTPlugins;
+  /** webpack module rules config */
+  rules?: webpack.RuleSetRule[];
   /** 项目前缀 */
   publicPath?: string;
   /** 提供回调函数，更改 webpack 的最终配置。 */
@@ -65,4 +67,6 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
   access?: boolean;
   /** 分析产物构成 */
   analyze?: KKTPAnalyze;
+  /** 是否开始本地 icon 功能 */
+  icons?: boolean;
 }

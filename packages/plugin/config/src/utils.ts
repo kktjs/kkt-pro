@@ -71,7 +71,14 @@ export const getKKTPlugins = (
 const createExportField = (pathList: string[], cacheDirName: string) => {
   if (pathList.length) {
     const contentPath = path.join(process.cwd(), 'src', cacheDirName, 'export.ts');
-    const content = pathList.map((bod) => `export * from "./${bod}";`).join('\n');
+    const content = pathList
+      .map((bod) => {
+        if (bod === 'icons') {
+          return `export * from "./${bod}";\nexport { default as Icons } from "./${bod}";`;
+        }
+        return `export * from "./${bod}";`;
+      })
+      .join('\n');
     FS.ensureFileSync(contentPath);
     FS.writeFileSync(contentPath, content, { flag: 'w+', encoding: 'utf-8' });
   }
@@ -94,13 +101,14 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps, options?: LoaderCo
     alias = {},
     /** 分析产物构成 */
     analyze,
+    icons = false,
   } = props;
   const pluginsArr = [...plugins];
   const exportPath = [];
   const newAlias = { ...alias };
 
   if (initEntery) {
-    pluginsArr.push(['@kkt/plugin-pro-entry', { redux: initModel, cacheDirName }]);
+    pluginsArr.push(['@kkt/plugin-pro-entry', { redux: initModel, cacheDirName, icons }]);
   }
   if (initRoutes) {
     pluginsArr.push([
@@ -117,6 +125,10 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps, options?: LoaderCo
     const fallbackElement = typeof initRoutes === 'boolean' ? null : initRoutes?.fallbackElement;
     pluginsArr.push(['@kkt/plugin-pro-access', { access, fallbackElement }]);
     exportPath.push('access');
+  }
+  if (icons) {
+    pluginsArr.push(['@kkt/plugin-pro-icons', { cacheDirName }]);
+    exportPath.push('icons');
   }
   /**分析产物*/
   if (options.analyzer && options.analyzer === 1) {

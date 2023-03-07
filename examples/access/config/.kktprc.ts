@@ -1,4 +1,6 @@
 import pkg from '../package.json';
+import path from 'path';
+
 export default {
   initEntery: true,
   initRoutes: {
@@ -13,4 +15,14 @@ export default {
   analyze: {
     analyzerPort: '2222',
   },
+  icons: true,
+  // rules: [
+  //   {
+  //     test: /\.svg$/,
+  //     loader: 'svg-sprite-loader',
+  //     options: {
+  //       // symbolId: 'icon-[name]'
+  //     }
+  //   }
+  // ]
 };

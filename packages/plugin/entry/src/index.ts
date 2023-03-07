@@ -9,6 +9,7 @@ type InitEntryOptions = {
   /**在src目录下生成的临时文件夹名称*/
   cacheDirName?: string;
   redux?: boolean | string;
+  icons?: boolean;
 };
 
 const PLUGIN_NAME = 'InitEntryPlugin';
@@ -25,13 +26,15 @@ class InitEntry implements WebpackPluginInstance {
   globalCSSPath = path.resolve(this.rootDir, 'global.css');
   initGlobalCSSContent = '';
   redux: boolean | string = false;
-  constructor({ cacheDirName, redux = false }: InitEntryOptions = {}) {
+  icons: boolean = false;
+  constructor({ cacheDirName, redux = false, icons }: InitEntryOptions = {}) {
     if (cacheDirName) {
       this.tempDir = path.resolve(this.rootDir, cacheDirName);
       this.entryCSSPath = path.resolve(this.tempDir, 'index.css');
       this.entryJSPath = path.resolve(this.tempDir, 'index.jsx');
     }
     this.redux = redux;
+    this.icons = icons;
   }
   apply(compiler: webpack.Compiler) {
     compiler.hooks.initialize.tap(PLUGIN_NAME, () => {
@@ -61,7 +64,7 @@ class InitEntry implements WebpackPluginInstance {
   };
   init() {
     fs.ensureDirSync(this.tempDir);
-    const code = getInitCode({ redux: this.redux });
+    const code = getInitCode({ redux: this.redux, icons: this.icons });
     fs.writeFileSync(this.entryJSPath, code);
     this.updateInitCSS();
   }

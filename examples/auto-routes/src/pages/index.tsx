@@ -2,6 +2,10 @@ import logo from './logo.svg';
 import styles from './App.module.css';
 import './App.css';
 
+const req = require.context('@/icons', true, /.svg$/);
+const requireAll = (requireContext) => requireContext.keys().map(requireContext);
+requireAll(req);
+
 const App = () => {
   return (
     <div className="App">
