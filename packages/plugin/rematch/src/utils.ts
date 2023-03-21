@@ -21,7 +21,7 @@ export const getAllFiles = (root: string, temp: string) => {
           const isFile = stats.isFile(); //是文件
           const isDir = stats.isDirectory(); //是文件夹
           const exFilePath = filedir.replace(root, '');
-          if (isFile && /(models|models\/.+).(ts|js)$/.test(exFilePath)) {
+          if (isFile && /(models|models\/.+).(ts|js)$/.test(exFilePath) && !/\.d\.ts$/.test(exFilePath)) {
             pathList.push(filedir);
           }
           if (isDir && temp !== filedir) {

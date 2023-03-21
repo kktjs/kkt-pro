@@ -33,7 +33,7 @@
     "framework"
   ],
   "dependencies": {
-    "@kkt/doc": "^1.0.0",
+    "@kkt/doc": "^1.0.5",
     "@kkt/less-modules": "~7.3.2",
     "@kkt/plugin-pro-config": "^1.0.6-bate.1",
     "@proload/plugin-json": "~0.3.1",

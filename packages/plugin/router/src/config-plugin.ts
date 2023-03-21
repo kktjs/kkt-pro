@@ -3,8 +3,9 @@ import chokidar from 'chokidar';
 import FS from 'fs-extra';
 import { checkRoutersFile, analysisRoutersIcon, analysisRoutersLoader } from '@kkt/plugin-pro-utils';
 import { getRouteContent } from './utils';
-import { createRouteConfigTemp, createIndexRouteTemp } from './code';
+import { createRouteConfigTemp, createIndexRouteTemp, createRouteTsTemp } from './code';
 import { RouterPluginProps } from './interface';
+import { creatLoop } from './code';
 
 export class ConfigRouterPlugin {
   /**上一次的路由数据*/
@@ -17,6 +18,8 @@ export class ConfigRouterPlugin {
   temp: string = path.resolve(process.cwd(), 'src', '.kktp');
   /**生成路由入口文件地址**/
   temp_index_file: string = '';
+  /**生成路由入口ts文件地址**/
+  temp_ts_file: string = '';
   /**生成路由配置文件地址**/
   temp_config_file: string = '';
   /**页面加载loading组件地址*/
@@ -35,6 +38,10 @@ export class ConfigRouterPlugin {
   analysisRoutersIcon?: RouterPluginProps['analysisRoutersIcon'];
   /**路由类型*/
   routesType?: 'browser' | 'hash' | 'memory' = 'hash';
+  /** 路由权限名称，默认auth.[js | ts] */
+  accessDirName?: string = 'access';
+  /**是否拥有权限校验*/
+  access?: boolean;
   // -----------------------自动生成路由-------------------------------
   /**自动生成路由配置*/
   autoRoutes: boolean = false;
@@ -49,13 +56,19 @@ export class ConfigRouterPlugin {
   // ------------------------------------------------------
   /**创建路由入口文件*/
   createIndex() {
-    const routeTemp = createIndexRouteTemp(this.routesType, this.fallbackElement, this.routesOutletElement);
+    const routeTemp = createIndexRouteTemp(this.routesType, this.routesOutletElement);
     if (this.pre_index_content !== routeTemp) {
       this.pre_index_content = routeTemp;
       FS.writeFileSync(this.temp_index_file, routeTemp, { encoding: 'utf-8', flag: 'w+' });
+      FS.writeFileSync(this.temp_ts_file, createRouteTsTemp(), { encoding: 'utf-8', flag: 'w+' });
     }
   }
-
+  createUtilsFile() {
+    FS.writeFileSync(path.join(this.temp, `utils.jsx`), creatLoop(this.access, this.fallbackElement), {
+      encoding: 'utf-8',
+      flag: 'w+',
+    });
+  }
   // ------------------------------------ 通过配置生成路由 ----------------------------------------------
   /**生成文件*/
   config_CreateRoute() {

@@ -1,5 +1,8 @@
 import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 
+import FS from 'fs-extra';
+import path from 'path';
+
 import { DefaultDefineType, PluginsType, KKTPlugins, OverrideKKTPConfigProps } from './interface';
 /** 全局默认公共参数  */
 export const defaultDefine: DefaultDefineType = {};
@@ -64,8 +67,18 @@ export const getKKTPlugins = (
   return conf;
 };
 
+/**生成导出文件*/
+const createExportField = (pathList: string[], cacheDirName: string) => {
+  if (pathList.length) {
+    const contentPath = path.join(process.cwd(), 'src', cacheDirName, 'export.ts');
+    const content = pathList.map((bod) => `export * from "./${bod}";`).join('\n');
+    FS.ensureFileSync(contentPath);
+    FS.writeFileSync(contentPath, content, { flag: 'w+', encoding: 'utf-8' });
+  }
+};
+
 /**内置插件判断*/
-export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
+export const getInitPlugin = (props: OverrideKKTPConfigProps, options?: LoaderConfOptions) => {
   const {
     plugins = [],
     /**自动生成文件目录**/
@@ -76,19 +89,55 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps) => {
     initRoutes = false,
     /**自动生成models集合配置文件*/
     initModel = false,
+    /** 是否添加权限 */
+    access = false,
+    alias = {},
+    /** 分析产物构成 */
+    analyze,
   } = props;
   const pluginsArr = [...plugins];
+  const exportPath = [];
+  const newAlias = { ...alias };
+
   if (initEntery) {
     pluginsArr.push(['@kkt/plugin-pro-entry', { redux: initModel, cacheDirName }]);
   }
   if (initRoutes) {
     pluginsArr.push([
       '@kkt/plugin-pro-router',
-      typeof initRoutes === 'boolean' ? { cacheDirName } : { ...initRoutes, cacheDirName },
+      typeof initRoutes === 'boolean' ? { cacheDirName } : { ...initRoutes, cacheDirName, access },
     ]);
+    exportPath.push('routes');
   }
-  if (initModel) {
+  if (typeof initModel === 'boolean' && initModel) {
     pluginsArr.push(['@kkt/plugin-pro-rematch', { cacheDirName }]);
+    exportPath.push('rematch');
   }
-  return pluginsArr;
+  if (access) {
+    const fallbackElement = typeof initRoutes === 'boolean' ? null : initRoutes?.fallbackElement;
+    pluginsArr.push(['@kkt/plugin-pro-access', { access, fallbackElement }]);
+    exportPath.push('access');
+  }
+  /**分析产物*/
+  if (options.analyzer && options.analyzer === 1) {
+    const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+    pluginsArr.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'server',
+        analyzerPort: 9999,
+        openAnalyzer: true,
+        ...analyze,
+      }),
+    );
+  }
+  createExportField(exportPath, cacheDirName);
+  /**这是为了解决导出问题*/
+  if (!exportPath.length) {
+    newAlias['@@/export'] = './export';
+  }
+  return {
+    plugins: pluginsArr,
+    isExport: !!exportPath.length,
+    newAlias,
+  };
 };

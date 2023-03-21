@@ -12,7 +12,7 @@ import path from 'path';
 import chokidar from 'chokidar';
 import FS from 'fs-extra';
 import { getFilesPath } from './utils';
-import { getRouterDataCode } from './code';
+import { getRouterDataCode, creatLoop } from './code';
 import { RouterPluginProps } from './interface';
 import { toPascalCase } from '@kkt/plugin-pro-utils';
 import { ConfigRouterPlugin } from './config-plugin';
@@ -27,9 +27,11 @@ class RouterPlugin extends ConfigRouterPlugin {
     this.outletLayout = props.outletLayout;
     this.routesOutletElement = props.routesOutletElement;
     this.autoRoutes = props.autoRoutes;
+    this.access = props.access;
 
     this.temp = path.resolve(this.rootDir, tmp, 'routes');
     this.temp_index_file = path.resolve(this.rootDir, tmp, 'routes', 'index.jsx');
+    this.temp_ts_file = path.resolve(this.rootDir, tmp, 'routes', 'index.d.ts');
     this.temp_config_file = path.resolve(this.rootDir, tmp, 'routes', 'config.jsx');
     this.analysisRoutersIcon = props.analysisRoutersIcon;
     if (!FS.existsSync(this.temp)) {
@@ -96,8 +98,10 @@ class RouterPlugin extends ConfigRouterPlugin {
       });
     }
   }
+
   apply(compiler: webpack.Compiler) {
     compiler.hooks.afterPlugins.tap('RouterPlugin', () => {
+      this.createUtilsFile();
       if (this.autoRoutes) {
         this.auto_Watch();
       } else {

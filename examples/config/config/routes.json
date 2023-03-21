@@ -1,5 +1,9 @@
 [
   {
+    "path": "/login",
+    "element": "@/pages/Login"
+  },
+  {
     "path": "/",
     "element": "@/layout",
     "children": [
@@ -19,6 +23,14 @@
       {
         "path": "/ceshi",
         "element": "@/pages/Ceshi"
+      },
+      {
+        "path": "/403",
+        "element": "@uiw-admin/exceptions/lib/Exceptions/403"
+      },
+      {
+        "path": "*",
+        "element": "@uiw-admin/exceptions/lib/Exceptions/403"
       }
     ]
   },

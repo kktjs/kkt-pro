@@ -9,6 +9,7 @@
 import webpack from 'webpack';
 import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 import { RouterPluginProps } from '@kkt/plugin-pro-router';
+import type { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export type DefaultDefineType = {};
 
@@ -34,6 +35,8 @@ export type KKTPlugins = (
   | string
   | [string, Record<string, any>]
 )[];
+
+export type KKTPAnalyze = BundleAnalyzerPlugin['opts'];
 
 export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   /**
@@ -61,16 +64,24 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
   initEntery?: boolean;
   /**路由配置*/
   initRoutes?: RouterPluginProps | boolean;
-  /**自动生成models集合配置文件*/
-  initModel?: boolean;
+  /**
+   * 1. 自动生成models集合配置文件
+   * 2. 当传递的是字符串的时候，用于自己定义状态管理的引用地址
+   */
+  initModel?: boolean | string;
+  /** 是否开启权限 */
+  access?: boolean;
+  /** 分析产物构成 */
+  analyze?: KKTPAnalyze;
 }
+
 
 ```
 
 ## 配置文件
 
 ```ts
-// .kktrc.ts
+// .kktprc.ts
 export default {
   // ...
   alias:{
@@ -88,7 +99,7 @@ export default {
 **plugins使用**
 
 ```ts
-// .kktrc.ts
+// .kktprc.ts
 export default {
   // ...
   plugins:["@kkt/plugin-pro-router"]
@@ -96,21 +107,29 @@ export default {
 }
 ```
 
-**plugins 使用**
+**analyze 使用**
+
+用于分析 bundle 构成。通过配置`--analyzer=1`生效。可以通过`analyze`选项自定义配置。`analyze` 插件的具体配置项，见 [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
 
 ```ts
-// .kktrc.ts
+// package.json
+"scripts": {
+  "start": "kktp start --analyzer=1",
+  "build": "kktp build --analyzer=1"
+},
+
+// .kktprc.ts
 export default {
   // ...
-  plugins:["@kkt/plugin-pro-router"]
-  // plugins:[["@kkt/plugin-pro-router",{ autoRoutes:true, }]]  
+  analyzer: {
+    analyzerPort: 9999 // 自定义端口
+  }
 }
 ```
-
 **overrideWebpack 使用**
 
 ```ts
-// .kktrc.ts
+// .kktprc.ts
 export default {
   // ...
   overrideWebpack:(conf, env, options)=>{

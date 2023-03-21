@@ -12,6 +12,56 @@ export interface ModelspluginProps {
 }
 ```
 
+## models ts 实例
+
+```ts
+// src/models/demo.ts
+export interface DemoState {
+  test?: string;
+}
+
+const demo = {
+  name: 'demo',
+  state: {
+    test: '测试State',
+  },
+  reducers: {
+    updateState: (state: DemoState, payload: DemoState): DemoState => ({
+      ...state,
+      ...payload,
+    }),
+  },
+  effects: (dispatch) => {
+    const { demo } = dispatch;
+    return {
+      async verify() {
+        demo.updateState({ test: '测试22' });
+      },
+    }
+  },
+};
+export default demo;
+
+
+// src/pages/ceshi.tsx
+import { RootState, useSelector, dispatch } from '@kkt/pro';
+const Ceshi = () => {
+  // 获取demo数据
+  const store = useSelector((store: RootState) => store.demo);
+  // Dispatch
+  const dispatch = useDispatch<Dispatch>();
+
+  const click = () => {
+    dispatch({
+      type: 'demo/verify',
+      payload: {}
+    })
+  }
+  return <div />
+}
+export default Ceshi;
+```
+
 ## 自动收集文件引入
 
 1. 约定`src/**/models/**/*.(js|ts)`文件
@@ -19,7 +69,7 @@ export interface ModelspluginProps {
 ## `kktp`配置文件
 
 ```ts
-// .kktrc.ts
+// .kktprc.ts
 export default {
   // ...
   initModel:true,

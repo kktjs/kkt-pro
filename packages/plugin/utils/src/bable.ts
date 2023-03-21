@@ -13,6 +13,7 @@ import {
   createObjectProperty,
   createTemplateExpression,
   getStringOrIdentifierValue,
+  NodeFun,
 } from './utils';
 
 /**
@@ -120,7 +121,8 @@ export const analysisRoutersLoader = (content: string) => {
             const componentName = 'Components' + index + toPascalCase(valus);
             index++;
             // node.value = getJSX(`${componentName}`);
-            node.value = createTemplateExpression(`<${componentName} />`);
+            // node.value = createTemplateExpression(`<${componentName} />`);
+            node.value = createTemplateExpression(`React.lazy(() => import("${valus}"))`);
             importLazy[componentName] = valus;
             importLazyString += `\nimport ${componentName} from "${valus}";\n`;
             if (t.isObjectExpression(path.parent)) {
@@ -190,14 +192,18 @@ export const analysisRoutersLoader = (content: string) => {
 export const checkModels = (content: string) => {
   let isModels = false;
   let modelNames;
+  let isCreateModel = false;
   const ast = getAst(content);
-
   traverse(ast, {
     ExportDefaultDeclaration(path: NodePath<t.ExportDefaultDeclaration>) {
       let node = path.node.declaration;
       node = getTSNode(node);
       node = getVarInit(node, path);
       node = getTSNode(node);
+      if (t.isCallExpression(node) && node.arguments) {
+        node = node.arguments[0] as NodeFun;
+        isCreateModel = true;
+      }
       // 如果 node 是一个对象
       // 并且 子集存在 state reducers, subscriptions, effects, name 则是一个 model 返回true
       if (
@@ -217,5 +223,6 @@ export const checkModels = (content: string) => {
   return {
     isModels,
     modelNames,
+    isCreateModel,
   };
 };

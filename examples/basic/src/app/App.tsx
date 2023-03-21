@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import styles from './App.module.css';
 import './App.css';
+import {} from '@kkt/pro';
 
 const App = () => (
   <div className="App">
