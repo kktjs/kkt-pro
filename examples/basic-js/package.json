@@ -1,6 +1,6 @@
 {
   "name": "@examples/basic-js",
-  "version": "1.0.1-bate.2",
+  "version": "1.0.6-bate.1",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -18,7 +18,7 @@
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
-    "@kkt/pro": "^1.0.1-bate.2"
+    "@kkt/pro": "^1.0.6-bate.1"
   },
   "eslintConfig": {
     "extends": [

@@ -2,7 +2,7 @@
   "name": "@examples/mocker",
   "description": "基础模拟 API 示例",
   "private": true,
-  "version": "1.0.1-bate.2",
+  "version": "1.0.6-bate.1",
   "scripts": {
     "start": "kktp start",
     "build": "kktp build",
@@ -20,7 +20,7 @@
     "react-router-dom": "~6.8.0"
   },
   "devDependencies": {
-    "@kkt/pro": "^1.0.1-bate.2"
+    "@kkt/pro": "^1.0.6-bate.1"
   },
   "eslintConfig": {
     "extends": [
