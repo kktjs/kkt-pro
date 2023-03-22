@@ -7,27 +7,26 @@ const defaultConfig = [
     name: '@proload/plugin-export-js',
     extensions: ['js', 'jsx', 'ts', 'tsx', 'cts', 'mts'],
     async register(fileName: string) {
-      // 为了解决 js 文件 使用 export default 导出 (配置中使用 import 引入包有点问题)
-      const register = require('@babel/register');
+      const registers = require('@babel/register');
       if (/\.(js|jsx|ts|tsx?)$/.test(fileName)) {
-        register({
+        registers({
           extensions: ['.js', '.jsx', '.ts', '.tsx'],
-          presets: ['env'],
+          presets: ['@babel/preset-env'],
           ignore: [/\/(node_modules)\//],
         });
       } else if (/\.([cm]ts|tsx?)$/.test(fileName)) {
         if (fileName.endsWith('.cts')) {
-          register({
+          registers({
             format: 'cjs',
             extensions: ['.cts'],
-            presets: ['env'],
+            presets: ['@babel/preset-env'],
             ignore: [/\/(node_modules)\//],
           });
         } else {
-          register({
+          registers({
             extensions: ['.ts', '.tsx', '.mts'],
             ignore: [/\/(node_modules)\//],
-            presets: ['env'],
+            presets: ['@babel/preset-env'],
           });
         }
       }
