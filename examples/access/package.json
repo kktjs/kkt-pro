@@ -1,6 +1,6 @@
 {
   "name": "@examples/access",
-  "version": "1.0.6-bate.2",
+  "version": "1.0.6",
   "description": "案例",
   "private": true,
   "scripts": {
