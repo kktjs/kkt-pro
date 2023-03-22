@@ -12,6 +12,7 @@
     "watch:utils": "lerna exec --scope  @kkt/plugin-pro-utils -- npm run watch",
     "watch:access": "lerna exec --scope  @kkt/plugin-pro-access -- npm run watch",
     "watch:pro": "lerna exec --scope  @kkt/pro -- npm run watch",
+    "watch:kktp": "lerna exec --scope kktp -- npm run watch",
     "------------": "----------------案例------------------------------",
     "basic": "lerna exec --scope @examples/basic -- npm run start",
     "basic-js": "lerna exec --scope  @examples/basic-js -- npm run start",
