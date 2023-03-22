@@ -1,6 +1,6 @@
 {
   "name": "kktp",
-  "version": "1.0.6-bate.1",
+  "version": "1.0.6-bate.2",
   "description": "kktp cli",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -33,16 +33,16 @@
     "framework"
   ],
   "dependencies": {
-    "@kkt/doc": "^1.0.5",
-    "@kkt/less-modules": "~7.3.2",
-    "@kkt/plugin-pro-config": "^1.0.6-bate.1",
-    "@proload/plugin-json": "~0.3.1",
-    "@proload/plugin-rc": "~0.2.1",
-    "carefree-proload": "~0.0.2",
     "@babel/core": "^7.21.3",
     "@babel/node": "^7.20.7",
     "@babel/register": "^7.21.0",
+    "@kkt/doc": "^1.0.6-bate.2",
+    "@kkt/less-modules": "~7.3.2",
+    "@kkt/plugin-pro-config": "^1.0.6-bate.2",
+    "@proload/plugin-json": "~0.3.1",
+    "@proload/plugin-rc": "~0.2.1",
     "babel-preset-env": "^1.7.0",
+    "carefree-proload": "~0.0.2",
     "kkt": "~7.2.3",
     "minimist": "~1.2.7",
     "typescript": "~4.9.5"

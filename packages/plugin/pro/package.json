@@ -1,6 +1,6 @@
 {
   "name": "@kkt/pro",
-  "version": "1.0.6-bate.1",
+  "version": "1.0.6-bate.2",
   "description": "kktp plugins",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "framework"
   ],
   "dependencies": {
-    "kktp": "1.0.6-bate.1",
+    "kktp": "^1.0.6-bate.2",
     "react-router": "~6.8.0",
     "react-router-dom": "~6.8.0"
   }
