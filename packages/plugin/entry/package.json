@@ -1,6 +1,6 @@
 {
   "name": "@kkt/plugin-pro-entry",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "自动生成入口文件",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
