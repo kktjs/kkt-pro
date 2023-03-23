@@ -42,6 +42,8 @@
     "@proload/plugin-json": "~0.3.1",
     "@proload/plugin-rc": "~0.2.1",
     "babel-preset-env": "^1.7.0",
+    "@babel/preset-typescript": "^7.21.0",
+    "path-browserify": "^1.0.1",
     "carefree-proload": "~0.0.2",
     "kkt": "~7.2.3",
     "minimist": "~1.2.7",

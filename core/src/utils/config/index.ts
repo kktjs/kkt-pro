@@ -11,7 +11,7 @@ const defaultConfig = [
       if (/\.(js|jsx|ts|tsx?)$/.test(fileName)) {
         registers({
           extensions: ['.js', '.jsx', '.ts', '.tsx'],
-          presets: ['@babel/preset-env'],
+          presets: ['@babel/preset-env', '@babel/preset-typescript'],
           ignore: [/\/(node_modules)\//],
         });
       } else if (/\.([cm]ts|tsx?)$/.test(fileName)) {
