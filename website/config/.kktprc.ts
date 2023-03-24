@@ -11,6 +11,7 @@ export default {
   define: {
     VERSION: pkg.version,
   },
+  publicPath: './',
   overrideWebpack: (
     conf: WebpackConfiguration,
     env: 'development' | 'production',
