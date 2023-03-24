@@ -60,13 +60,6 @@ jobs:
             ${{ steps.changelog.outputs.compareurl }}
             ${{ steps.changelog.outputs.changelog }}
 
-
-      - name: Converts kkt Markdown to HTML
-        uses: jaywcjlove/markdown-to-html-cli@main
-        with:
-          github-corners: https://github.com/kktjs/kkt-pro
-          output: build/index.html
-
       - run: mkdir -p website/build/zip
 
       - name: Compress basic Example.
