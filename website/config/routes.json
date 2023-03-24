@@ -1,0 +1,56 @@
+[
+  {
+    "path": "/",
+    "element": "@/components/Layouts/index",
+    "children": [
+      {
+        "index": true,
+        "redirect": "/doc/kktp"
+      },
+      {
+        "path": "/doc/kktp",
+        "element": "@/pages/kktp"
+      },
+      {
+        "path": "/doc/getting-started",
+        "element": "@/pages/getting-started"
+      },
+      {
+        "path": "/doc/update-kktp",
+        "element": "@/pages/update-kktp"
+      },
+      {
+        "path": "/doc/kktp-config",
+        "element": "@/pages/kktp-config"
+      },
+      {
+        "path": "/doc/directory-structure",
+        "element": "@/pages/directory-structure"
+      },
+      {
+        "path": "/doc/kktp-router",
+        "element": "@/pages/kktp-router"
+      },
+      {
+        "path": "/doc/proxy",
+        "element": "@/pages/proxy"
+      },
+      {
+        "path": "/doc/access",
+        "element": "@/pages/access"
+      },
+      {
+        "path": "/doc/redux",
+        "element": "@/pages/redux"
+      },
+      {
+        "path": "*",
+        "element": "@uiw-admin/exceptions/lib/Exceptions/404"
+      }
+    ]
+  },
+  {
+    "path": "*",
+    "element": "@uiw-admin/exceptions/lib/Exceptions/404"
+  }
+]

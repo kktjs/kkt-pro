@@ -1,7 +1,6 @@
-状态管理
-====
+## 状态管理
 
-`kktp`内置插件,是以`@rematch/core`包为基础进行自动收集状态管理。使用此插件需要安装`@rematch/core`和`@rematch/loading`包
+`kktp`内置插件,是以`@rematch/core`包为基础进行自动收集状态管理。使用此插件需要安装`@rematch/core`和`@rematch/loading`包。
 
 ## 参数
 
@@ -75,3 +74,7 @@ export default {
   initModel:true,
 }
 ```
+
+## License
+
+[MIT © Kenny Wong](https://github.com/jaywcjlove)

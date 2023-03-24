@@ -1,7 +1,7 @@
-配置
+配置 .kktprc
 ====
 
-`kktp`内置配置处理包
+`kktp`内置配置处理包，配置约定在根目录，命名为 `.kktprc.[ts|js]`。
 
 ## 参数
 
@@ -134,7 +134,11 @@ export default {
   // ...
   overrideWebpack:(conf, env, options)=>{
     // 处理 conf
-    return conf
+    return conf;
   }
 }
 ```
+
+## License
+
+[MIT © Kenny Wong](https://github.com/jaywcjlove)

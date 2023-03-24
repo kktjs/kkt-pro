@@ -23,6 +23,8 @@
     "access": "lerna exec --scope @examples/access -- npm run start",
     "rematch": "lerna exec --scope @examples/rematch -- npm run start",
     "-------------": "----------------------------------------------",
+    "start": "lerna exec --scope website -- npm run start",
+    "build:website": "lerna exec --scope website -- npm run build",
     "version": "lerna version --force-publish=* --no-changelog --no-git-tag-version --no-push",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "remove": "lerna exec \"rm -rf node_modules build package-lock.json\"",
@@ -33,6 +35,7 @@
   },
   "workspaces": [
     "core",
+    "website",
     "packages/*",
     "examples/*",
     "packages/plugin/*"
