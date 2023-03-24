@@ -2,6 +2,7 @@
   "name": "website",
   "version": "1.0.8",
   "description": "doc",
+  "homepage": "https://github.com/kktjs/kkt-pro",
   "private": true,
   "scripts": {
     "start": "kktp start",
