@@ -174,10 +174,12 @@ jobs:
       # 生成文档
       - run: export CI=false && npm run build:website
 
+      - run: mkdir -p website/build/zip
+      - run: cp -rp build/zip/* website/build/zip/
+
       # 生成案例网站
       - name: Deploy Website
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: v1-doc
           publish_dir: ./website/build
