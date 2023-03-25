@@ -30,9 +30,7 @@
     "zero-configuration",
     "framework"
   ],
-  "dependencies": {
-    "kktp": "^1.0.8",
-    "react-router": "~6.8.0",
-    "react-router-dom": "~6.8.0"
+  "devDependencies": {
+    "kktp": "^1.0.8"
   }
 }

@@ -30,7 +30,7 @@
     "zero-configuration",
     "framework"
   ],
-  "dependencies": {
+  "devDependencies": {
     "@kkt/plugin-pro-entry": "^1.0.8",
     "@kkt/plugin-pro-rematch": "^1.0.8",
     "@kkt/plugin-pro-router": "^1.0.8",

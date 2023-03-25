@@ -30,7 +30,7 @@
     "zero-configuration",
     "framework"
   ],
-  "dependencies": {
+  "devDependencies": {
     "@babel/generator": "7.20.5",
     "@babel/parser": "7.20.5",
     "@babel/traverse": "7.20.5",

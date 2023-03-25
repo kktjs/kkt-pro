@@ -40,8 +40,7 @@
     "@types/styled-components": "^5.1.26",
     "styled-components": "^5.3.9",
     "hast": "^1.0.0",
-    "markdown-react-code-preview-loader": "^2.1.5",
-    "kktp": "^1.0.7"
+    "markdown-react-code-preview-loader": "^2.1.5"
   },
   "eslintConfig": {
     "extends": [
