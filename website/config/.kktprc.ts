@@ -17,6 +17,9 @@ export default {
     env: 'development' | 'production',
     options: LoaderConfOptions | undefined,
   ) => {
+    /** https://github.com/uiwjs/react-code-preview/issues/94 */
+    conf.module!.exprContextCritical = false;
+    conf.module!.exprContextRecursive = false;
     conf = mdCodeModulesLoader(conf);
     return conf;
   },
