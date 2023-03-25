@@ -31,6 +31,12 @@ $ npm install @kkt/pro -D # yarn add @kkt/pro -D
 - 权限管理[@kkt/plugin-pro-access](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/access)
 - 包集成管理[@kkt/pro](https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/pro)
 
-## License
+### Contributors
 
-[MIT © Kenny Wong](https://github.com/jaywcjlove)
+<a href="https://github.com/kktjs/kkt-pro/graphs/contributors">
+  <img src="https://kktjs.github.io/kkt-pro/CONTRIBUTORS.svg" />
+</a>
+
+### License
+
+Licensed under the MIT License.

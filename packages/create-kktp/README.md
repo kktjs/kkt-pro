@@ -90,7 +90,12 @@ Example:
 
 Copyright 2023
 ```
+### Contributors
 
-## License
+<a href="https://github.com/kktjs/kkt-pro/graphs/contributors">
+  <img src="https://kktjs.github.io/kkt-pro/CONTRIBUTORS.svg" />
+</a>
 
-[MIT © Kenny Wong](https://github.com/jaywcjlove)
+### License
+
+Licensed under the MIT License.

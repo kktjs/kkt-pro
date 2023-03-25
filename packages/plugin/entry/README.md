@@ -28,3 +28,13 @@ export default {
   initRoutes:true,
 }
 ```
+
+### Contributors
+
+<a href="https://github.com/kktjs/kkt-pro/graphs/contributors">
+  <img src="https://kktjs.github.io/kkt-pro/CONTRIBUTORS.svg" />
+</a>
+
+### License
+
+Licensed under the MIT License.

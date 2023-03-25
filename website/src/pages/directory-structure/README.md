@@ -66,6 +66,12 @@
 └── src
 ```
 
-## License
+### Contributors
 
-[MIT © Kenny Wong](https://github.com/jaywcjlove)
+<a href="https://github.com/kktjs/kkt-pro/graphs/contributors">
+  <img src="https://kktjs.github.io/kkt-pro/CONTRIBUTORS.svg" />
+</a>
+
+### License
+
+Licensed under the MIT License.
