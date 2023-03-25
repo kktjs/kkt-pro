@@ -30,7 +30,7 @@
     "zero-configuration",
     "framework"
   ],
-  "devDependencies": {
+  "dependencies": {
     "kktp": "^1.0.9"
   }
 }

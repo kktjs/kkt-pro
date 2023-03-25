@@ -30,7 +30,7 @@
     "zero-configuration",
     "framework"
   ],
-  "devDependencies": {
+  "dependencies": {
     "@kkt/plugin-pro-utils": "^1.0.9",
     "@types/fs-extra": "~11.0.1",
     "@types/recursive-readdir": "~2.2.1",

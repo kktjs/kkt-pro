@@ -34,9 +34,7 @@
     "@rematch/core": "2.2.0",
     "@rematch/loading": "2.1.2",
     "react-redux": "^8.0.5",
-    "redux": "^4.2.1"
-  },
-  "devDependencies": {
+    "redux": "^4.2.1",
     "@kkt/plugin-pro-utils": "^1.0.9",
     "@types/fs-extra": "~11.0.1",
     "chokidar": "~3.5.3",
