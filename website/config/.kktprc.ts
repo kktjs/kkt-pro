@@ -1,13 +1,11 @@
 import { mdCodeModulesLoader } from 'markdown-react-code-preview-loader';
 import type { WebpackConfiguration, LoaderConfOptions } from 'kkt';
 import pkg from '../package.json';
+const webpack = require('webpack');
 
 export default {
   initEntery: true,
-  initRoutes: {
-    fallbackElement: '@/loading',
-  },
-  initModel: true,
+  initRoutes: true,
   define: {
     VERSION: pkg.version,
   },

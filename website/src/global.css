@@ -37,6 +37,3 @@ html, main {
 .menu-toc .menu-marker {
   background: var(--color-accent-fg) !important;
 }
-.wmde-markdown a {
-  color: var(--color-fg-subtle) !important;
-}

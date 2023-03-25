@@ -4,7 +4,7 @@
   "description": "doc",
   "private": true,
   "scripts": {
-    "start": "kktp start",
+    "start": "CI=false kktp start",
     "build": "kktp build",
     "doc": "kktp doc --entry=./build --local",
     "test": "kktp test --env=jsdom",
