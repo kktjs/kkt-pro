@@ -1,6 +1,6 @@
 {
   "name": "create-kktp",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Creates a kktp application using the command line.",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",

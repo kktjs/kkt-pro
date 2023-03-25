@@ -1,6 +1,6 @@
 {
   "name": "@examples/auto-routes",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -22,11 +22,11 @@
   },
   "devDependencies": {
     "@kkt/less-modules": "^7.2.3",
-    "@kkt/pro": "^1.0.8",
+    "@kkt/pro": "^1.0.9",
     "@types/jest": "~27.4.1",
     "@types/react": "~18.0.0",
     "@types/react-dom": "~18.0.0",
-    "kktp": "^1.0.8"
+    "kktp": "^1.0.9"
   },
   "eslintConfig": {
     "extends": [

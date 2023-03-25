@@ -1,6 +1,6 @@
 {
   "name": "@kkt/pro",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "kktp plugins",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -31,6 +31,6 @@
     "framework"
   ],
   "devDependencies": {
-    "kktp": "^1.0.8"
+    "kktp": "^1.0.9"
   }
 }
