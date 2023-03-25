@@ -15,24 +15,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@rematch/core": "2.2.0",
-    "@rematch/loading": "2.1.2",
     "@uiw-admin/exceptions": "~5.3.21",
-    "react": "~18.2.0",
-    "react-dom": "~18.2.0",
-    "react-redux": "^8.0.5",
-    "react-router": "~6.8.0",
-    "react-router-dom": "~6.8.0",
-    "redux": "^4.2.1",
     "styled-components": "^5.3.6",
-    "uiw": "^4.21.23",
-    "web-vitals": "^2.1.2"
+    "uiw": "^4.21.23"
   },
   "devDependencies": {
-    "@kkt/pro": "^1.0.10",
-    "@types/jest": "~27.4.1",
-    "@types/react": "~18.0.0",
-    "@types/react-dom": "~18.0.0"
+    "@kkt/pro": "^1.0.10"
   },
   "eslintConfig": {
     "extends": [
