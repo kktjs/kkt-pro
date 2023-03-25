@@ -6,6 +6,7 @@ import { getMetaId, getURLParameters } from 'markdown-react-code-preview-loader'
 import CodeLayout from 'react-code-preview-layout';
 import { useMdData, MdDataHandle } from './useMdData';
 import { useHyperlink } from './useHyperlink';
+import Loading from '../Loading';
 import './nodes/toc.less';
 
 const Preview = CodeLayout.Preview;
@@ -31,39 +32,41 @@ const Markdown = styled<
 
 const PreviewDocument = ({ path }: { path: MdDataHandle }) => {
   const $dom = useRef<HTMLDivElement>(null);
-  const { mdData } = useMdData(path);
+  const { mdData, loading } = useMdData(path);
   useHyperlink($dom.current);
   return (
     <Wrapper ref={$dom}>
-      <Markdown
-        disableCopy={true}
-        source={mdData.source}
-        components={{
-          div: ({ node, ...props }) => {
-            const { 'data-meta': meta, 'data-md': metaData, ...rest } = props as any;
-            const line = node.position?.start.line;
-            const metaId = getMetaId(metaData) || String(line);
-            const Child = mdData.components[metaId];
-            if (meta !== 'preview' || !metaId || typeof Child !== 'function') return <div {...props} />;
-            const code = mdData.data[metaId].value || '';
-            const param = getURLParameters(meta);
-            return (
-              <CodeLayout disableCheckered style={{ marginBottom: 18 }}>
-                <Preview>
-                  <Child />
-                </Preview>
-                <Toolbar text={code}>{param.title || '示例'}</Toolbar>
-                <Code style={{ padding: 0 }}>
-                  <pre {...rest} />
-                </Code>
-              </CodeLayout>
-            );
-          },
-        }}
-      />
-      <BackToUp element={$dom.current} style={{ float: 'right' }}>
-        Top
-      </BackToUp>
+      <Loading loading={loading}>
+        <Markdown
+          disableCopy={true}
+          source={mdData.source}
+          components={{
+            div: ({ node, ...props }) => {
+              const { 'data-meta': meta, 'data-md': metaData, ...rest } = props as any;
+              const line = node.position?.start.line;
+              const metaId = getMetaId(metaData) || String(line);
+              const Child = mdData.components[metaId];
+              if (meta !== 'preview' || !metaId || typeof Child !== 'function') return <div {...props} />;
+              const code = mdData.data[metaId].value || '';
+              const param = getURLParameters(meta);
+              return (
+                <CodeLayout disableCheckered style={{ marginBottom: 18 }}>
+                  <Preview>
+                    <Child />
+                  </Preview>
+                  <Toolbar text={code}>{param.title || '示例'}</Toolbar>
+                  <Code style={{ padding: 0 }}>
+                    <pre {...rest} />
+                  </Code>
+                </CodeLayout>
+              );
+            },
+          }}
+        />
+        <BackToUp element={$dom.current} style={{ float: 'right' }}>
+          Top
+        </BackToUp>
+      </Loading>
     </Wrapper>
   );
 };
