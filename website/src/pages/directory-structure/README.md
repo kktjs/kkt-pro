@@ -40,7 +40,7 @@
 
 ### build 目录
 
-执行 `anem build` 后，产物默认会存放在这里
+执行 `kktp build` 后，产物默认会存放在这里
 
 ```bash
 ├── build           # 编译后生成的目录
