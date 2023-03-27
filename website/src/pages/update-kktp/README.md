@@ -5,8 +5,7 @@
 ## 依赖处理
 
 项目的 package.json 需要升级 `kkt`, 并替换掉对应的 `kkt` 插件。
-```ts
-// package.json
+```diff
 {
   "devDependencies": {
 +   "@kkt/pro": "^1.0.0",
@@ -19,8 +18,7 @@
 ## 启动命令
 
 将原有的`kkt`命令替换成`kktp`。
-```ts
-// package.json
+```diff
 {
   "scripts": {
 -    "start": "kkt start",
@@ -41,8 +39,7 @@
 - `kktp`中路由配置规则与`react-router@6`同步，所以路由相关的一些 api 存在着使用上的差异。
 - `kktp`中约定`element`路径为字符串，在`kktp`内部会自动处理成异步加载。
 
-```ts
-// config/routes.json
+```diff
 [
   {
      "path": "/page",
