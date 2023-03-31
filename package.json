@@ -4,15 +4,15 @@
   "scripts": {
     "prepare": "husky install",
     "watch": "lerna exec --scope kktp -- npm run watch",
-    "build": "lerna exec --scope @kkt/* --scope kktp --scope create-kktp -- npm run build",
-    "watch:d": "lerna exec --scope @kkt/doc -- npm run watch",
-    "watch:route": "lerna exec --scope @kkt/plugin-pro-router -- npm run watch",
-    "watch:config": "lerna exec --scope @kkt/plugin-pro-config -- npm run watch",
-    "watch:models": "lerna exec --scope  @kkt/plugin-pro-rematch -- npm run watch",
-    "watch:utils": "lerna exec --scope  @kkt/plugin-pro-utils -- npm run watch",
-    "watch:access": "lerna exec --scope  @kkt/plugin-pro-access -- npm run watch",
-    "watch:pro": "lerna exec --scope  @kkt/pro -- npm run watch",
-    "watch:kktp": "lerna exec --scope kktp -- npm run watch",
+    "build": "lerna exec --scope @kkt/* --scope kktp --scope create-kktp -- tsbb build src/*.{ts,tsx} --use-babel",
+    "watch:d": "lerna exec --scope @kkt/doc -- npm run watch src/*.{ts,tsx} --use-babel",
+    "watch:route": "lerna exec --scope @kkt/plugin-pro-router -- tsbb watch src/*.{ts,tsx} --use-babel",
+    "watch:config": "lerna exec --scope @kkt/plugin-pro-config -- tsbb watch src/*.{ts,tsx} --use-babel",
+    "watch:models": "lerna exec --scope  @kkt/plugin-pro-rematch -- tsbb watch src/*.{ts,tsx} --use-babel",
+    "watch:utils": "lerna exec --scope  @kkt/plugin-pro-utils -- tsbb watch src/*.{ts,tsx} --use-babel",
+    "watch:access": "lerna exec --scope  @kkt/plugin-pro-access -- tsbb watch src/*.{ts,tsx} --use-babel",
+    "watch:pro": "lerna exec --scope  @kkt/pro -- tsbb watch src/*.{ts,tsx} --use-babel",
+    "watch:kktp": "lerna exec --scope kktp -- tsbb watch src/*.{ts,tsx} --use-babel",
     "------------": "----------------案例------------------------------",
     "basic": "lerna exec --scope @examples/basic -- npm run start",
     "basic-js": "lerna exec --scope  @examples/basic-js -- npm run start",
@@ -24,7 +24,7 @@
     "rematch": "lerna exec --scope @examples/rematch -- npm run start",
     "-------------": "----------------------------------------------",
     "start": "lerna exec --scope website -- npm run start",
-    "build:website": "lerna exec --scope website -- npm run build",
+    "build:website": "lerna exec --scope website -- tsbb build src/*.{ts,tsx} --use-babel",
     "version": "lerna version --force-publish=* --no-changelog --no-git-tag-version --no-push",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "remove": "lerna exec \"rm -rf node_modules build package-lock.json\"",
@@ -46,7 +46,7 @@
     "lerna": "~6.0.3",
     "lint-staged": "~13.0.4",
     "prettier": "~2.8.0",
-    "tsbb": "~3.7.8"
+    "tsbb": "^4.0.8"
   },
   "engines": {
     "node": ">=16.0.0"

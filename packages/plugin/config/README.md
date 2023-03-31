@@ -9,7 +9,7 @@
 import webpack from 'webpack';
 import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 import { RouterPluginProps } from '@kkt/plugin-pro-router';
-import type { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export type DefaultDefineType = {};
 
