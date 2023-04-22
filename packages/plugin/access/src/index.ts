@@ -1,11 +1,9 @@
 import webpack from 'webpack';
 import path from 'path';
-import chokidar from 'chokidar';
 import FS from 'fs-extra';
 import { AccessPluginProps } from './interface';
 import { getExt, isFile } from './utils';
 import { createIndex, createAccess } from './code';
-import RouterPlugin from '@kkt/plugin-pro-router';
 
 class AccessPlugin {
   access?: boolean;

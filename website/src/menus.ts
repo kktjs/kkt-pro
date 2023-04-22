@@ -14,4 +14,5 @@ export const menusConfig: MenusConfigObject[] = [
   { title: '代理', path: '/doc/proxy' },
   { title: '权限', path: '/doc/access' },
   { title: 'redux', path: '/doc/redux' },
+  { title: 'API 请求', path: '/doc/request' },
 ];

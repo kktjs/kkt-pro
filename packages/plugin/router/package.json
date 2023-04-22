@@ -36,8 +36,8 @@
     "@types/recursive-readdir": "~2.2.1",
     "chokidar": "~3.5.3",
     "fs-extra": "~11.1.0",
-    "react-router": "^6.8.0",
-    "react-router-dom": "^6.8.0",
+    "react-router": "^6.10.0",
+    "react-router-dom": "^6.10.0",
     "recursive-readdir": "~2.2.3"
   }
 }

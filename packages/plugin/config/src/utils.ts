@@ -68,13 +68,14 @@ export const getKKTPlugins = (
 };
 
 /**生成导出文件*/
-const createExportField = (pathList: string[], cacheDirName: string) => {
-  if (pathList.length) {
-    const contentPath = path.join(process.cwd(), 'src', cacheDirName, 'export.ts');
-    const content = pathList.map((bod) => `export * from "./${bod}";`).join('\n');
-    FS.ensureFileSync(contentPath);
-    FS.writeFileSync(contentPath, content, { flag: 'w+', encoding: 'utf-8' });
+const createExportField = (pathList: string[], cacheDirName: string, queryClient: boolean) => {
+  const contentPath = path.join(process.cwd(), 'src', cacheDirName, 'export.ts');
+  let content = pathList.map((bod) => `export * from "./${bod}";`).join('\n');
+  if (queryClient) {
+    content += `\nexport * from "@kkt/request";\n`;
   }
+  FS.ensureFileSync(contentPath);
+  FS.writeFileSync(contentPath, content, { flag: 'w+', encoding: 'utf-8' });
 };
 
 /**内置插件判断*/
@@ -94,13 +95,15 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps, options?: LoaderCo
     alias = {},
     /** 分析产物构成 */
     analyze,
+    /** 是否导出使用 react-query 状态管理器 */
+    queryClient = false,
   } = props;
   const pluginsArr = [...plugins];
   const exportPath = [];
   const newAlias = { ...alias };
 
   if (initEntery) {
-    pluginsArr.push(['@kkt/plugin-pro-entry', { redux: initModel, cacheDirName }]);
+    pluginsArr.push(['@kkt/plugin-pro-entry', { redux: initModel, queryClient, cacheDirName }]);
   }
   if (initRoutes) {
     pluginsArr.push([
@@ -130,7 +133,7 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps, options?: LoaderCo
       }),
     );
   }
-  createExportField(exportPath, cacheDirName);
+  createExportField(exportPath, cacheDirName, queryClient);
   /**这是为了解决导出问题*/
   if (!exportPath.length) {
     newAlias['@@/export'] = './export';

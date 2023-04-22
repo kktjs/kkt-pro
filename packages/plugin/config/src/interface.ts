@@ -29,7 +29,6 @@ export type KKTPlugins = (
 )[];
 
 export type KKTPAnalyze = BundleAnalyzerPlugin['opts'];
-
 export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   /**
    * 别名
@@ -38,6 +37,8 @@ export interface OverrideKKTPConfigProps extends Omit<WebpackConfiguration, 'plu
    * 2. `@@` 指向 src/.kktp 目录
    */
   alias?: Record<string, string | false | string[]>;
+  /** 是否导出使用 react-query 状态管理器 */
+  queryClient?: boolean;
   /** 插件 */
   plugins?: PluginsType;
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */

@@ -1,0 +1,39 @@
+{
+  "name": "@kkt/request",
+  "version": "1.0.10",
+  "description": "kktp query",
+  "author": "SunLxy <1011771396@qq.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "module": "esm/index.js",
+  "scripts": {
+    "start": "tsbb watch",
+    "watch": "tsbb watch",
+    "build": "tsbb build"
+  },
+  "files": [
+    "lib",
+    "esm",
+    "src"
+  ],
+  "peerDependencies": {
+    "@babel/runtime": ">=7.11.0",
+    "@tanstack/react-query": ">=4.24.6",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.18.6",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
+    "react": "~18.2.0",
+    "react-dom": "~18.2.0",
+    "react-router": "^6.10.0",
+    "react-router-dom": "^6.10.0"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^4.24.6",
+    "axios": "~1.1.3"
+  }
+}
