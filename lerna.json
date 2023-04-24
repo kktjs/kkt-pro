@@ -1,5 +1,5 @@
 {
-  "version": "1.0.10",
+  "version": "1.0.11-bate.1",
   "packages": ["core", "packages/*", "examples/*", "packages/plugin/*"],
   "useWorkspaces": true
 }

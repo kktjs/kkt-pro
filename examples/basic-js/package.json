@@ -1,6 +1,6 @@
 {
   "name": "@examples/basic-js",
-  "version": "1.0.10",
+  "version": "1.0.11-bate.1",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@kkt/pro": "^1.0.10"
+    "@kkt/pro": "^1.0.11-bate.1"
   },
   "eslintConfig": {
     "extends": [
