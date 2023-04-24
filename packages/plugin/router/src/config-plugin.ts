@@ -3,7 +3,7 @@ import chokidar from 'chokidar';
 import FS from 'fs-extra';
 import { checkRoutersFile, analysisRoutersIcon, analysisRoutersLoader } from '@kkt/plugin-pro-utils';
 import { getRouteContent } from './utils';
-import { createRouteConfigTemp, createIndexRouteTemp, createRouteTsTemp } from './code';
+import { createRouteConfigTemp, createIndexRouteTemp } from './code';
 import { RouterPluginProps } from './interface';
 import { creatLoop } from './code';
 
@@ -60,7 +60,7 @@ export class ConfigRouterPlugin {
     if (this.pre_index_content !== routeTemp) {
       this.pre_index_content = routeTemp;
       FS.writeFileSync(this.temp_index_file, routeTemp, { encoding: 'utf-8', flag: 'w+' });
-      FS.writeFileSync(this.temp_ts_file, createRouteTsTemp(), { encoding: 'utf-8', flag: 'w+' });
+      // FS.writeFileSync(this.temp_ts_file, createRouteTsTemp(), { encoding: 'utf-8', flag: 'w+' });
     }
   }
   createUtilsFile() {

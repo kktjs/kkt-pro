@@ -70,7 +70,17 @@ export const getKKTPlugins = (
 /**生成导出文件*/
 const createExportField = (pathList: string[], cacheDirName: string, queryClient: boolean) => {
   const contentPath = path.join(process.cwd(), 'src', cacheDirName, 'export.ts');
-  let content = pathList.map((bod) => `export * from "./${bod}";`).join('\n');
+  let content = pathList
+    .map((bod) => {
+      if (bod === 'routes') {
+        return `
+// export * from "./${bod}";
+export * from 'react-router-dom';
+export * from 'react-router';`;
+      }
+      return `export * from "./${bod}";`;
+    })
+    .join('\n');
   if (queryClient) {
     content += `\nexport * from "@kkt/request";\n`;
   }
@@ -119,7 +129,6 @@ export const getInitPlugin = (props: OverrideKKTPConfigProps, options?: LoaderCo
   if (access) {
     const fallbackElement = typeof initRoutes === 'boolean' ? null : initRoutes?.fallbackElement;
     pluginsArr.push(['@kkt/plugin-pro-access', { access, fallbackElement }]);
-    exportPath.push('access');
   }
   /**分析产物*/
   if (options.analyzer && options.analyzer === 1) {

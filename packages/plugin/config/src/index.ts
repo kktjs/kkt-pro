@@ -36,6 +36,7 @@ const overrideKKTPConfig = (
     initModel = false,
     /** 分析产物构成 */
     analyze,
+    queryClient,
     ...rest
   } = overrideConfigProps;
   conf.output = { ...conf.output, ...output, publicPath: prefix };
