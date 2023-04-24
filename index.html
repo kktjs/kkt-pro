@@ -154,247 +154,41 @@ class MarkdownStyle extends HTMLElement {
     }
 }
 customElements.define('markdown-style', MarkdownStyle);</script><markdown-style style="max-width: 960px; margin: 0 auto 60px auto; padding: 8px" class="markdown-style">
-    <h1 id="kktp"><a class="anchor" aria-hidden="true" tabindex="-1" href="#kktp"><span class="octicon octicon-link"></span></a>kktp</h1>
+    <h2 id="kktp"><a class="anchor" aria-hidden="true" tabindex="-1" href="#kktp"><span class="octicon octicon-link"></span></a>KKTP</h2>
+    <p>命令行工具用于 <code>Mobile</code>/<code>PC</code> 页面构建。</p>
     <h2 id="安装"><a class="anchor" aria-hidden="true" tabindex="-1" href="#安装"><span class="octicon octicon-link"></span></a>安装</h2>
-    <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">npm</span> <span class="token function">install</span> kktp <span class="token parameter variable">-D</span> <span class="token comment"># yarn add kktp -D</span>
-</span></code><div onclick="copied(this)" data-code="$ npm install kktp -D # yarn add kktp -D
+    <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">npm</span> <span class="token function">install</span> @kkt/pro <span class="token parameter variable">-D</span> <span class="token comment"># yarn add @kkt/pro -D</span>
+</span></code><div onclick="copied(this)" data-code="$ npm install @kkt/pro -D # yarn add @kkt/pro -D
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    <h2 id="说明"><a class="anchor" aria-hidden="true" tabindex="-1" href="#说明"><span class="octicon octicon-link"></span></a>说明</h2>
-    <p>kktp ===> <code>kkt pro</code></p>
-    <p>把现存的<code>uiw-admin</code>进行简化</p>
-    <p>功能参考：<code>umi</code>、 <code>antd component pro</code></p>
     <h2 id="功能"><a class="anchor" aria-hidden="true" tabindex="-1" href="#功能"><span class="octicon octicon-link"></span></a>功能</h2>
     <p>对<code>kkt</code>进行封装配置集成,功能方面可以使用插件(plugin)</p>
-    <ol>
-      <li>入口文件自动生成</li>
-      <li>默认全局样式文件</li>
-      <li>配置文件路由自动生成/通过配置自动通过文件路径生成路由</li>
-      <li>菜单icon图标处理</li>
-      <li>支持<code>react-router 6</code></li>
-      <li>支持<code>react-redux</code></li>
-      <li>默认封装<code>mocker</code>代理配置</li>
-      <li>支持路由拦截 / 权限控制</li>
-      <li>支持生成代码分析报告</li>
-    </ol>
-    <h2 id="command-help"><a class="anchor" aria-hidden="true" tabindex="-1" href="#command-help"><span class="octicon octicon-link"></span></a>Command Help</h2>
-    <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">
-</span><span class="code-line line-number" line="2">  Usage: kktp <span class="token punctuation">[</span>build<span class="token operator">|</span><span class="token function">watch</span><span class="token operator">|</span>doc<span class="token punctuation">]</span> <span class="token punctuation">[</span>input-file<span class="token punctuation">]</span> <span class="token punctuation">[</span>--help<span class="token operator">|</span>h<span class="token punctuation">]</span>
-</span><span class="code-line line-number" line="3">
-</span><span class="code-line line-number" line="4">  Displays <span class="token builtin class-name">help</span> information.
-</span><span class="code-line line-number" line="5">
-</span><span class="code-line line-number" line="6">  Options:
-</span><span class="code-line line-number" line="7">
-</span><span class="code-line line-number" line="8">   --version, <span class="token parameter variable">-v</span>         Show version number
-</span><span class="code-line line-number" line="9">   --help, <span class="token parameter variable">-h</span>            Displays <span class="token builtin class-name">help</span> information.
-</span><span class="code-line line-number" line="10">   --entry, <span class="token parameter variable">-e</span>           Document entry address.
-</span><span class="code-line line-number" line="11">   <span class="token parameter variable">--local</span>               Local address preview or not.
-</span><span class="code-line line-number" line="12">
-</span><span class="code-line line-number" line="13">  Example:
-</span><span class="code-line line-number" line="14">
-</span><span class="code-line line-number" line="15">   $ kktp build
-</span><span class="code-line line-number" line="16">   $ kktp <span class="token function">watch</span>
-</span><span class="code-line line-number" line="17">   $ kktp doc
-</span><span class="code-line line-number" line="18">
-</span></code><div onclick="copied(this)" data-code="
-  Usage: kktp [build|watch|doc] [input-file] [--help|h]
-
-  Displays help information.
-
-  Options:
-
-   --version, -v         Show version number
-   --help, -h            Displays help information.
-   --entry, -e           Document entry address.
-   --local               Local address preview or not.
-
-  Example:
-
-   $ kktp build
-   $ kktp watch
-   $ kktp doc
-
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    <h2 id="文档命令使用"><a class="anchor" aria-hidden="true" tabindex="-1" href="#文档命令使用"><span class="octicon octicon-link"></span></a>文档命令使用</h2>
-    <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">
-</span><span class="code-line line-number" line="2">kktp doc <span class="token parameter variable">--entry</span> @uiw/doc/doc <span class="token comment"># 使用文档包进行预览</span>
-</span><span class="code-line line-number" line="3">
-</span><span class="code-line line-number" line="4">kktp doc <span class="token parameter variable">--entry</span> ./build <span class="token parameter variable">--local</span> <span class="token comment"># 使用本地地址进行预览</span>
-</span><span class="code-line line-number" line="5">
-</span></code><div onclick="copied(this)" data-code="
-kktp doc --entry @uiw/doc/doc # 使用文档包进行预览
-
-kktp doc --entry ./build --local # 使用本地地址进行预览
-
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    <p>package.json 中配置命令</p>
-    <pre class="language-json"><code class="language-json code-highlight"><span class="code-line line-number" line="1">
-</span><span class="code-line line-number" line="2">  <span class="token comment">// ....</span>
-</span><span class="code-line line-number" line="3">  <span class="token property">"script"</span><span class="token operator">:</span><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="4">    <span class="token property">"doc"</span><span class="token operator">:</span><span class="token string">"kktd @uiw/doc/doc"</span><span class="token punctuation">,</span> 
-</span><span class="code-line line-number" line="5">    <span class="token property">"doc2"</span><span class="token operator">:</span><span class="token string">"kktd ./examples/doc --local"</span><span class="token punctuation">,</span> 
-</span><span class="code-line line-number" line="6">  <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="7">
-</span></code><div onclick="copied(this)" data-code="
-  // ....
-  &#x22;script&#x22;:{
-    &#x22;doc&#x22;:&#x22;kktd @uiw/doc/doc&#x22;, 
-    &#x22;doc2&#x22;:&#x22;kktd ./examples/doc --local&#x22;, 
-  }
-
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    <h2 id="约定配置位置"><a class="anchor" aria-hidden="true" tabindex="-1" href="#约定配置位置"><span class="octicon octicon-link"></span></a>约定配置位置</h2>
-    <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token builtin class-name">.</span>
-</span><span class="code-line line-number" line="2">├── config <span class="token comment"># </span>
-</span><span class="code-line line-number" line="3">│    └── router.json <span class="token comment"># 路由菜单配置文件</span>
-</span><span class="code-line line-number" line="4">├── .kktprc.ts <span class="token comment"># 配置文件</span>
-</span><span class="code-line line-number" line="5">└── mock <span class="token comment"># mock 数据</span>
-</span><span class="code-line line-number" line="6">    └── index.js
-</span></code><div onclick="copied(this)" data-code=".
-├── config # 
-│    └── router.json # 路由菜单配置文件
-├── .kktprc.ts # 配置文件
-└── mock # mock 数据
-    └── index.js
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+    <ul class="contains-task-list">
+      <li class="task-list-item"><input type="checkbox" checked disabled> 入口文件自动生成</li>
+      <li class="task-list-item"><input type="checkbox" checked disabled> 默认全局样式文件</li>
+      <li class="task-list-item"><input type="checkbox" checked disabled> 配置文件路由自动生成/通过配置自动通过文件路径生成路由</li>
+      <li class="task-list-item"><input type="checkbox" checked disabled> 菜单<code>icon</code>图标处理</li>
+      <li class="task-list-item"><input type="checkbox" checked disabled> 支持<code>react-router 6</code></li>
+      <li class="task-list-item"><input type="checkbox" checked disabled> 支持<code>react-redux</code></li>
+      <li class="task-list-item"><input type="checkbox" checked disabled> 默认封装<code>mocker</code>代理配置</li>
+      <li class="task-list-item"><input type="checkbox" checked disabled> 支持路由拦截 / 权限控制</li>
+      <li class="task-list-item"><input type="checkbox" checked disabled> 支持生成代码分析报告</li>
+      <li class="task-list-item"><input type="checkbox" disabled> 支持接口返回菜单进行展示</li>
+      <li class="task-list-item"><input type="checkbox" disabled> 添加国际化方案</li>
+    </ul>
     <h2 id="插件"><a class="anchor" aria-hidden="true" tabindex="-1" href="#插件"><span class="octicon octicon-link"></span></a>插件</h2>
-    <ol>
+    <ul>
       <li>配置处理包<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/config">@kkt/plugin-pro-config</a></li>
       <li>自动生成入口<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/entry">@kkt/plugin-pro-entry</a></li>
       <li>生成路由配置<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/router">@kkt/plugin-pro-router</a></li>
       <li>状态管理<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/rematch">@kkt/plugin-pro-rematch</a></li>
       <li>权限管理<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/access">@kkt/plugin-pro-access</a></li>
-      <li>本地icon图标使用 <a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/icons">@kkt/plugin-pro-icons</a></li>
       <li>包集成管理<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/pro">@kkt/pro</a></li>
-    </ol>
-    <h2 id="配置加载"><a class="anchor" aria-hidden="true" tabindex="-1" href="#配置加载"><span class="octicon octicon-link"></span></a>配置加载</h2>
-    <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1"><span class="token comment">// .kktprc.ts</span>
-</span><span class="code-line line-number" line="2">
-</span><span class="code-line line-number" line="3"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="4">  <span class="token comment">// ...</span>
-</span><span class="code-line line-number" line="5">  <span class="token comment">/** 自动生成入口文件 */</span>
-</span><span class="code-line line-number" line="6">  initEntery<span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="7">  <span class="token comment">/** 路由配置 */</span>
-</span><span class="code-line line-number" line="8">  initRoutes<span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="9">  <span class="token comment">/** 自动生成models集合配置文件 */</span>
-</span><span class="code-line line-number" line="10">  initModel<span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="11">  <span class="token comment">/** 是否开启权限 */</span>
-</span><span class="code-line line-number" line="12">  access<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="13">  <span class="token comment">/** 是否开始本地 icon 功能 */</span>
-</span><span class="code-line line-number" line="14">  icons<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="15"><span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="16">
-</span></code><div onclick="copied(this)" data-code="// .kktprc.ts
-
-export default {
-  // ...
-  /** 自动生成入口文件 */
-  initEntery:true,
-  /** 路由配置 */
-  initRoutes:true,
-  /** 自动生成models集合配置文件 */
-  initModel:true,
-  /** 是否开启权限 */
-  access: true,
-  /** 是否开始本地 icon 功能 */
-  icons: true,
-}
-
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    <h2 id="kkt-升级到-kktpro"><a class="anchor" aria-hidden="true" tabindex="-1" href="#kkt-升级到-kktpro"><span class="octicon octicon-link"></span></a>kkt 升级到 kktpro</h2>
-    <p><strong>依赖处理</strong></p>
-    <p>项目的 package.json 需要升级 <code>kkt</code>, 并替换掉对应的 <code>kkt</code> 插件。</p>
-    <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1"><span class="token comment">// package.json</span>
-</span><span class="code-line line-number" line="2"><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="3">  <span class="token string-property property">"devDependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="4"><span class="token operator">+</span>   <span class="token string">"@kkt/pro"</span><span class="token operator">:</span> <span class="token string">"^1.0.0"</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="5"><span class="token operator">-</span>   <span class="token string">"kkt"</span><span class="token operator">:</span> <span class="token string">"^7.0.0"</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="6"><span class="token operator">-</span>   <span class="token string">"@kkt/***"</span><span class="token operator">:</span> <span class="token string">"^1.0.0"</span>
-</span><span class="code-line line-number" line="7">  <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="8"><span class="token punctuation">}</span>
-</span></code><div onclick="copied(this)" data-code="// package.json
-{
-  &#x22;devDependencies&#x22;: {
-+   &#x22;@kkt/pro&#x22;: &#x22;^1.0.0&#x22;,
--   &#x22;kkt&#x22;: &#x22;^7.0.0&#x22;,
--   &#x22;@kkt/***&#x22;: &#x22;^1.0.0&#x22;
-  }
-}
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    <p><strong>启动命令</strong></p>
-    <p>将原有的<code>kkt</code>命令替换成<code>kktp</code>。</p>
-    <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1"><span class="token comment">// package.json</span>
-</span><span class="code-line line-number" line="2"><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="3">  <span class="token string-property property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="4"><span class="token operator">-</span>    <span class="token string">"start"</span><span class="token operator">:</span> <span class="token string">"kkt start"</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="5"><span class="token operator">-</span>    <span class="token string">"build"</span><span class="token operator">:</span> <span class="token string">"kkt build"</span>
-</span><span class="code-line line-number" line="6"><span class="token operator">+</span>    <span class="token string">"start"</span><span class="token operator">:</span> <span class="token string">"kktp start"</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="7"><span class="token operator">+</span>    <span class="token string">"build"</span><span class="token operator">:</span> <span class="token string">"kktp build"</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="8">  <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="9"><span class="token punctuation">}</span>
-</span></code><div onclick="copied(this)" data-code="// package.json
-{
-  &#x22;scripts&#x22;: {
--    &#x22;start&#x22;: &#x22;kkt start&#x22;,
--    &#x22;build&#x22;: &#x22;kkt build&#x22;
-+    &#x22;start&#x22;: &#x22;kktp start&#x22;,
-+    &#x22;build&#x22;: &#x22;kktp build&#x22;,
-  }
-}
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    <p><strong>配置层迁移</strong></p>
-    <p><code>.kktrc.[ts|js]</code> 文件替换成 <code>.kktprc.[ts|js]</code>文件。<code>kktprc</code>配置文档参考<a href="https://github.com/kktjs/kkt-pro/tree/main/packages/plugin/config">@kkt/plugin-pro-config</a></p>
-    <p><strong>路由配置修改</strong></p>
-    <ul>
-      <li><code>kktp</code>中约定 <code>config/routes.[json|js|ts]</code>为路由文件。</li>
-      <li><code>kktp</code>中路由配置规则与<code>react-router@6</code>同步，所以路由相关的一些 api 存在着使用上的差异。</li>
-      <li><code>kktp</code>中约定<code>element</code>路径为字符串，在<code>kktp</code>内部会自动处理成异步加载。</li>
     </ul>
-    <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1"><span class="token comment">// config/routes.json</span>
-</span><span class="code-line line-number" line="2"><span class="token punctuation">[</span>
-</span><span class="code-line line-number" line="3">  <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="4">     <span class="token string-property property">"path"</span><span class="token operator">:</span> <span class="token string">"/page"</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="5"><span class="token operator">-</span>    <span class="token string">"component"</span><span class="token operator">:</span> <span class="token string">"@/layouts/BasicLayout"</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="6"><span class="token operator">+</span>    <span class="token string">"element"</span><span class="token operator">:</span> <span class="token string">"@/layouts/BasicLayout"</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="7"><span class="token operator">-</span>    <span class="token string">"routes"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="8"><span class="token operator">+</span>    <span class="token string">"children"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="9">     <span class="token comment">// ...</span>
-</span><span class="code-line line-number" line="10">  <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="11"><span class="token punctuation">]</span>
-</span></code><div onclick="copied(this)" data-code="// config/routes.json
-[
-  {
-     &#x22;path&#x22;: &#x22;/page&#x22;,
--    &#x22;component&#x22;: &#x22;@/layouts/BasicLayout&#x22;,
-+    &#x22;element&#x22;: &#x22;@/layouts/BasicLayout&#x22;,
--    &#x22;routes&#x22;: [],
-+    &#x22;children&#x22;: [],
-     // ...
-  }
-]
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    <p><strong>代码层修改</strong></p>
-    <p>为了减少代码量，<code>kktp</code>中集成了部分导出类型，如：<code>router</code> / <code>rematch</code> 等常用功能。</p>
-    <p>例如：配置了<code>initRoutes</code>, <code>initModel</code>, 则页面中可以直接通过<code>@kkt/pro</code>来导出对应的类型。</p>
-    <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">import</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="2">  useLocation<span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="3">  Outlet<span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="4">  Dispatch<span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="5">  <span class="token operator">...</span>
-</span><span class="code-line line-number" line="6"><span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@kkt/pro'</span><span class="token punctuation">;</span>
-</span></code><div onclick="copied(this)" data-code="import {
-  useLocation,
-  Outlet,
-  Dispatch,
-  ...
-} from &#x27;@kkt/pro&#x27;;
-" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-    <h2 id="配置加载使用-proload-替换"><a class="anchor" aria-hidden="true" tabindex="-1" href="#配置加载使用-proload-替换"><span class="octicon octicon-link"></span></a>配置加载使用 proload 替换</h2>
-    <p>Github: <a href="https://github.com/natemoo-re/proload">https://github.com/natemoo-re/proload</a></p>
-    <h4 id="问题"><a class="anchor" aria-hidden="true" tabindex="-1" href="#问题"><span class="octicon octicon-link"></span></a>问题</h4>
-    <ul class="contains-task-list">
-      <li class="task-list-item"><input type="checkbox" disabled> <code>require</code>引入，缺失<code>use</code>方法</li>
-      <li class="task-list-item"><input type="checkbox" checked disabled> 配置文件需要使用<code>module.exports/require</code>写法,不能使用<code>import/export</code>写法</li>
-    </ul>
+    <h3 id="contributors"><a class="anchor" aria-hidden="true" tabindex="-1" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h3><a href="https://github.com/kktjs/kkt-pro/graphs/contributors">
+  <img src="https://kktjs.github.io/kkt-pro/CONTRIBUTORS.svg">
+</a>
+    <h3 id="license"><a class="anchor" aria-hidden="true" tabindex="-1" href="#license"><span class="octicon octicon-link"></span></a>License</h3>
+    <p>Licensed under the MIT License.</p>
   <style>markdown-style pre .copied {
   display: flex;
   position: absolute;
