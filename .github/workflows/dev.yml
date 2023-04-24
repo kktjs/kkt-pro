@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - dev
+      - v2
 
 jobs:
   build:
@@ -166,6 +166,7 @@ jobs:
             packages/doc
             packages/create-kktp
             packages/plugin/*
+            packages/request
             core
           tag: bate
 

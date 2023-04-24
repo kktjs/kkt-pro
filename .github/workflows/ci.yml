@@ -163,6 +163,7 @@ jobs:
             packages/doc
             packages/create-kktp
             packages/plugin/*
+            packages/request
             core
             
       - name: Generate Contributors Images
