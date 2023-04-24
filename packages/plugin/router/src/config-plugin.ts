@@ -56,7 +56,7 @@ export class ConfigRouterPlugin {
   // ------------------------------------------------------
   /**创建路由入口文件*/
   createIndex() {
-    const routeTemp = createIndexRouteTemp(this.routesType, this.routesOutletElement);
+    const routeTemp = createIndexRouteTemp(this.routesType, this.fallbackElement, this.routesOutletElement);
     if (this.pre_index_content !== routeTemp) {
       this.pre_index_content = routeTemp;
       FS.writeFileSync(this.temp_index_file, routeTemp, { encoding: 'utf-8', flag: 'w+' });

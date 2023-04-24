@@ -16,46 +16,60 @@ ${content}
 };
 
 const Routertype = {
-  browser: 'BrowserRouter',
-  hash: 'HashRouter',
-  memory: 'MemoryRouter',
+  browser: 'createBrowserRouter',
+  hash: 'createHashRouter',
+  memory: 'createMemoryRouter',
 };
 
+const createRouterFunTemp = (type: 'browser' | 'hash' | 'memory') => `
+const childRoutes = (routes) => {
+  const data = routes.find((item) => item.path === '/')
+  if(data && Array.isArray(data.children) && data.children.length){
+    return  filterEmptyChildRoutes(data.children);
+  }
+  return [];
+}
+
+let router;
+let navigate;
+export const createRouter = (routes,options) => {
+  router = ${Routertype[type]}(handleRoutes(routes, childRoutes(routes)), options);
+  navigate = router.navigate;
+  return router
+};
+export { router,navigate }
+`;
+
 /**获取路由入口文件内容*/
-export const createIndexRouteTemp = (type: 'browser' | 'hash' | 'memory', routesOutletElement?: string) => {
+export const createIndexRouteTemp = (
+  type: 'browser' | 'hash' | 'memory',
+  fallbackElement?: string,
+  routesOutletElement?: string,
+) => {
   let importRouter = `
 import React from "react";
-import { ${Routertype[type]}, useRoutes ,useNavigate} from 'react-router-dom';
+import {${Routertype[type]}, RouterProvider} from 'react-router-dom';
 import routesConfig from "./config";
 import { handleRoutes, filterEmptyChildRoutes } from './utils';
 `;
 
-  let render = `<${Routertype[type]}>\n`;
+  if (fallbackElement) {
+    importRouter += `import FallbackElement from "${fallbackElement}";\n`;
+  }
+
+  let render = `<RouterProvider router={createRouter(routesConfig)} fallbackElement={${
+    fallbackElement ? '<FallbackElement />' : '<div>loading...</div>'
+  }} />`;
   if (routesOutletElement) {
     importRouter += `import RoutesOutletElement from "${routesOutletElement}";\n`;
-    render += `    <RoutesOutletElement routes={routesConfig}><App /></RoutesOutletElement>\n`;
-  } else {
-    render += `    <App />\n`;
+    render = `<RoutesOutletElement routes={routesConfig} createRouter={createRouter}>${render}</RoutesOutletElement>`;
   }
-  render += `  </${Routertype[type]}>`;
 
   return `
 ${importRouter}
-export * from 'react-router-dom';
-export * from 'react-router';
-const App = (props) => {
-  const { routes = routesConfig } = props;
-  const navigate = useNavigate();
-  const childRoutes = React.useMemo(() => {
-    const data = routes.find((item) => item.path === '/')
-    if(data && Array.isArray(data.children) && data.children.length){
-      return  filterEmptyChildRoutes(data.children);
-    }
-    return [];
-  }, [routes])
-  return useRoutes(handleRoutes(routes, childRoutes,navigate));
-}
-export default ()=>(\n  ${render}\n)
+
+${createRouterFunTemp(type)}
+export default ()=>(${render})
 `;
 };
 
@@ -77,12 +91,12 @@ export const getRouterDataCode = (data: Map<string, string>, outletLayout?: stri
     const newName = `${name}${index}`;
     importCode += `import ${newName} from "${routePath}";\n`;
     if (pathStr === '*') {
-      globalCode += `\t{ path: prefix + "${pathStr}", element: React.lazy(() => import("${routePath}")), loader: ${newName}.loader },\n`;
+      globalCode += `\t{ path: prefix + "${pathStr}", element: <${routePath} />, loader: ${newName}.loader },\n`;
     } else if (pathStr === 'index') {
       childCode += `\t{ index: true, element: <Navigate to={prefix + "${pathStr}"} />, loader: ${newName}.loader },\n`;
-      childCode += `\t{ path: prefix + "${pathStr}", element: React.lazy(() => import("${routePath}")), loader: ${newName}.loader },\n`;
+      childCode += `\t{ path: prefix + "${pathStr}", element: <${newName} />, loader: ${newName}.loader },\n`;
     } else {
-      childCode += `\t{ path: prefix + "${pathStr}", element: React.lazy(() => import("${routePath}")), loader: ${newName}.loader },\n`;
+      childCode += `\t{ path: prefix + "${pathStr}", element: <${newName} />, loader: ${newName}.loader },\n`;
     }
   });
   if (outletLayout) {
@@ -92,23 +106,14 @@ export const getRouterDataCode = (data: Map<string, string>, outletLayout?: stri
 };
 
 export const creatLoop = (access: boolean, fallbackElement: string) => {
-  let element = '';
   let fallback = '<></>';
-  if (access) {
-    element = `if (Array.isArray(item.children) && item.children.length || item.path === '*') {
-          newItem.element = element;
-        } else {
-          newItem.element = ${access ? '<Access>{element}</Access>;' : 'element;'}
-        }`;
-  } else {
-    element = `newItem.element = element;`;
-  }
   if (fallbackElement && !access) {
     fallback = '<Fallback />';
   }
 
   return `
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 ${access ? `import Access from '@@/access';` : ''}
 ${fallbackElement && !access ? `import Fallback from '${fallbackElement}';` : ''}
 
@@ -132,29 +137,36 @@ export const filterEmptyChildRoutes = (routes) => {
   return newRoutes;
 };
 
-export const handleRoutes = (routes, childRoutes,navigate) => {
+const Childrens = (props) => {
+  const { children, roles = [], routes = [] } = props;
+  const navigate = useNavigate();
+  return React.cloneElement(children, {
+    roles,
+    navigate: navigate,
+    routes
+  })
+}
+
+export const handleRoutes = (routes, childRoutes) => {
   return routes.filter(item => !item.hideRoute).map(item => {
     const newItem = { ...item };
     if (Array.isArray(item.children) && item.children.length) {
-      newItem.children = handleRoutes(item.children, childRoutes,navigate);
+      newItem.children = handleRoutes(item.children, childRoutes);
     }
     if (item.element) {
       const Element = item.element;
-      const roles = item.roles || [];
-      if (!React.isValidElement(item.element)) {
-        const element = (
-          <React.Suspense fallback={${fallback}}>
-            <Element roles={roles} navigate={navigate} routes={childRoutes} />
-          </React.Suspense>
-        )
-        ${element}
+      const ChildElement = <Childrens {...item} routes={childRoutes}>{Element}</Childrens>
+      let accessElement;
+      if (Array.isArray(item.children) && item.children.length || item.path === '*') {
+        accessElement = ChildElement;
       } else {
-        newItem.element = React.cloneElement(Element, {
-          roles: roles,
-          navigate: navigate,
-          routes: childRoutes
-        })
+        ${
+          access
+            ? `accessElement = <Access {...item} routes={childRoutes}>{Element}</Access>;`
+            : `accessElement = ChildElement`
+        }
       }
+      newItem.element = accessElement;
     }
     return newItem;
   });

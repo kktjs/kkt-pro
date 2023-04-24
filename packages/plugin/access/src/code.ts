@@ -7,12 +7,13 @@ export default;
 export const createIndex = (fallbackElement?: string) => {
   const loading = fallbackElement ? '<Fallback />' : '<></>';
   const jsContent = `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import RouteAccess from '@/access';
 ${fallbackElement ? `import Fallback from '${fallbackElement}';` : ''}
 
-const Access = ({ children }) => {
+const Access = (props) => {
+  const { children, roles = [], routes = [] } = props;
   const location = useLocation();
   const navigate = useNavigate();
   const { pathname } = location;
@@ -33,7 +34,11 @@ const Access = ({ children }) => {
   if (!isAccess) {
     return ${loading};
   }
-  return children;
+  return React.cloneElement(children, {
+    roles,
+    navigate: navigate,
+    routes
+  })
 }
 
 export default Access;

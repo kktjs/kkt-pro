@@ -1,9 +1,9 @@
-import { KktproPageProps, useLocation } from '@kkt/pro';
+import { KktproPageProps } from '@kkt/pro';
 import Ceshi from '../Ceshi';
 
 const Home = (props: KktproPageProps) => {
   const { navigate } = props;
-  console.log(useLocation());
+  console.log('dddd', props);
   const click = () => {
     navigate?.('/ceshi');
   };
@@ -16,5 +16,6 @@ const Home = (props: KktproPageProps) => {
 };
 Home.loader = async () => {
   console.log('::进入页面请求API:');
+  return { a: 1 };
 };
 export default Home;

@@ -5,24 +5,20 @@ import { KktproRoutesProps } from '@kkt/pro';
 interface RoutesOutletElementProps {
   children: React.ReactNode;
   routes: KktproRoutesProps[];
+  createRouter: (routes: KktproRoutesProps[], options?: any) => any;
 }
+
 const RoutesOutletElement = (props: RoutesOutletElementProps) => {
+  // const navigate = useNavigate();
+  console.log(678, props);
+
   // 模拟添加路由
   const newRoutes = useMemo(() => {
-    return props.routes.concat([
-      {
-        path: '/home2',
-        element: React.lazy(() => import('@/pages/Home')),
-      },
-      {
-        path: '/about2',
-        element: React.lazy(() => import('@/pages/About')),
-      },
-    ]);
+    return props.routes;
   }, [props.routes]);
 
   return cloneElement(props.children as JSX.Element, {
-    routes: newRoutes,
+    routes: props.createRouter(newRoutes),
   });
 };
 export default RoutesOutletElement;
