@@ -106,8 +106,6 @@ export default function HomePage() {
 
 可选选项，请求的数据进行处理等其它常用[选项](https://tanstack.com/query/v4/docs/react/reference/useQuery)，可以用于默认全局配置 `QueryClientConfig` 的设置。
 
-> 注意：`.anerc.js` 默认已经在 `QueryClientConfig` 中默认全局配置，可以进行增加配置，配置 `react-query=false` 取消注销全局 `QueryClient`，可以自己注册 `QueryClient`
-
 ```js
 const { data } = useReactQuery({
   /** 设置 Content-Type，默认值 `json`，'Content-Type' = 'application/json' */
@@ -406,7 +404,6 @@ const { isLoading, isError, data } = useReactQuery({
 });
 ```
 
-修改 `.anerc.js` 配置，每次尝试的默认 `retryDelay` 设置为双倍（从 `1000` 毫秒开始），但不超过 `30` 秒：
 
 ```js
 /** @type {import("anem").ANEMOptions} */
