@@ -5,7 +5,7 @@
     "prepare": "husky install",
     "watch": "lerna exec --scope kktp -- npm run watch",
     "build": "lerna exec --scope @kkt/* --scope kktp --scope create-kktp -- tsbb build src/*.{ts,tsx} --use-babel",
-    "watch:d": "lerna exec --scope @kkt/doc -- npm run watch src/*.{ts,tsx} --use-babel",
+    "watch:d": "lerna exec --scope @kkt/doc -- npm run watch src/*.ts --use-babel",
     "watch:route": "lerna exec --scope @kkt/plugin-pro-router -- tsbb watch src/*.{ts,tsx} --use-babel",
     "watch:config": "lerna exec --scope @kkt/plugin-pro-config -- tsbb watch src/*.{ts,tsx} --use-babel",
     "watch:entry": "lerna exec --scope @kkt/plugin-pro-entry -- tsbb watch src/*.{ts,tsx} --use-babel",

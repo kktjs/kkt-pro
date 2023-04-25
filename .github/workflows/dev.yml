@@ -166,6 +166,7 @@ jobs:
             packages/doc
             packages/create-kktp
             packages/plugin/*
+            packages/request
             core
           tag: bate
 

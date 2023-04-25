@@ -2,7 +2,7 @@
   "name": "@examples/mocker",
   "description": "基础模拟 API 示例",
   "private": true,
-  "version": "1.0.12",
+  "version": "1.0.13",
   "scripts": {
     "start": "kktp start",
     "build": "kktp build",
@@ -14,7 +14,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@kkt/pro": "^1.0.12"
+    "@kkt/pro": "^1.0.13"
   },
   "eslintConfig": {
     "extends": [
