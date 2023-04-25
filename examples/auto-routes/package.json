@@ -1,6 +1,6 @@
 {
   "name": "@examples/auto-routes",
-  "version": "1.0.12-bate.2",
+  "version": "1.0.11-bate.2",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@kkt/pro": "^1.0.12-bate.2"
+    "@kkt/pro": "^1.0.11-bate.2"
   },
   "eslintConfig": {
     "extends": [
