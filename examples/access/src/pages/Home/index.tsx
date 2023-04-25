@@ -14,7 +14,4 @@ const Home = (props: KktproPageProps) => {
     </div>
   );
 };
-Home.loader = async () => {
-  console.log('::进入页面请求API:');
-};
 export default Home;
