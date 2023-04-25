@@ -208,40 +208,6 @@ const { data } = useReactQuery({
 });
 ```
 
-#### Fetch 选项
-
-请求 `fetch` 相关参数 
-
-```js
-const { data } = useReactQuery({
-  /** 用于设置请求正文的 BodyInit 对象或 null。*/
-  body?: BodyInit | null;
-  /** 一个字符串，指示请求将如何与浏览器的缓存交互以设置请求的缓存。*/
-  cache?: RequestCache;
-  /** 一个字符串，指示凭据是始终、从不还是仅在发送到同源 URL 时随请求一起发送。 设置请求的凭据。*/
-  credentials?: RequestCredentials;
-  /** Headers 对象、对象字面量或包含两项的数组，用于设置请求的标头。*/
-  headers?: HeadersInit;
-  /** 要按请求获取的资源的加密哈希。 设置请求的完整性。*/
-  integrity?: string;
-  /** 设置请求的保活的布尔值。*/
-  keepalive?: boolean;
-  /** 设置请求方法的字符串。(GET|POST|PUT....)*/
-  method?: string;
-  /** 一个字符串，指示请求是使用 CORS，还是仅限于同源 URL。 设置请求的模式。*/
-  mode?: RequestMode;
-  /** 一个字符串，指示请求是否遵循重定向、在遇到重定向时导致错误或返回重定向（以不透明的方式）。 放s request's redirect. */
-  redirect?: RequestRedirect;
-  /** 一个字符串，其值为同源 URL、“about:client”或空字符串，用于设置请求的引荐来源网址。*/
-  referrer?: string;
-  /** 设置请求的 referrerPolicy 的引用策略。*/
-  referrerPolicy?: ReferrerPolicy;
-  /** 用于设置请求信号的 AbortSignal。*/
-  signal?: AbortSignal | null;
-  /** 只能为空。 用于解除来自任何窗口的请求。*/
-  window?: null;
-});
-```
 
 ### useReactMutation
 
