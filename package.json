@@ -40,6 +40,7 @@
     "website",
     "packages/*",
     "examples/*",
+    "packages/request",
     "packages/plugin/*"
   ],
   "devDependencies": {
