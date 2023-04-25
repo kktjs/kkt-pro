@@ -469,34 +469,6 @@ const client = queryClient;
 ```
 
 
-### 提交过程不引起 URL 跳转
-
-使用 `useFetcher` 钩子定义一个 `fetcher.Form` 标签
-
-```jsx
-import { useLoaderData, Form, useFetcher } from "@kkt/pro";
-
-FavoritePage.action = async ({ params, request }) => {
-  let formData = await request.formData();
-  return updateContact(params.contactId, {
-    favorite: formData.get("favorite") === "true",
-  });
-}
-
-export default function FavoritePage({ contact }) {
-  const fetcher = useFetcher();
-  let favorite = contact.favorite;
-  return (
-    <fetcher.Form method="post">
-      <button name="favorite" value={favorite ? "false" : "true"}>
-        {favorite ? "★" : "☆"}
-      </button>
-    </fetcher.Form>
-  );
-}
-```
-
-
 ## 比较 | React Query vs SWR vs Apollo vs RTK Query vs React Router
 
 |   | React Query | SWR [_(Website)_][swr] | Apollo Client [_(Website)_][apollo] | RTK-Query [_(Website)_][rtk-query]   | React Router [_(Website)_][react-router] |

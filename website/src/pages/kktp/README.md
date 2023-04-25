@@ -15,7 +15,6 @@ $ npm install @kkt/pro -D # yarn add @kkt/pro -D
 - 入口文件自动生成
 - 默认全局样式文件
 - 配置文件路由自动生成/通过配置自动通过文件路径生成路由
-- 菜单`icon`图标处理
 - 支持`react-router 6`
 - 支持`react-redux`
 - 默认封装`mocker`代理配置
