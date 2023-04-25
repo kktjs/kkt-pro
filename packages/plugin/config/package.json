@@ -1,6 +1,6 @@
 {
   "name": "@kkt/plugin-pro-config",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "kktp plugins",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
@@ -31,12 +31,12 @@
     "framework"
   ],
   "dependencies": {
-    "@kkt/plugin-pro-entry": "^1.0.10",
-    "@kkt/plugin-pro-rematch": "^1.0.10",
-    "@kkt/plugin-pro-router": "^1.0.10",
-    "@kkt/request": "^1.0.10",
-    "webpack-bundle-analyzer": "^4.8.0",
+    "@kkt/plugin-pro-entry": "^1.0.11",
+    "@kkt/plugin-pro-rematch": "^1.0.11",
+    "@kkt/plugin-pro-router": "^1.0.11",
+    "@kkt/request": "^1.0.11",
     "@types/webpack-bundle-analyzer": "^4.6.0",
-    "kkt": "^7.3.2"
+    "kkt": "^7.3.2",
+    "webpack-bundle-analyzer": "^4.8.0"
   }
 }

@@ -1,12 +1,15 @@
 {
   "name": "@kkt/request",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "kktp query",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "module": "esm/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "tsbb watch",
     "watch": "tsbb watch",

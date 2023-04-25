@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "doc",
   "private": true,
   "scripts": {
@@ -24,7 +24,7 @@
     "uiw": "4.21.23"
   },
   "devDependencies": {
-    "@kkt/pro": "^1.0.10",
+    "@kkt/pro": "^1.0.11",
     "@types/styled-components": "^5.1.26",
     "hast": "^1.0.0",
     "markdown-react-code-preview-loader": "^2.1.5",
