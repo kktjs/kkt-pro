@@ -27,7 +27,7 @@ module.exports.login = function (req, res) {
           token: '5c2d6d45-ec94-319c-a9c8-cae43e192b65',
         });
         resolve(a);
-      }, 2000);
+      }, 500);
     });
   }
   return res.status(401).json({
