@@ -22,7 +22,6 @@
   ],
   "peerDependencies": {
     "@babel/runtime": ">=7.11.0",
-    "@tanstack/react-query": ">=4.24.6",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
@@ -36,7 +35,7 @@
     "react-router-dom": "^6.10.0"
   },
   "dependencies": {
-    "@tanstack/react-query": "^4.24.6",
+    "@tanstack/react-query": "4.28.0",
     "axios": "~1.1.3"
   }
 }

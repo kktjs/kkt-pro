@@ -10,10 +10,12 @@ export interface ReactQueryOptions<
   url?: string;
   /** 设置 Content-Type，默认值 `json`，'Content-Type' = 'application/json' */
   contentType?: 'json' | 'form';
+  headerTokenName?: string;
 }
 
 export interface QueryFnOptions extends RequestInit {
   contentType?: ReactQueryOptions['contentType'];
+  headerTokenName?: string;
 }
 
 export interface ReactMutationOptions<TData = unknown, TError = unknown, TVariables = void, TContext = unknown>
@@ -21,4 +23,5 @@ export interface ReactMutationOptions<TData = unknown, TError = unknown, TVariab
     MutationOptions<TData, TError, TVariables, TContext> {
   url?: string;
   contentType?: ReactQueryOptions['contentType'];
+  headerTokenName?: string;
 }

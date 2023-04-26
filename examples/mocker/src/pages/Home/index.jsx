@@ -3,6 +3,7 @@ const Home = () => {
   const data = useReactQuery({
     queryKey: ['user'],
     url: '/api/user',
+    headerTokenName: 'token2',
     onSuccess: (res) => {
       console.log(888, res);
     },
@@ -14,6 +15,7 @@ const Home = () => {
     url: '/api/login',
     method: 'POST',
     mutationKey: ['login'],
+    headerTokenName: 'token2333',
     onSuccess: (res) => {
       // console.log(456, res)
     },

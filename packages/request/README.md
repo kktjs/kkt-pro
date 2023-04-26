@@ -109,9 +109,11 @@ export default function HomePage() {
 ```js
 const { data } = useReactQuery({
   /** 设置 Content-Type，默认值 `json`，'Content-Type' = 'application/json' */
-  contentType: "json" | 'form';
+  contentType: "json" | 'form',
   // 请求 API
-  url: '/api/user/list'
+  url: '/api/user/list',
+  // 设置header里面 token名称，默认 x-auth
+  headerTokenName: 'x-auth',
   // 用于此查询的查询键。查询键将被 hash 成一个稳定的 hash 。当此键更改时，查询将自动更新（只要 enabled 未设置为 false）
   queryKey: ['user-list', userId],
   // 只要查询成功获取新数据，此函数就会触发。

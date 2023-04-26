@@ -41,6 +41,7 @@ export function useReactQuery<TQueryFnData = unknown, TError = unknown, TData = 
     signal,
     window,
     contentType = 'json',
+    headerTokenName = 'x-auth',
     ...opts
   } = options || {};
   const fetchOption: RequestInit = {
@@ -59,7 +60,7 @@ export function useReactQuery<TQueryFnData = unknown, TError = unknown, TData = 
   };
   const queryOptions: UseQueryOptions<TQueryFnData, TError, TData, QueryKey> = { ...opts };
   if (url) {
-    const cusFn = () => fetchFn(url, { contentType, ...fetchOption });
+    const cusFn = () => fetchFn(url, { contentType, ...fetchOption, headerTokenName });
     queryOptions.queryFn = queryOptions.queryFn || cusFn;
   }
   return useQuery({ ...queryOptions });
@@ -83,6 +84,7 @@ export function useReactMutation<TData = unknown, TError = unknown, TVariables =
     signal,
     window,
     contentType = 'json',
+    headerTokenName = 'x-auth',
     ...opts
   } = options || {};
   const fetchOption: RequestInit = {
@@ -106,7 +108,7 @@ export function useReactMutation<TData = unknown, TError = unknown, TVariables =
       if (Object.prototype.toString.call(newData).slice(8, -1) !== 'FormData') {
         body = JSON.stringify(newData);
       }
-      return fetchFn(url, { contentType, ...fetchOption, body: body as BodyInit });
+      return fetchFn(url, { contentType, ...fetchOption, headerTokenName, body: body as BodyInit });
     };
     mutationOptions.mutationFn = mutationOptions.mutationFn || cusFn;
   }

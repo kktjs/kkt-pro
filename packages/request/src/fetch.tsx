@@ -1,6 +1,6 @@
 import { ReactQueryOptions, QueryFnOptions } from './interface';
 
-function getFetchOption(type: ReactQueryOptions['contentType'] = 'json', option: RequestInit = {}) {
+function getFetchOption(type: ReactQueryOptions['contentType'] = 'json', option: QueryFnOptions = {}) {
   if (type === 'json') {
     option.headers = {
       Accept: 'application/json',
@@ -16,8 +16,8 @@ function getFetchOption(type: ReactQueryOptions['contentType'] = 'json', option:
   }
   option.headers = new Headers({ ...option.headers });
   const token = sessionStorage.getItem('token') || localStorage.getItem('token');
-  if (token && !option.headers.get('x-auth')) {
-    option.headers.set('x-auth', token);
+  if (token && !option.headers.get(option['headerTokenName'])) {
+    option.headers.set(option['headerTokenName'], token);
   }
   return { ...option };
 }
