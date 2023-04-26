@@ -9,8 +9,6 @@ const Home = () => {
     },
   });
 
-  console.log(3333, data);
-
   const { isLoading, mutateAsync } = useReactMutation({
     url: '/api/login',
     method: 'POST',

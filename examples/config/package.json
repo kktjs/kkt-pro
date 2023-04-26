@@ -1,6 +1,6 @@
 {
   "name": "@examples/config",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -18,7 +18,7 @@
     "uiw": "4.21.23"
   },
   "devDependencies": {
-    "@kkt/pro": "^1.0.13"
+    "@kkt/pro": "^1.0.14"
   },
   "eslintConfig": {
     "extends": [
