@@ -102,7 +102,7 @@ jobs:
       - name: Compress docs Example.
         run: zip -r -y docs.zip . -x "node_modules/*"  -x "src/.kktp/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x "package-lock.json"
         working-directory: examples/docs
-      - run: cp -rp examples/docs/routes.zip  website/build/zip
+      - run: cp -rp examples/docs/docs.zip  website/build/zip
 
       - name: Add Download Page
         working-directory:  website/build/zip
