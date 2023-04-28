@@ -12,14 +12,6 @@
   "license": "MIT",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.0",
-    "@react-login-page/base": "^0.4.4",
-    "@react-login-page/page1": "^0.4.4",
-    "@react-login-page/page2": "^0.4.4",
-    "@react-login-page/page3": "^0.4.4",
-    "@react-login-page/page4": "^0.4.4",
-    "@react-login-page/page5": "^0.4.4",
-    "@react-login-page/page6": "^0.4.4",
-    "@react-login-page/page7": "^0.4.4",
     "@types/styled-components": "^5.1.26",
     "@uiw/react-back-to-top": "^1.2.1",
     "@uiw/react-code-preview": "4.0.5",
@@ -32,13 +24,13 @@
     "markdown-react-code-preview-loader": "2.1.5",
     "react-code-preview-layout": "3.0.0",
     "react-login-page": "^0.4.4",
-    "react-test-renderer": "17.0.2",
+    "react-test-renderer": "18.2.0",
     "styled-components": "^5.3.5",
-    "react": "17.0.2"
+    "react": "18.2.0"
   },
   "devDependencies": {
     "@kkt/pro": "1.0.14",
-    "@types/react-test-renderer": "17.0.1",
+    "@types/react-test-renderer": "18.0.0",
     "hast": "^1.0.0",
     "rehype-rewrite": "^3.0.6",
     "source-map-explorer": "~2.5.2"
