@@ -54,6 +54,7 @@ $ npx create-kktp my-app
 └─ examples
    ├── access       # 权限实例
    ├── auto-routes  # 自动生成路由实例
+   ├── docs         # 基础文档网站实例
    ├── basic        # 基础示例
    ├── basic-js     # 基础js示例
    ├── config       # config配置示例
