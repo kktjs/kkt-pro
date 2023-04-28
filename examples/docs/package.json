@@ -10,11 +10,6 @@
     "map": "source-map-explorer build/static/js/*.js --html build/website-result.html"
   },
   "license": "MIT",
-  "peerDependencies": {
-    "@babel/runtime": ">=7.12.0",
-    "react": ">=16.14.0",
-    "react-dom": ">=16.14.0"
-  },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.0",
     "@react-login-page/base": "^0.4.4",
@@ -38,7 +33,8 @@
     "react-code-preview-layout": "3.0.0",
     "react-login-page": "^0.4.4",
     "react-test-renderer": "17.0.2",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "react": "17.0.2"
   },
   "devDependencies": {
     "@kkt/pro": "1.0.14",
