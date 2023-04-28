@@ -24,6 +24,7 @@
     "mocker": "lerna exec --scope @examples/mocker -- npm run start",
     "access": "lerna exec --scope @examples/access -- npm run start",
     "rematch": "lerna exec --scope @examples/rematch -- npm run start",
+    "docs": "lerna exec --scope @examples/docs -- npm run start",
     "-------------": "----------------------------------------------",
     "start": "lerna exec --scope website -- npm run start",
     "build:website": "lerna exec --scope website -- npm run build",
