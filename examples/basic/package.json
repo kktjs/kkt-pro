@@ -1,6 +1,6 @@
 {
   "name": "@examples/basic",
-  "version": "1.0.14",
+  "version": "1.1.0",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@kkt/pro": "^1.0.14"
+    "@kkt/pro": "^1.1.0"
   },
   "eslintConfig": {
     "extends": [
