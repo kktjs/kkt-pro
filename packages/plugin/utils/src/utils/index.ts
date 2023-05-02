@@ -96,7 +96,9 @@ export const createTemplateExpression = (value: string) => {
 export const createObjectProperty = (key: string, value: t.Expression) => {
   return t.objectProperty(t.identifier(key), value);
 };
-
+export const createSpreadElement = (key: string) => {
+  return t.spreadElement(t.identifier(key));
+};
 /**
  * 判断值是否相等
  * **/
