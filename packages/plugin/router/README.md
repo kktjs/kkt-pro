@@ -55,7 +55,7 @@ export interface RouterPluginProps {
 
 - `routes` 路由`path="/"`路由下的子集路由集合。
 
-```ts
+```tsx
 import { KktproPageProps } from '@kkt/pro';
 
 const Page = (props: KktproPageProps) => {
@@ -70,7 +70,7 @@ export default Page;
 
 页面中可直接通过 `navigate` 跳转， 或者通过`react-router-dom`提供的 `useNavigate`来跳转。
 
-```ts
+```tsx
 import { KktproPageProps, useNavigate } from '@kkt/pro';
 
 const Page = (props: KktproPageProps) => {
@@ -84,6 +84,29 @@ const Page = (props: KktproPageProps) => {
   return <button onClick={click}>navigate</button>
 };
 export default Page;
+```
+
+## 支持页面导出`react-router 6`配置参数
+
+```tsx
+// 路由加载文件 src/pages/about/index.tsx
+const Index = ()=>{
+  return <div>导出element</div>
+}
+export default Index;
+export const element = <Index />;
+export const loader = ()=>{}
+export const action = ()=>{}
+const ErrorElement = ()=><div>errorElement</div>
+export const errorElement =<ErrorElement />
+export const lazy=()=>import("@/about")
+export const path="/about"
+export const shouldRevalidate=({ currentUrl }) => {
+  // only revalidate if the submission originates from
+  // the `/meal-plans/new` route.
+  return currentUrl.pathname === "/meal-plans/new";
+}
+
 ```
 
 ## `kktp`配置文件
