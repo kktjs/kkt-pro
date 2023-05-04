@@ -108,7 +108,6 @@ export const analysisRoutersLoader = (content: string) => {
   let index = 0;
   let isRedirect = false;
   let isImportNavigate = false;
-  let importOtherStr = '';
 
   traverse(ast, {
     ObjectProperty(path) {
@@ -128,10 +127,9 @@ export const analysisRoutersLoader = (content: string) => {
             importLazy[componentName] = valus;
             // importLazyString += `\nimport ${componentName} from "${valus}";\n`;
             importLazyString += `import * as ${componentName}ALL from "${valus}";\n`;
-            importOtherStr += `const { default:${componentName},...${componentName}Other } = ${componentName}ALL;\n`;
             if (t.isObjectExpression(path.parent)) {
-              path.parent.properties.push(createObjectProperty('loader', t.identifier(`${componentName}.loader`)));
-              path.parent.properties.push(createSpreadElement(`${componentName}Other`));
+              // path.parent.properties.push(createObjectProperty('loader', t.identifier(`${componentName}.loader`)));
+              path.parent.properties.push(createSpreadElement(`${componentName}ALL.default`));
             }
           }
         }
@@ -190,7 +188,7 @@ export const analysisRoutersLoader = (content: string) => {
     /**code代码*/
     code: jsonCode,
     importLazy,
-    importLazyString: newImportLazyString + importOtherStr,
+    importLazyString: newImportLazyString,
   };
 };
 
