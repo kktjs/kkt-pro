@@ -1,6 +1,6 @@
 {
   "name": "@examples/auto-routes",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "案例",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@kkt/pro": "^1.1.1"
+    "@kkt/pro": "^1.1.2"
   },
   "eslintConfig": {
     "extends": [
