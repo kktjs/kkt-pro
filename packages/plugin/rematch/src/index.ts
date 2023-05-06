@@ -16,7 +16,7 @@ export interface ModelspluginProps {
 }
 
 class RematchPlugin {
-  root: string = path.join(process.cwd(), 'src');
+  root: string = path.join(process.cwd(), 'src').replace(/\\/g, '/');
   temp: string = path.join(process.cwd(), 'src', '.kktp');
   tempDir = path.join(process.cwd(), 'src', '.kktp', 'rematch');
   /**所有model数据存储*/

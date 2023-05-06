@@ -11,7 +11,8 @@ export const getAllFiles = (root: string, temp: string) => {
     const files = FS.readdirSync(parent, { encoding: 'utf-8' });
     if (Array.isArray(files)) {
       files.forEach((filename) => {
-        const filedir = path.join(parent, filename);
+        // 把Windows的 \ 替换成 /
+        const filedir = path.join(parent, filename).replace(/\\/g, '/');
         const isNoEmty = FS.existsSync(filedir);
         if (!isNoEmty) {
           return;

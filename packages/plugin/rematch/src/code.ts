@@ -6,7 +6,13 @@ export const createModelsConfigFile = (
   const importString = modelsData
     .map((item) => {
       const { filePath, variableName } = item;
-      return `import ${variableName} from "${filePath.replace(/\.(js|ts)$/, '')}";`;
+      // 默认Mac处理 , Windows导入地址和Mac的斜杠是相同的
+      const importStr = `import ${variableName} from "${filePath.replace(/\.(js|ts)$/, '')}";`;
+      // // 如果是windows
+      // if (/^win.*/.test(process.platform)) {
+      //   importStr = importStr.replace(/\\/g, '/');
+      // }
+      return importStr;
     })
     .join('\n');
   const modelsString = modelsData
@@ -22,12 +28,12 @@ export const createModelsConfigFile = (
     })
     .join('\n');
   return `
-${importString}
-${isTS ? `export interface ModelsType {${modelsTypeString}} ` : ''}
-export default {
-${modelsString}
-}
-`;
+    ${importString}
+    ${isTS ? `export interface ModelsType {${modelsTypeString}} ` : ''}
+    export default {
+    ${modelsString}
+    }
+  `;
 };
 
 const jsContent = `
@@ -42,7 +48,7 @@ export const { dispatch, addModel } = store;
 `;
 
 const tsContent = `
-import {  
+import {
   init,
   Models,
   Model,
