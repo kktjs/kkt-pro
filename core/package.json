@@ -48,7 +48,7 @@
     "@types/react-dom": "~18.0.0",
     "babel-preset-env": "^1.7.0",
     "carefree-proload": "~0.0.2",
-    "kkt": "~7.2.3",
+    "kkt": "~7.4.15",
     "minimist": "~1.2.7",
     "path-browserify": "^1.0.1",
     "react": "~18.2.0",
