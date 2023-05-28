@@ -24,10 +24,11 @@
     "uiw": "4.21.23"
   },
   "devDependencies": {
+    "buffer": "6.0.3",
     "@kkt/pro": "^1.1.4",
     "@types/styled-components": "^5.1.26",
     "hast": "^1.0.0",
-    "markdown-react-code-preview-loader": "^2.1.5",
+    "markdown-react-code-preview-loader": "^2.1.6",
     "styled-components": "^5.3.9"
   },
   "eslintConfig": {
