@@ -24,7 +24,6 @@
     "uiw": "4.21.23"
   },
   "devDependencies": {
-    "buffer": "6.0.3",
     "@kkt/pro": "^1.1.4",
     "@types/styled-components": "^5.1.26",
     "hast": "^1.0.0",

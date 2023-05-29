@@ -36,7 +36,7 @@
     "@kkt/plugin-pro-router": "^1.1.4",
     "@kkt/request": "^1.1.4",
     "@types/webpack-bundle-analyzer": "^4.6.0",
-    "kkt": "^7.4.16",
+    "kkt": "^7.4.17",
     "webpack-bundle-analyzer": "^4.8.0"
   }
 }
