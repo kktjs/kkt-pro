@@ -14,6 +14,12 @@ npm install
 
 [![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?logo=codesandbox)](https://codesandbox.io/s/github/kktjs/kktp/tree/main/examples/basic-js)
 
+## Open in Codeanywhere
+
+<a href="https://app.codeanywhere.com/#https://github.com/kktjs/kkt-pro/tree/main/examples/basic-js">
+  <img src="https://codeanywhere.com/img/open-in-codeanywhere-btn.svg" alt="Open in Codeanywhere" width="200">
+</a>
+
 ## Development
 
 **development**
